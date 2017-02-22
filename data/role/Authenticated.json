@@ -1,0 +1,12 @@
+{
+  "_id": "Authenticated",
+  "permissions": {
+    "collection: view relevant": true,
+    "schemas: view": true,
+    "view errors": false
+  },
+  "meta": {
+    "created": "2016-12-14T08:09:54.886Z",
+    "updated": "2016-12-14T08:09:54.886Z"
+  }
+}

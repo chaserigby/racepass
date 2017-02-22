@@ -1,0 +1,18 @@
+{
+  "_id": "settings",
+  "schema": {
+    "type": "object",
+    "additionalProperties": true,
+    "properties": {
+      "_id": {
+        "type": "string"
+      }
+    }
+  },
+  "storage": "file",
+  "documentsHaveOwners": false,
+  "meta": {
+    "updated": "2016-12-14T08:09:54.944Z",
+    "created": "2016-12-14T08:09:54.944Z"
+  }
+}

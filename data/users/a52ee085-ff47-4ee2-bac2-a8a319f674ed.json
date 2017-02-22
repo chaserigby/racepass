@@ -1,0 +1,12 @@
+{
+  "_id": "a52ee085-ff47-4ee2-bac2-a8a319f674ed",
+  "meta": {
+    "created": "2016-12-14T08:09:54.820Z",
+    "updated": "2016-12-14T08:09:54.820Z"
+  },
+  "email": "th4019@gmail.com",
+  "roles": [
+    "Admin"
+  ],
+  "password": "$2a$10$w/1iRb2LenBFoREQ9uO3k.0rc1ypz3tL.XZEGWbzRGtmbamgwAAOK"
+}

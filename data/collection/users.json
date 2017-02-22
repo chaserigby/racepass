@@ -1,0 +1,53 @@
+{
+  "_id": "users",
+  "schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "meta": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {}
+      },
+      "email": {
+        "type": "string"
+      },
+      "password": {
+        "type": "string"
+      },
+      "fullName": {
+        "type": "string"
+      },
+      "roles": {
+        "items": {
+          "type": "string",
+          "enum": [
+            "Admin",
+            "Anonymous",
+            "Authenticated",
+            "Test"
+          ]
+        },
+        "uniqueItems": true,
+        "format": "checkbox",
+        "type": "array"
+      },
+      "zip": {
+        "type": "number"
+      },
+      "city": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "email",
+      "password"
+    ]
+  },
+  "storage": "file",
+  "documentsHaveOwners": true,
+  "meta": {
+    "updated": "2016-12-14T08:18:20.712Z",
+    "created": "2016-12-14T08:09:55.554Z"
+  }
+}
