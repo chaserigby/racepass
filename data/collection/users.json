@@ -44,7 +44,7 @@
       "password"
     ]
   },
-  "storage": "file",
+  "storage": "postgres",
   "documentsHaveOwners": true,
   "meta": {
     "updated": "2016-12-14T08:18:20.712Z",

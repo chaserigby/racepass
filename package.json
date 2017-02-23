@@ -9,9 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "content-type": "~1.0.2",
-    "expressa-swagger": "^1.0.2",
-    "googleapis": "^15.1.0",
-    "jsonpointer": "~4.0.1"
+    "braintree": "^2.0.2",
+    "expressa": "^0.2.3",
+    "googleapis": "^15.0.0"
   }
 }

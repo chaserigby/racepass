@@ -1,0 +1,36 @@
+{
+  "_id": "contacts",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "first_name": {
+        "type": "string"
+      },
+      "last_name": {
+        "type": "string"
+      },
+      "email": {
+        "type": "string"
+      },
+      "phone": {
+        "type": "string"
+      },
+      "role": {
+        "type": "string"
+      },
+      "website": {
+        "type": "string"
+      },
+      "body": {
+        "type": "string"
+      }
+    }
+  },
+  "storage": "postgres",
+  "documentsHaveOwners": false,
+  "meta": {
+    "created": "2017-02-16T10:03:55.365Z",
+    "updated": "2017-02-16T10:04:47.560Z",
+    "owner": "a52ee085-ff47-4ee2-bac2-a8a319f674ed"
+  }
+}

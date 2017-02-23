@@ -28,10 +28,26 @@
     "race: create": true,
     "race: view": true,
     "race: edit": true,
-    "race: delete": true
+    "race: delete": true,
+    "leads: create": true,
+    "leads: view": true,
+    "leads: edit": true,
+    "leads: delete": true,
+    "email_signups: create": true,
+    "email_signups: view": true,
+    "email_signups: edit": true,
+    "email_signups: delete": true,
+    "contacts: create": true,
+    "contacts: view": true,
+    "contacts: edit": true,
+    "contacts: delete": true,
+    "partner_payments: create": true,
+    "partner_payments: view": true,
+    "partner_payments: edit": true,
+    "partner_payments: delete": true
   },
   "meta": {
     "created": "2016-12-14T08:09:54.875Z",
-    "updated": "2016-12-14T08:09:54.875Z"
+    "updated": "2017-02-19T07:13:32.174Z"
   }
 }
