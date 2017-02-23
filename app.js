@@ -5,7 +5,7 @@ var bodyParser  = require('body-parser');
 
 var expressa = require('expressa');
 
-var routes = require('./routes/index');
+var routes = require('./routes/index')(expressa);
 
 app.use(cors());
 
