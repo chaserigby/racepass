@@ -20,6 +20,12 @@
       },
       "amount": {
         "type": "number"
+      },
+      "errors": {
+        "type": "string"
+      },
+      "transaction_id": {
+        "type": "string"
       }
     }
   },
@@ -27,7 +33,7 @@
   "documentsHaveOwners": false,
   "meta": {
     "created": "2017-02-23T07:14:32.069Z",
-    "updated": "2017-02-23T07:14:32.069Z",
+    "updated": "2017-02-24T04:34:28.951Z",
     "owner": "a52ee085-ff47-4ee2-bac2-a8a319f674ed"
   }
 }

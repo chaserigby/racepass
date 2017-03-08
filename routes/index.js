@@ -105,14 +105,19 @@ module.exports = function(expressa) {
         email: req.body.email,
         organization: req.body.organization,
       };
-      if (result.success || result.transaction) {
+      if (result.transaction) {
+        data.transaction_id = result.transaction.id;
+      }
+      if (result.success) {
         data.status = 'success';
-        data.details = result.transaction.id;
-        res.status(200).send({"status":"success", "transaction_id": result.transaction.id});
+        console.log(result);
+        res.status(200).send({"status":"success",
+          "cc": result.transaction.creditCard,
+          "transaction_id": result.transaction.id});
       } else {
         transactionErrors = result.errors.deepErrors();
         data.status = 'failure';
-        data.details = JSON.stringify(result.errors.deepErrors());
+        data.errors = JSON.stringify(result.errors.deepErrors());
         res.status(400).send({"status":"failure", "error": transactionErrors});
       }
       expressa.db.partner_payments.create(data);

@@ -17,6 +17,9 @@
       },
       "referrer": {
         "type": "string"
+      },
+      "ip": {
+        "type": "string"
       }
     }
   },
@@ -24,7 +27,7 @@
   "documentsHaveOwners": false,
   "meta": {
     "created": "2017-02-14T08:28:29.658Z",
-    "updated": "2017-02-16T07:00:04.194Z",
+    "updated": "2017-03-06T08:01:44.694Z",
     "owner": "a52ee085-ff47-4ee2-bac2-a8a319f674ed"
   }
 }
