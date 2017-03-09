@@ -22,6 +22,7 @@
         "items": {
           "type": "string",
           "enum": [
+            "ActivePass",
             "Admin",
             "Anonymous",
             "Authenticated",
@@ -37,6 +38,17 @@
       },
       "city": {
         "type": "string"
+      },
+      "passType": {
+        "type": "string",
+        "enum": [
+          "3races",
+          "5races",
+          "unlimited"
+        ]
+      },
+      "transaction_id": {
+        "type": "string"
       }
     },
     "required": [
@@ -47,7 +59,7 @@
   "storage": "postgres",
   "documentsHaveOwners": true,
   "meta": {
-    "updated": "2016-12-14T08:18:20.712Z",
+    "updated": "2017-03-08T07:39:14.207Z",
     "created": "2016-12-14T08:09:55.554Z"
   }
 }

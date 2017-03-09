@@ -44,7 +44,11 @@
     "partner_payments: create": true,
     "partner_payments: view": true,
     "partner_payments: edit": true,
-    "partner_payments: delete": true
+    "partner_payments: delete": true,
+    "user_payments: create": true,
+    "user_payments: view": true,
+    "user_payments: edit": true,
+    "user_payments: delete": true
   },
   "meta": {
     "created": "2016-12-14T08:09:54.875Z",

@@ -48,10 +48,6 @@ module.exports = function(expressa) {
     return result;
   }
 
-  router.get('/', function (req, res) {
-    res.redirect('/checkouts/new');
-  });
-
   router.get('/checkouts/new', function (req, res) {
     gateway.clientToken.generate({}, function (err, response) {
       res.send({clientToken: response.clientToken});
@@ -61,29 +57,49 @@ module.exports = function(expressa) {
   router.post('/purchase', function (req, res) {
     var nonce = req.body.payment_method_nonce;
     var detailMap = {
-      'Contender': {
-        'cost': 195
+      '3races': {
+        'cost': 195,
+        '25off': 170,
       },
-      'Challenger': {
-        'cost': 349
+      '5races': {
+        'cost': 395,
+        '25off': 370,
       },
-      'Contender': {
-        'cost': 799
+      'unlimited': {
+        'cost': 895,
+        '25off': 870,
       }
     };
+    var amount = detailMap[req.body.sku][req.body.promo || 'cost'];
     gateway.transaction.sale({
-      amount: detailMap[req.body.passType].cost,
+      amount: amount,
       paymentMethodNonce: nonce,
       options: {
         submitForSettlement: true
       }
     }, function (err, result) {
-      if (result.success || result.transaction) {
-        res.send({"status":"success", "transaction_id": result.transaction.id});
-      } else {
-        var transactionErrors = result.errors.deepErrors();
-        res.send({"status":"failure", "error": transactionErrors});
+      var data = {
+        passType: req.body.passType,
+        sku: req.body.sku,
+        amount: amount,
+        email: req.body.email,
+      };
+      if (result.transaction) {
+        data.transaction_id = result.transaction.id;
       }
+      if (result.success) {
+        data.status = 'success';
+        console.log(result);
+        res.status(200).send({"status":"success",
+          "cc": result.transaction.creditCard,
+          "transaction_id": result.transaction.id});
+      } else {
+        transactionErrors = result.errors.deepErrors();
+        data.status = 'failure';
+        data.errors = JSON.stringify(result.errors.deepErrors());
+        res.status(400).send({"status":"failure", "error": transactionErrors});
+      }
+      expressa.db.user_payments.create(data);
     });
   });
 
