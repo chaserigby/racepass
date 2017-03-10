@@ -9,8 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.5.0",
     "braintree": "^2.0.2",
     "expressa": "^0.2.3",
+    "fbgraph": "^1.4.1",
+    "generate-password": "^1.3.0",
     "googleapis": "^15.0.0"
   }
 }

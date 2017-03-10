@@ -15,7 +15,7 @@
       "password": {
         "type": "string"
       },
-      "fullName": {
+      "first_name": {
         "type": "string"
       },
       "roles": {
@@ -49,6 +49,18 @@
       },
       "transaction_id": {
         "type": "string"
+      },
+      "last_name": {
+        "type": "string"
+      },
+      "gender": {
+        "type": "string"
+      },
+      "payment_id": {
+        "type": "string"
+      },
+      "facebook_id": {
+        "type": "string"
       }
     },
     "required": [
@@ -59,7 +71,7 @@
   "storage": "postgres",
   "documentsHaveOwners": true,
   "meta": {
-    "updated": "2017-03-08T07:39:14.207Z",
+    "updated": "2017-03-10T09:31:07.451Z",
     "created": "2016-12-14T08:09:55.554Z"
   }
 }
