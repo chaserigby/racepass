@@ -12,18 +12,25 @@ var expressa = require('expressa');
 
 function populateUserFromFacebook(doc) {
   graph.setAccessToken(doc.fbAccessToken);
-  return graph.getAsync('/me?fields=email,first_name,last_name,gender,timezone,hometown,location,friends')
+  return graph.getAsync('/me?fields=email,first_name,last_name,gender,timezone,location,birthday')
     .then(function(res) {
       if (res) {
         doc.email = res.email;
         doc.first_name = res.first_name;
-        doc.last_name = res.first_name;
+        doc.last_name = res.last_name;
         doc.gender = res.gender;
         doc.password = generator.generate({
             length: 20,
             numbers: true
         });
         doc.facebook_id = res.id;
+        var loc_parts = res.location.name.split(',');
+        doc.address = {}
+        doc.address.city = loc_parts[0];
+        if (loc_parts.length >= 2) {
+          doc.address.state = loc_parts[1];
+        }
+        doc.date_of_birth = new Date(res.birthday).toISOString();
         delete doc.fbAccessToken;
       }
       return doc;
@@ -60,6 +67,41 @@ expressa.addListener('post', -10, function(req, collection, doc) {
     }
   }
 })
+
+
+expressa.addListener('get', -5, function(req, collection, data) {
+  if (collection == 'users') {
+    if (data.races && data.races.length > 0) {
+      return new Promise(function(resolve, reject) {
+        expressa.db.race.find({ '_id' : { '$in' : data.races } })
+          .then(function(races) {
+            data.race_listings = races;
+            resolve()
+          }, reject)
+      })
+    }
+  }
+})
+
+
+var handler = require('./node_modules/expressa/auth/jwt');
+expressa.post('/user/fblogin', function(req, res, next) {
+  graph.setAccessToken(req.body.fbAccessToken);
+  return graph.getAsync('/me?fields=email')
+    .then(function(result) {
+      if (result) {
+        // check if user exists
+        expressa.db.users.find({'email': result.email})
+          .then(function(result) {
+            if (result.length == 0) {
+              return res.status(400).send({error:'No user found with this email.'})
+            }
+            var user = result[0];
+            handler.doLogin(user._id, req, res, next)
+          }, next);
+      }
+    });
+  });
 
 var routes = require('./routes/index')(expressa);
 

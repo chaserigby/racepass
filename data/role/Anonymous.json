@@ -40,10 +40,18 @@
     "contacts: create": true,
     "contacts: delete": false,
     "contacts: edit": false,
-    "contacts: view": false
+    "contacts: view": false,
+    "partner_payments: create": false,
+    "partner_payments: delete": false,
+    "partner_payments: edit": false,
+    "partner_payments: view": false,
+    "user_payments: create": false,
+    "user_payments: delete": false,
+    "user_payments: edit": false,
+    "user_payments: view": false
   },
   "meta": {
     "created": "2016-12-14T08:09:54.883Z",
-    "updated": "2017-02-19T07:13:32.165Z"
+    "updated": "2017-03-11T08:01:42.255Z"
   }
 }

@@ -33,12 +33,6 @@
         "format": "checkbox",
         "type": "array"
       },
-      "zip": {
-        "type": "number"
-      },
-      "city": {
-        "type": "string"
-      },
       "passType": {
         "type": "string",
         "enum": [
@@ -61,6 +55,66 @@
       },
       "facebook_id": {
         "type": "string"
+      },
+      "date_of_birth": {
+        "type": "string"
+      },
+      "address": {
+        "type": "object",
+        "properties": {
+          "line1": {
+            "type": "string"
+          },
+          "line2": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "zip": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          }
+        }
+      },
+      "raceinfo": {
+        "type": "object",
+        "properties": {
+          "tshirt": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "emergency_first_name": {
+            "type": "string"
+          },
+          "emergency_last_name": {
+            "type": "string"
+          },
+          "emergency_relationship": {
+            "type": "string"
+          },
+          "emergency_phone": {
+            "type": "string"
+          },
+          "has_medical": {
+            "type": "boolean",
+            "format": "checkbox"
+          },
+          "medical_info": {
+            "type": "string",
+            "format": ""
+          }
+        }
+      },
+      "races": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
       }
     },
     "required": [
@@ -71,7 +125,7 @@
   "storage": "postgres",
   "documentsHaveOwners": true,
   "meta": {
-    "updated": "2017-03-10T09:31:07.451Z",
+    "updated": "2017-03-11T08:46:41.689Z",
     "created": "2016-12-14T08:09:55.554Z"
   }
 }
