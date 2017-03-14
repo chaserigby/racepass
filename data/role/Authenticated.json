@@ -48,10 +48,14 @@
     "user_payments: create": false,
     "user_payments: delete": false,
     "user_payments: edit": false,
-    "user_payments: view": false
+    "user_payments: view": false,
+    "promo_code: create": false,
+    "promo_code: delete": false,
+    "promo_code: edit": false,
+    "promo_code: view": true
   },
   "meta": {
     "created": "2016-12-14T08:09:54.886Z",
-    "updated": "2017-03-11T08:01:42.240Z"
+    "updated": "2017-03-13T07:27:11.274Z"
   }
 }
