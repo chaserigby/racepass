@@ -115,6 +115,12 @@
           "type": "string"
         },
         "type": "array"
+      },
+      "race_signup_ids": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
       }
     },
     "required": [
@@ -125,7 +131,7 @@
   "storage": "postgres",
   "documentsHaveOwners": true,
   "meta": {
-    "updated": "2017-03-11T08:46:41.689Z",
+    "updated": "2017-03-14T07:36:28.179Z",
     "created": "2016-12-14T08:09:55.554Z"
   }
 }

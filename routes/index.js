@@ -54,23 +54,18 @@ module.exports = function(expressa) {
     });
   });
 
-  router.post('/purchase', function (req, res) {
+  function makePurchase(req, res, promo_amount) {
+    promo_amount = promo_amount || 0;
+
+    // prices also in html site in js/base.js
+    var passPrices = {
+      '3races': 195,
+      '5races': 295,
+      'unlimited': 695,
+    }
+
+    var amount = passPrices[req.body.sku] - promo_amount;
     var nonce = req.body.payment_method_nonce;
-    var detailMap = {
-      '3races': {
-        'cost': 195,
-        '25off': 170,
-      },
-      '5races': {
-        'cost': 395,
-        '25off': 370,
-      },
-      'unlimited': {
-        'cost': 895,
-        '25off': 870,
-      }
-    };
-    var amount = detailMap[req.body.sku][req.body.promo || 'cost'];
     gateway.transaction.sale({
       amount: amount,
       paymentMethodNonce: nonce,
@@ -83,6 +78,7 @@ module.exports = function(expressa) {
         sku: req.body.sku,
         amount: amount,
         email: req.body.email,
+        promo_code: req.body.promo,
       };
       if (result.transaction) {
         data.transaction_id = result.transaction.id;
@@ -94,13 +90,34 @@ module.exports = function(expressa) {
           "cc": result.transaction.creditCard,
           "transaction_id": result.transaction.id});
       } else {
-        transactionErrors = result.errors.deepErrors();
+        var transactionErrors = result.errors.deepErrors();
         data.status = 'failure';
         data.errors = JSON.stringify(result.errors.deepErrors());
         res.status(400).send({"status":"failure", "error": transactionErrors});
       }
       expressa.db.user_payments.create(data);
     });
+  }
+
+  router.post('/purchase', function (req, res) {
+    if (!req.body.promo) {
+      makePurchase(req, res, 0);
+    } else {
+      expressa.db.promo_code.find({ 'name' : req.body.promo.toUpperCase() })
+        .then(function(results) {
+          if (results.length == 0) {
+            res.status('400')
+            res.send('promo code not found')
+            return;
+          }
+          var promo_amount = results[0].value;
+          makePurchase(req, res, promo_amount);
+        }, function(err) {
+            console.log(err)
+           res.status('500')
+           res.send('something went wrong.')
+        })
+    }
   });
 
   router.post('/partnerships_payment', function (req, res) {

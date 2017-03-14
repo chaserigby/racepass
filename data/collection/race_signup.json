@@ -1,0 +1,32 @@
+{
+  "_id": "race_signup",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "race_id": {
+        "type": "string"
+      },
+      "user_id": {
+        "type": "string"
+      },
+      "status": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "registered",
+          "canceled"
+        ]
+      },
+      "cancellation_reason": {
+        "type": "string"
+      }
+    }
+  },
+  "storage": "postgres",
+  "documentsHaveOwners": true,
+  "meta": {
+    "created": "2017-03-14T07:10:05.574Z",
+    "updated": "2017-03-14T07:30:00.823Z",
+    "owner": "a52ee085-ff47-4ee2-bac2-a8a319f674ed"
+  }
+}

@@ -29,6 +29,9 @@
       },
       "linked_user": {
         "type": "string"
+      },
+      "promo_code": {
+        "type": "string"
       }
     }
   },
@@ -36,7 +39,7 @@
   "documentsHaveOwners": false,
   "meta": {
     "created": "2017-02-23T07:14:32.069Z",
-    "updated": "2017-03-08T06:14:43.687Z",
+    "updated": "2017-03-14T08:30:32.373Z",
     "owner": "a52ee085-ff47-4ee2-bac2-a8a319f674ed"
   }
 }

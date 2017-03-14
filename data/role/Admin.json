@@ -52,10 +52,17 @@
     "promo_code: create": true,
     "promo_code: view": true,
     "promo_code: edit": true,
-    "promo_code: delete": true
+    "promo_code: delete": true,
+    "race_signup: create": true,
+    "race_signup: view": true,
+    "race_signup: edit": true,
+    "race_signup: delete": true,
+    "race_signup: view own": true,
+    "race_signup: edit own": true,
+    "race_signup: delete own": true
   },
   "meta": {
     "created": "2016-12-14T08:09:54.875Z",
-    "updated": "2017-03-13T07:27:11.271Z"
+    "updated": "2017-03-14T07:30:55.912Z"
   }
 }
