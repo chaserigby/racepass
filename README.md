@@ -10,6 +10,7 @@
 1. clone racepass-html
 2. Install nginx
 3. Use something like tho following config except change the root to match where you cloned the html repo.
+4. Edit the last 2 lines in js/base.js so that apiurl is set to the server you want it to use.
 
 ```
 server {
