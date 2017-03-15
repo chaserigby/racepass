@@ -1,0 +1,7 @@
+Race cancellation confirmed: {{data.name}}
+
+Distance: {{data.distance}}
+Date: {{data.date}}
+Race starting time: {{data.start_time}}
+
+If you change your mind, make sure to re-register at least 21 days prior to race day

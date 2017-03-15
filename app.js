@@ -9,6 +9,7 @@ Promise.promisifyAll(graph);
 var generator = require('generate-password');
 
 var expressa = require('expressa');
+var email = require('./email.js')
 
 function populateUserFromFacebook(doc) {
   graph.setAccessToken(doc.fbAccessToken);
@@ -33,6 +34,7 @@ function populateUserFromFacebook(doc) {
         doc.date_of_birth = new Date(res.birthday).toISOString();
         delete doc.fbAccessToken;
       }
+      email.sendWelcomeEmail(doc);
       return doc;
     })
 }
@@ -54,6 +56,7 @@ expressa.addListener('post', -10, function(req, collection, doc) {
               if (doc.fbAccessToken) {
                 return populateUserFromFacebook(doc);
               } else {
+                email.sendWelcomeEmail(doc);
                 return doc;
               }
             }
@@ -65,6 +68,20 @@ expressa.addListener('post', -10, function(req, collection, doc) {
           }, reject)
       });
     }
+  }
+})
+
+expressa.addListener('changed', -10, function(req, collection, doc) {
+  if (collection == 'race_signup') {
+    expressa.db.users.get(doc.user_id)
+      .then(function(user) {
+        if (data.status == 'pending') {
+          email.sendRaceConfirmation(user, doc)
+        }
+        if (data.status == 'canceled') {
+          email.sendRaceCancellation(user, doc)
+        }
+      });
   }
 })
 
@@ -83,7 +100,6 @@ expressa.addListener('get', -5, function(req, collection, data) {
   }
 })
 
-
 var handler = require('./node_modules/expressa/auth/jwt');
 expressa.post('/user/fblogin', function(req, res, next) {
   graph.setAccessToken(req.body.fbAccessToken);
@@ -94,10 +110,10 @@ expressa.post('/user/fblogin', function(req, res, next) {
         expressa.db.users.find({'email': result.email})
           .then(function(result) {
             if (result.length == 0) {
-              return res.status(400).send({error:'No user found with this email.'})
+              return res.status(404).send({error:'No user found with this email.'})
             }
             var user = result[0];
-            handler.doLogin(user._id, req, res, next)
+            handler.doLogin(user, req, res, next)
           }, next);
       }
     });
@@ -116,3 +132,11 @@ app.use('/', expressa);
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });
+
+/*setTimeout(function() {
+  //email.sendTestEmail()
+  expressa.db.race.get('f5619ec4-1248-4449-afd2-f5ed4b65c4df')
+    .then(function(race) {
+      email.sendRaceConfirmation({email: 'th4019@gmail.com'}, race)
+    });
+}, 3000);*/
