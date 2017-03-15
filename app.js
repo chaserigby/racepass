@@ -7,6 +7,7 @@ var graph = require('fbgraph');
 var Promise = require("bluebird");
 Promise.promisifyAll(graph);
 var generator = require('generate-password');
+var request = require('request');
 
 var expressa = require('expressa');
 var email = require('./email.js')
@@ -68,6 +69,28 @@ expressa.addListener('post', -10, function(req, collection, doc) {
           }, reject)
       });
     }
+  }
+})
+
+expressa.addListener('put', 0, function(req, collection, doc) {
+  if (collection == 'users' && doc.address && doc.address.city) {
+    var key = 'AIzaSyDOZ8hCqFBA-vK2S5rt2eOJm_6FS36N2fE';
+    var loc = doc.address.line1 + ',' + doc.address.city + ',' + doc.address.state + ',' + doc.address.zip
+    return new Promise(function(resolve, reject) {
+      request('https://maps.googleapis.com/maps/api/geocode/json?address='+loc+'&key='+key, function(err, response, body) {
+                if (err) {
+                  console.error(err);
+                  console.error('failed to geolocate user\'s address');
+                }
+                var data = JSON.parse(body);
+                if (!data.results[0]) {
+                  return console.error('failed to geolocate user\'s address due to empty response.');
+                }
+                var latlng = data.results[0].geometry.location;
+                doc.address.coordinates = latlng;
+                resolve();
+              });
+    });
   }
 })
 
