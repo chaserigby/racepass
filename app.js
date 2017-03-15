@@ -96,14 +96,21 @@ expressa.addListener('put', 0, function(req, collection, doc) {
 
 expressa.addListener('changed', -10, function(req, collection, doc) {
   if (collection == 'race_signup') {
-    expressa.db.users.get(doc.user_id)
+    expressa.db.users.get(doc.meta.owner)
       .then(function(user) {
-        if (data.status == 'pending') {
-          email.sendRaceConfirmation(user, doc)
-        }
-        if (data.status == 'canceled') {
-          email.sendRaceCancellation(user, doc)
-        }
+        expressa.db.race.get(doc.race_id)
+          .then(function(race) {
+            if (doc.status == 'pending') {
+              console.log('emailing ' + user);
+              console.log(doc);
+              email.sendRaceConfirmation(user, race)
+            }
+            if (doc.status == 'cancelled') {
+              email.sendRaceCancellation(user, race)
+            }
+          })
+      }, function(err) {
+        console.error('invalid user_id in race_signup');
       });
   }
 })

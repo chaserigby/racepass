@@ -50,7 +50,7 @@ exports.sendWelcomeEmail = function(user) {
 }
 
 exports.sendRaceConfirmation = function(user, race) {
-  send('race_confirmation', user.email, 'Registration Confirmed', { 'data': {
+  send('race_confirmation', user.email, 'Registration Confirmed for '+ race.name, { 'data': {
     'name': race.name,
     'start_time': moment(race.datetime).format('h:mm a'),
     'date': moment(race.datetime).format('l'),
@@ -60,7 +60,7 @@ exports.sendRaceConfirmation = function(user, race) {
 }
 
 exports.sendRaceCancellation = function(user, race) {
-  send('race_cancellation', user.email, 'Registration Confirmed', { 'data': {
+  send('race_cancellation', user.email, 'Cancellation Confirmed for '+ race.name, { 'data': {
     'name': race.name,
     'start_time': moment(race.datetime).format('h:mm a'),
     'date': moment(race.datetime).format('l'),
