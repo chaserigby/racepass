@@ -41,7 +41,7 @@
     "user_payments: view": false,
     "users: create": false,
     "users: delete": false,
-    "users: delete own": false,
+    "users: delete own": true,
     "users: edit": false,
     "users: edit own": true,
     "users: modify roles": false,
