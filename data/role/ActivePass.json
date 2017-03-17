@@ -43,7 +43,7 @@
     "users: delete": false,
     "users: delete own": false,
     "users: edit": false,
-    "users: edit own": false,
+    "users: edit own": true,
     "users: modify roles": false,
     "users: view": false,
     "users: view hashed passwords": false,
@@ -63,7 +63,7 @@
   },
   "meta": {
     "created": "2017-03-08T06:20:23.125Z",
-    "updated": "2017-03-15T08:39:42.977Z",
+    "updated": "2017-03-16T06:55:12.812Z",
     "owner": "a52ee085-ff47-4ee2-bac2-a8a319f674ed"
   }
 }

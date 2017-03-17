@@ -70,6 +70,27 @@ expressa.addListener('post', -10, function(req, collection, doc) {
       });
     }
   }
+  if (collection == 'race_signup') {
+    return expressa.db.users.get(req.user._id)
+      .then(function(user) {
+        var passRaceCount = {
+          '3races': 3,
+          '5races': 5,
+          'unlimited': 200,
+        }
+
+        var current_count = user.race_signup_ids.length;
+        var plan_count = passRaceCount[user.passType];
+        if (current_count >= plan_count) {
+          return {
+            code: '400',
+            message: 'Already signed up for maximum number of races your plan provides',
+          }
+        }
+      }, function(err) {
+        console.error('invalid user id in race_signup');
+      });
+  }
 })
 
 expressa.addListener('put', 0, function(req, collection, doc) {
@@ -91,6 +112,19 @@ expressa.addListener('put', 0, function(req, collection, doc) {
                 resolve();
               });
     });
+  }
+  if (collection == 'race_signup') {
+    console.log(doc)
+    return expressa.db.race_signup.get(doc._id)
+      .then(function(old) {
+        console.log(old);
+        if (doc.status == 'cancelled' && old.status == 'registered') {
+          doc.status = 'request_cancel';
+          console.log('requested cancellation of a registered race');
+        }
+      }, function(err) {
+        console.error('failed to load old race signup.');
+      })
   }
 })
 

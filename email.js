@@ -25,7 +25,7 @@ function send(templateName, dest, subject, data) {
 
   server.send({
      text:    text[templateName](data), 
-     from:    "info@racepass.com", 
+     from:    "Racepass <info@racepass.com>", 
      to:      dest,
      //cc:      "else <else@your-email.com>",
      subject: subject,
