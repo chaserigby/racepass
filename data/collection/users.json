@@ -120,18 +120,6 @@
             "format": ""
           }
         }
-      },
-      "races": {
-        "items": {
-          "type": "string"
-        },
-        "type": "array"
-      },
-      "race_signup_ids": {
-        "items": {
-          "type": "string"
-        },
-        "type": "array"
       }
     },
     "required": [
@@ -142,7 +130,7 @@
   "storage": "postgres",
   "documentsHaveOwners": true,
   "meta": {
-    "updated": "2017-03-15T09:43:10.111Z",
+    "updated": "2017-03-21T04:23:34.093Z",
     "created": "2016-12-14T08:09:55.554Z"
   }
 }

@@ -30,7 +30,11 @@ function send(templateName, dest, subject, data) {
      //cc:      "else <else@your-email.com>",
      subject: subject,
      attachment: [ {data: html[templateName](data), alternative:true} ]
-  }, function(err, message) { console.log(err || message); });
+  }, function(err, message) {
+    if (err) {
+      console.log(err);
+    }
+  });
 }
 
 exports.sendTestEmail = function() {

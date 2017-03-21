@@ -71,24 +71,34 @@ expressa.addListener('post', -10, function(req, collection, doc) {
     }
   }
   if (collection == 'race_signup') {
-    return expressa.db.users.get(req.user._id)
-      .then(function(user) {
+    return expressa.db.race_signup.find({ 'meta.owner' : req.user._id, 'status' : { '$in': ['pending', 'registered'] } })
+      .then(function(race_signups) {
         var passRaceCount = {
           '3races': 3,
           '5races': 5,
           'unlimited': 200,
         }
 
-        var current_count = user.race_signup_ids.length;
-        var plan_count = passRaceCount[user.passType];
+        var current_count = race_signups.length;
+        var plan_count = passRaceCount[req.user.passType];
+        console.log('using ' + current_count + ' of ' + plan_count);
         if (current_count >= plan_count) {
           return {
             code: '400',
             message: 'Already signed up for maximum number of races your plan provides',
           }
         }
+        var race_ids = race_signups.map(function(signup) { return signup.race_id; });
+        if (race_ids.includes(doc.race_id)) {
+          return {
+            code: '400',
+            message: 'You are already signed up for this race.',
+          }
+        }
+
       }, function(err) {
-        console.error('invalid user id in race_signup');
+        console.error(err);
+        console.error('failed to lookup user race count.')
       });
   }
 })
@@ -114,10 +124,8 @@ expressa.addListener('put', 0, function(req, collection, doc) {
     });
   }
   if (collection == 'race_signup') {
-    console.log(doc)
     return expressa.db.race_signup.get(doc._id)
       .then(function(old) {
-        console.log(old);
         if (doc.status == 'cancelled' && old.status == 'registered') {
           doc.status = 'request_cancel';
           console.log('requested cancellation of a registered race');
@@ -149,18 +157,26 @@ expressa.addListener('changed', -10, function(req, collection, doc) {
   }
 })
 
-
 expressa.addListener('get', -5, function(req, collection, data) {
   if (collection == 'users') {
-    if (data.races && data.races.length > 0) {
-      return new Promise(function(resolve, reject) {
-        expressa.db.race.find({ '_id' : { '$in' : data.races } })
-          .then(function(races) {
-            data.race_listings = races;
-            resolve()
-          }, reject)
-      })
-    }
+    return expressa.db.race_signup.find({ 'meta.owner' : data._id, 'status' : { '$in': ['pending', 'registered'] } })
+      .then(function(race_signups) {
+        var signup_ids = race_signups.map(function(signup) { return signup._id; });
+        data.race_signup_ids = signup_ids;
+        var race_ids = race_signups.map(function(signup) { return signup.race_id; });
+        if (signup_ids.length) {
+          return expressa.db.race.find({ '_id' : { '$in' : race_ids } })
+            .then(function(races) {
+              data.race_listings = races;
+            }, function(err) {
+              console.error('failed to lookup full details of user races')
+            });
+        } else {
+          data.race_listings = [];
+        }
+      }, function(err) {
+        console.error('failed to lookup user races')
+      });
   }
 })
 
