@@ -30,3 +30,7 @@ server {
         }
 }
 ```
+
+Files shared between landing page and app/
+ * CSS: base.css, payment.css
+ * JS: base.js, login.js, map.js, mapstyle.js

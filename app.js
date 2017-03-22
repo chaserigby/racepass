@@ -11,6 +11,7 @@ var request = require('request');
 
 var expressa = require('expressa');
 var email = require('./email.js')
+var pg = require('pg')
 
 function populateUserFromFacebook(doc) {
   graph.setAccessToken(doc.fbAccessToken);
@@ -36,12 +37,18 @@ function populateUserFromFacebook(doc) {
         delete doc.fbAccessToken;
       }
       email.sendWelcomeEmail(doc);
-      return doc;
     })
 }
 
 expressa.addListener('post', -10, function(req, collection, doc) {
   if (collection == 'users') {
+    if (doc.fbAccessToken) {
+      return populateUserFromFacebook(doc);
+    } else {
+      email.sendWelcomeEmail(doc);
+    }
+  }
+  /*if (collection == 'users') {
     if (doc.transaction_id) {
       var payment;
       return new Promise(function(resolve, reject) {
@@ -69,7 +76,7 @@ expressa.addListener('post', -10, function(req, collection, doc) {
           }, reject)
       });
     }
-  }
+  }*/
   if (collection == 'race_signup') {
     return expressa.db.race_signup.find({ 'meta.owner' : req.user._id, 'status' : { '$in': ['pending', 'registered'] } })
       .then(function(race_signups) {
@@ -103,10 +110,12 @@ expressa.addListener('post', -10, function(req, collection, doc) {
   }
 })
 
-expressa.addListener('put', 0, function(req, collection, doc) {
+expressa.addListener('put', -10, function(req, collection, doc) {
   if (collection == 'users' && doc.address && doc.address.city) {
     var key = 'AIzaSyDOZ8hCqFBA-vK2S5rt2eOJm_6FS36N2fE';
-    var loc = doc.address.line1 + ',' + doc.address.city + ',' + doc.address.state + ',' + doc.address.zip
+    var loc = doc.address.line1 + ',' + doc.address.city + ',' + doc.address.state + ',' + doc.address.zip;
+    delete doc.race_signup_ids;
+    delete doc.race_listings;
     return new Promise(function(resolve, reject) {
       request('https://maps.googleapis.com/maps/api/geocode/json?address='+loc+'&key='+key, function(err, response, body) {
                 if (err) {
@@ -202,6 +211,31 @@ expressa.post('/user/fblogin', function(req, res, next) {
 var routes = require('./routes/index')(expressa);
 
 app.use(cors());
+
+app.get('/nearby_races', function(req, res, next) {
+  pg.connect(expressa.settings.postgresql_uri, function(err, client, done) {
+    if (err) {
+      return reject(err, 500);
+    }
+    var query = "SELECT * FROM race "
+    + " WHERE data->>'datetime' >= $4"
+     + " ORDER BY "
+     + "abs($1::numeric - (data->'location'->'coordinates'->>'lat')::numeric)"
+     + " + abs($2::numeric - (data->'location'->'coordinates'->>'lng')::numeric) ASC LIMIT $3;"
+    client.query(query, [parseFloat(req.query.lat), parseFloat(req.query.lng),
+      parseInt(req.query.limit), new Date().toISOString()], function(err, result) {
+      done();
+      if (err) {
+        console.error(err);
+        return res.status(500).send('error getting local races');
+      }
+      res.send(result.rows.map(function(row) {
+        return row.data
+      }))
+    })
+  });
+});
+
 
 app.use(bodyParser.json({ type: "*/*" }))
 app.use('/', routes);

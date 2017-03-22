@@ -30,9 +30,9 @@
     "settings: view": false,
     "users: create": false,
     "users: delete": false,
-    "users: delete own": false,
+    "users: delete own": true,
     "users: edit": false,
-    "users: edit own": false,
+    "users: edit own": true,
     "users: modify roles": false,
     "users: view": false,
     "users: view hashed passwords": false,
@@ -63,6 +63,6 @@
   },
   "meta": {
     "created": "2016-12-14T08:09:54.886Z",
-    "updated": "2017-03-21T03:59:47.066Z"
+    "updated": "2017-03-22T06:21:39.205Z"
   }
 }

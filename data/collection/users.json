@@ -120,6 +120,9 @@
             "format": ""
           }
         }
+      },
+      "phone": {
+        "type": "string"
       }
     },
     "required": [
@@ -130,7 +133,7 @@
   "storage": "postgres",
   "documentsHaveOwners": true,
   "meta": {
-    "updated": "2017-03-21T04:23:34.093Z",
+    "updated": "2017-03-22T04:17:04.233Z",
     "created": "2016-12-14T08:09:55.554Z"
   }
 }
