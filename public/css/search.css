@@ -100,7 +100,7 @@
 }
 #map {
 	background: black;
-	min-height: 450px;
+	min-height: 500px;
 }
 .scrolloff {
 	pointer-events: none;
