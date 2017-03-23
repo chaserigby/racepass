@@ -77,6 +77,10 @@ app.controller('MainController', function($location, $http, $scope, $timeout) {
         this.upcoming_races = response.data;
       }.bind(this));
 
+    this.buy = function() {
+      $location.path('payment');
+    }
+
     this.cancellation_reasons = [
       'Lost motivation',
       'No friends or family racing',
@@ -145,7 +149,7 @@ app.controller('MainController', function($location, $http, $scope, $timeout) {
       var signup_id = self.my_race_signup_ids[i];
 
       data = {
-        '$set': { 'status': 'cancelled', 'cancellation_reason': self.get_cancellation_reason() }
+        '$set': { 'status': 'canceled', 'cancellation_reason': self.get_cancellation_reason() }
       }
       $http.post(window.apiurl + 'race_signup/' + signup_id + '/update?token=' + localStorage.token, JSON.stringify(data))
         .then(function(result) {

@@ -36,7 +36,7 @@
     <dl>
       <dt>Pass Type</dt>
       <dd ng-if="main.passName">{{main.passName}} ({{main.racesLeft}} races left)</dd>
-      <dd ng-if="!main.passName">None <em>Buy a pass now</em></dd>
+      <dd ng-if="!main.passName">None <a ng-click="main.buy()"><em>Buy a pass now</em></a></dd>
     </dl>
     <!--<dl>
       <dt>Last Race</dt>

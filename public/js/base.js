@@ -135,5 +135,5 @@ function calculateAge(birthday) { // birthday is a date
     return Math.abs(ageDate.getUTCFullYear() - 1970);
 }
 
-window.apiurl = '//api.racepass.com/'
-//window.apiurl = '//local.racepass.com:3000/'
+//window.apiurl = '//api.racepass.com/'
+window.apiurl = '//local.racepass.com:3000/'

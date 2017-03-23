@@ -87,8 +87,14 @@ expressa.addListener('post', -10, function(req, collection, doc) {
         }
 
         var current_count = race_signups.length;
-        var plan_count = passRaceCount[req.user.passType];
+        var plan_count = passRaceCount[req.user.passType] || 0;
         console.log('using ' + current_count + ' of ' + plan_count);
+        if (plan_count == 0) {
+          return {
+            code: '400',
+            message: 'You need to purchase a pass to register for races.',
+          }
+        }
         if (current_count >= plan_count) {
           return {
             code: '400',
