@@ -89,7 +89,7 @@ module.exports = function(expressa) {
         expressa.db.users.get(req.uid)
           .then(function(u) {
             u.roles = u.roles || [];
-            if (!u.roles.includes('ActivePass')) {
+            if (u.roles.indexOf('ActivePass') == -1) {
               u.roles.push('ActivePass');
               u.passType = req.body.sku;
             }

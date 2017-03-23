@@ -5,7 +5,7 @@
     "schemas: view": true,
     "view errors": false,
     "users: create": true,
-    "users: view own": true,
+    "users: view own": false,
     "users: edit own": false,
     "users: delete own": false,
     "collection: create": false,

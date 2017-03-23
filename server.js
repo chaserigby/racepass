@@ -96,7 +96,7 @@ expressa.addListener('post', -10, function(req, collection, doc) {
           }
         }
         var race_ids = race_signups.map(function(signup) { return signup.race_id; });
-        if (race_ids.includes(doc.race_id)) {
+        if (race_ids.indexOf(doc.race_id) != -1) {
           return {
             code: '400',
             message: 'You are already signed up for this race.',

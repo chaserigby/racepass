@@ -4,7 +4,7 @@
     "created": "2016-12-14T08:09:55.586Z",
     "updated": "2016-12-14T08:26:47.305Z"
   },
-  "postgresql_uri": "postgres://postgres:wkDPvFPkFtlJY55n@localhost/racepass",
+  "postgresql_uri": "postgres://racepass:wkDPvFPkFtlJY55n@localhost/racepass",
   "mongodb_uri": "",
   "jwt_secret": "123123",
   "enforce_permissions": true,
