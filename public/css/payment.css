@@ -1,0 +1,129 @@
+#payment {
+	background: #323237;
+	border-radius: 6px;
+	margin: 20px auto 20px auto;
+	padding: 30px;
+	max-width: 675px;
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
+}
+#pane-container {
+	padding: 15px;
+}
+#left-pane {
+	padding-left: 0px;
+}
+#right-pane {
+	border: 1px solid white;
+	border-radius: 5px;
+}
+#right-pane table {
+	width: 100%;
+}
+#right-pane table tr td:last-child {
+	text-align: end;
+	width: 75px;
+}
+
+#card-details {
+	background: #F7F7F7;
+	color: black !important;
+	border-radius: 6px;
+}
+#payment-row-1 {
+	display: flex;
+	padding: 5px;
+}
+#payment-row-2 {
+	display: flex;
+	border-top: 1px solid #323237;
+	padding: 5px;
+}
+.hosted-field {
+	height: 26px;
+}
+.payment-icon {
+	display: inline-block;
+	margin: 3px;
+	width: 40px;
+}
+.half {
+	flex: 1;
+	display: flex;
+}
+#right-half {
+	border-left: 1px solid #323237;
+}
+
+#email, #num_races {
+	margin-bottom: 10px;
+}
+#promo-container {
+	display: flex;
+}
+#promo-apply {
+	margin-left: 5px;
+	height: 40px;
+	width: 100px;
+}
+#submit {
+	margin-top: 10px;
+	padding: 5px;
+	font-size: 18px;
+}
+#footer-text {
+	font-size: 12px;
+}
+#right-pan p {
+	margin: 0px 0px 15px 0px;
+}
+#right-pane .pass-body {
+	padding: 15px;
+	border-bottom: 1px solid white;
+	border-top: 1px solid white;
+	font-size: 20px;
+}
+#right-pane #summary {
+	padding: 15px;
+}
+
+#payment.paymentComplete #submit {
+	background: #0062FF;
+	border: none;
+}
+#next {
+	padding: 5px;
+	font-size: 18px;
+	display: none;
+}
+#payment.paymentComplete #next {
+	display: inline-block;
+}
+
+#error-message {
+	margin-top: 10px;
+	color: #0DFFAE;
+}
+
+#payment em {
+	cursor: pointer;
+}
+
+
+#payment-complete .details {
+  max-width: 287.7px;
+  margin: 5px auto 45px auto;
+}
+#payment-complete table tr td:first-child {
+  text-align: start;
+}
+#payment-complete table tr td:nth-child(2) {
+  text-align: end;
+  width: 75px;
+}
+#payment-complete #payment-leave button {
+  display: block;
+  width: 287.95px;
+  height: 48.59px;
+  padding-top: 5px;
+  margin: 45px auto 5px auto;
+}

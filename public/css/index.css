@@ -1,0 +1,483 @@
+﻿#landing-nav {
+	padding-bottom: 0px;
+}
+#navbar-primary-collapse {
+	padding-right: 0px;
+	overflow: hidden;
+}
+#primary-menu {
+	float: right;
+	font-size: 14px;
+	padding-bottom: 25px;
+}
+#primary-menu a {
+	margin-left: 19px;
+	padding: 0px;
+	padding-top: 15px;
+}
+#primary-menu a:hover {
+	background: transparent;
+}
+#primary-menu a:focus {
+	background: transparent;
+	color: inherit;
+}
+#primary-menu li.mbutton a {
+	border: 2px solid #0DFFAE;
+	border-radius: 8px;	margin-left: 20px;
+	margin-top: 4px;
+	width: 121.78px;
+	padding: 6px;
+	text-align: center;
+	height: 35px;
+	color: #0DFFAE;
+	margin-left: 15px;
+	font-weight: 900;
+}
+#primary-menu li.mbutton-filled a {
+	background: linear-gradient(180deg, #1EFFD7 0%, #0DFFAE 100%);
+	color: black;
+	margin-left: 30px;
+}
+#primary-menu li.mbutton-filled a:hover {
+	background: linear-gradient(180deg, #2EFFF7 0%, #2DFFBE 100%);
+}
+#primary-menu li.mbutton-hollow a {
+	border: .5px solid #0DFFAE;
+	width: 70px;
+	cursor: pointer;
+}
+#primary-menu li.mbutton-hollow a:hover {
+	background: #0DFFAE;
+	color: black;
+	transition: .2s;
+}
+/* These styles only apply when narrow width*/
+.navbar-custom .navbar-toggle {
+    border-color: #dddddd;
+}
+.navbar-custom .navbar-toggle:hover,
+.navbar-custom .navbar-toggle:focus {
+    background-color: #dddddd;
+}
+.navbar-custom .navbar-toggle .icon-bar {
+    background-color: #888888;
+}
+@media screen and (max-width: 930px) {
+	#primary-menu li.mbutton-filled a {
+        position: relative;
+        left: -15px;
+        width: 120px;
+    }
+	#primary-menu li.mbutton-hollow a {
+        width: 120px;
+    }
+}
+
+#banner1 {
+	height: 550px;
+	position: relative;
+	overflow: hidden;
+}
+#banner1 video {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	width: 100%;
+	min-width: 850px;
+}
+#banner1 #find-races-panel {
+	z-index: 100;
+	position: relative;
+	margin-top: 150px;
+	text-align: center;
+}
+#find-races-panel .title {
+	font-size: 36px;
+	font-weight: 500;
+	text-align: center;
+	line-height: 49px;
+	color: #FFFFFF;
+	text-shadow: 0 0 6px rgba(0,0,0,0.5);
+	margin-bottom: 12px;
+}
+#find-races-panel .subtitle {
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 27px;
+	color: #FFFFFF;
+	text-shadow: 0 0 6px rgba(0,0,0,0.5);
+	margin-bottom: 30px;
+}
+#find-races-panel input {
+	color: #0DFFAE;
+	border: none;
+	border-bottom: 1.5px solid #0DFFAE;
+	border-radius: 0px;
+	font-weight: 900;
+	width: 150px;
+	height: 24px;
+	margin-left: 10px;
+	padding-left: 0px;
+	background-color: transparent;
+}
+#find-races-panel input:focus {
+	 outline: none;
+}
+#banner1 .container {
+	z-index: 100;
+	position: relative;
+}
+#banner1 .text {
+	width: 400px;
+	margin-top: 25px;
+	margin-bottom: 30px;
+	font-size: 36px;
+	font-weight: 500;
+	line-height: 49px;
+	color: #F7F7F7;
+	text-shadow: 0 0 6px rgba(0,0,0,0.5);
+}
+@media screen and (max-width: 600px) {
+    #banner1 .text {
+        width: 290px;
+    }
+}
+#banner1 .textbox {
+	padding-top: 5%;
+	margin-left: 10%;
+	font-size: 28px;
+	max-width: 303.83px;
+
+}
+.input-row {
+	display: flex;
+	width: 100%;
+}
+.input-row input {
+	width: 0; /* actual width controlled by flex*/
+	font-size: 14px;
+	height: 40px;
+}
+#field-email {
+	flex: 3;
+	margin: 0px 10px 10px 0px;
+	background-color: #F7F7F7;
+	border-radius: 8px;
+}
+#field-zip {
+	flex: 1;
+	margin: 0px 0px 10px 0px;
+	background-color: #F7F7F7;
+	border-radius: 8px;
+}
+#find-button {
+	font-size: 14px;
+	height: 46.24px;
+	color: #10383D;
+}
+#separator-row {
+	display: flex;
+	text-align: center;
+	margin: 8px 3px;
+	font-size: 14px;
+	font-weight: 900;
+	line-height: 19px;
+	color: #F7F7F7;
+}
+.hbar {
+	flex: 3;
+}
+.container {
+	max-width: 1000px !important;
+}
+#find-disclaimer {
+	padding: 8px 35px 0px 35px;
+	height: 24px;
+	font-family: Avenir;
+	font-size: 9px;
+	font-weight: 500;
+	text-align: center;
+	line-height: 12px;
+	color: #F7F7F7;
+}
+
+/* Styles for 3 column main features */
+#selling-points-wrapper {
+	margin: 0px 25px 0px 25px;
+}
+#selling-points {
+	color: #F7F7F7;
+	padding: 20px 0px;
+	text-align: center;
+}
+#selling-points h3 {
+	font-size: 22px;
+	margin: 10px 0px;
+
+}
+.selling-point {
+	padding: 20px;
+}
+#selling-points p {
+	line-height: 25px;
+	margin: 0px;
+	color: #ABAEB7;
+}
+.selling-icon {
+	margin: 21px auto;
+	display: block;
+	width: 80px;
+	height: 80px;
+	text-align: center;
+}
+.selling-icon img {
+	height: 80px;
+}
+.point-ch {
+	margin-top: 31px;
+}
+
+.button-row {
+	width: 100%;
+	text-align: center;
+	margin: 40px 0px 40px 0px;
+}
+.button-continue {
+	border: 1px solid #979797;
+	border-radius: 100px;
+	font-weight: 300;
+	padding: 15px 15px;
+	display: inline-block;
+	color: #F7F7F7;
+	cursor: pointer;
+}
+.button-continue-icon {
+	font-size: 36px;
+	color: #979797;
+	line-height: .6;
+	font-weight: lighter;
+}
+
+/** Race Logos Section */
+#race-logos-wrapper {
+	width: 100%;
+	overflow: hidden;
+}
+#race-logos {
+	background: #F7F7F7;
+	width: 10000px;
+	margin-left: -50px;
+	/*transition: 1.5s linear;*/
+}
+.race-logo {
+	opacity: .75;
+	margin: 0px;
+	/*filter: grayscale(100%);*/
+	padding: 15px 25px;
+}
+
+
+#m-search-wrapper {
+	padding: 14px 18px 10px 17px;
+	width: 100%;
+	position: relative;
+	pointer-events: auto;
+}
+#pac-input {
+	font-size: 16px;
+	width: 100%;
+	z-index: 11;
+	padding-right: 80px;
+}
+#search-icon {
+	position: absolute;
+	top: 6px;
+	right: 45px;
+	padding: 15px;
+	z-index: 20;
+	font-size: 18px;
+	color: rgba(103,103,103,0.84);
+}
+#search-close {
+	position: absolute;
+	top: 12px;
+	right: 30px;
+	padding: 10px;
+	z-index: 20;
+	font-family: Arial;
+	font-size: 18px;
+	font-weight: 100;
+	line-height: 25px;
+	color: rgba(103,103,103,0.84);
+	cursor: pointer;
+}
+
+#m-filter-wrapper {
+	display: flex;
+	font-size: 14px;
+	padding: 3px 8px 11px 8px;
+}
+
+#m-filter-wrapper .filter {
+	padding-left: 13px;
+	padding-right: 13px;
+}
+.filter .header {
+	font-weight: 300;
+	line-height: 19px;
+	color: #D6D6D6;
+}
+.filter .value {
+	font-weight: 900;
+	line-height: 19px;
+	color: #D8D8D8;
+}
+.value.selected {
+	color: #0DFFAE;
+}
+
+.filter-options {
+	height: 52px;
+	border-top: 0.5px solid #979797;
+	border-bottom: 0.5px solid #979797;
+}
+.values {
+	list-style-type: none;
+	display: flex;
+	padding: 0px;
+}
+.values li {
+	margin-left: 7px;
+	width: 30px;
+	height: 12px;
+	font-family: Avenir;
+	font-size: 10px;
+	font-weight: 500;
+	line-height: 12px;
+	color: #0DFFAE;
+}
+
+
+/* Choose your pass page */
+#choose-pass {
+	font-size: 36px;
+	margin: 0px 25px 0px 25px;
+}
+#pass-header {
+}
+
+#pass-wrapper {
+	flex-direction: row;
+	text-align: center;
+	font-size: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 50px;
+	padding: 0px;
+}
+.pass-container {
+	padding: 10px;
+}
+.pass {
+	/*margin: 30px 10px 0px 10px;*/
+	height: 425px;
+	background-color: #323237;
+	box-shadow: 0 2px 10px 0 rgba(0,0,0,0.5);
+	border-radius: 4px;
+	display: inline-block;
+	width: 100%;
+}
+.pass-bordered {
+	border: 2px solid #0DFFAE;
+	border-radius: 14px;
+	padding: 5px;
+}
+.pass-title {
+	height: 36px;
+	font-family: Avenir;
+	font-size: 26px;
+	font-weight: 900;
+	text-align: center;
+	line-height: 36px;
+	color: #0DFFAE;
+	margin: 47px auto 29px auto;
+}
+.pass-count {
+	font-size: 24px;
+}
+.pass p {
+	margin: 0px 0px 15px 0px;
+}
+.pass-body {
+	height: 225px;
+	background-color: #6A6A6A;
+	font-weight: 900;
+	font-size: 16px;
+	border-radius: 2px;
+	padding: 20px 5px 20px 5px;
+	margin: 0px 23px;
+}
+.pass-top {
+	height: 120px;
+}
+.pass-price-row {
+	margin-top: 27px;
+}
+.pass-price {
+	font-size: 24px;
+	font-weight: bold;
+}
+.pass-buy {
+	display: block;
+	margin: 10px 55px 5px 55px;
+	padding: 6px;
+	font-size: 16px;
+	height: 40px;
+}
+.pass-buy button {
+	width: 100%;
+}
+.slick-dots button:before {
+	color: #F7F7F7 !important;
+	height: 30px;
+	width: 30px;
+}
+.slick-slide{
+	width: 350px;
+}
+
+
+
+#faq {
+}
+.qa {
+	border: 1px solid #979797;
+	border-radius: 8px;
+	font-size: 18px;
+	margin: 10px 20px 10px 10px;
+	padding: 17px 12px 10px 40px;
+	cursor: pointer;
+}
+.answer {
+	font-size: 16px;
+	color: #ABAEB7;
+}
+.qa .question::after { 
+    color: #0DFFAE;
+    content: "-";
+    float: right;
+}
+.collapsed .question::after { 
+    color: #0DFFAE;
+    content: "+";
+    float: right;
+}
+#faq-full .button-continue {
+	height: 43px;
+	border: 1px solid #F7F7F7;
+	border-radius: 100px;
+	font-family: Avenir;
+	padding: 11px;
+}

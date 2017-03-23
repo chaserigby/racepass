@@ -1,0 +1,49 @@
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1732893076927842',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+    FB.AppEvents.logPageView();
+  };
+  
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div>
+   <h3>Welcome to Racepass!</h3>
+   <div class="login-panel">
+     <div style="flex: 1;">
+        <div>Login/create account with social:</div>
+        <div style="margin-top: 30px;">
+           <div id="fb-login" ng-click="login.facebook()">
+            <i class="fa fa-facebook" aria-hidden="true"></i>
+            CONTINUE WITH FACEBOOK
+          </div>
+        </div>
+     </div>
+     <div id="login-divider" style="flex: 0.1 50px">
+        <div class="vbar"></div>
+        <div style="margin: 8px 0px;">OR</div>
+        <div class="vbar"></div>
+     </div>
+     <form class="userpass" style="flex: 1;">
+        <div>Login or create account with email and password:</div>
+        <br>
+        <input required ng-model="login.email" class="full" type="email" placeholder="Your email" /><br>
+        <input required ng-model="login.password" class="full" type="password" placeholder="Your password" />
+        <div>
+           <button style="margin-left: 20px;" ng-click="login.pwdLogin()" id="login-button">Login</button>
+           <button ng-click="login.pwdRegister()" id="login-button">Register</button>
+
+        </div>
+      </form>
+    </div>
+</div>

@@ -1,0 +1,183 @@
+#profile-info {
+	display: flex;
+	margin-top: 15px;
+}
+#profile-left {
+	width: 200px;
+	clear: none;
+}
+#profile-photo-frame {
+	height: 150px;
+	width: 150px;
+	border-radius: 75px;
+	margin: 25px;
+	overflow: hidden;
+}
+#profile-photo {
+	width: 150px;
+	min-height: 150px;
+	border-radius: 75px;
+}
+
+#profile-info h1 {
+	margin: 10px 0px;
+}
+#profile-right dl {
+	margin: 3px;
+}
+#profile-right dt {
+	display: inline-block;
+	width: 100px;
+	color: #ABAEB7;
+}
+#profile-right dd {
+	display: inline-block;
+}
+
+
+.race-table {
+	width: 100%;
+}
+.race-table th {
+	background: #323237;
+	padding: 8px 15px;
+	font-weight: lighter;
+}
+.race-table td {
+	color: #F7F7F7;
+	padding: 10px;
+	border-bottom: 0.5px solid #323237;
+}
+.race-table .button {
+	padding: 5px;
+	width: 100px;
+	font-size: 12px;
+}
+
+/** Styles for registration */
+#registration h1 {
+	font-size: 24px;
+}
+#registration h3 {
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 25px;
+	color: #ABAEB7;
+	margin-bottom: 8px;
+}
+#registration input {
+	margin-right: 10px;
+	margin-bottom: 8px;
+}
+#registration {
+	padding: 50px;
+	background: #323237;
+	border-radius: 6px;
+	margin: 50px auto;
+	max-width: 800px;
+}
+#registration .next {
+	margin: 30px auto 10px auto;
+	display: block;
+	padding: 10px 40px 10px 40px;
+}
+#registration .dots-wrapper {
+	margin: 30px auto 0px auto;
+	width: 78px;
+}
+#registration .dots {
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	border-radius: 4px;
+	margin-right: 8px;
+	background-color: #9B9B9B;
+}
+#registration .dots-filled {
+	background-color: #0DFFAE;
+}
+.close, .close:hover {
+	font-size: 42px;
+	color: #979797;
+	border: none;
+	text-shadow: none;
+}
+
+.addr-box {
+	border-radius: 4px;
+	background: #F7F7F7;
+	max-width: 450px;
+}
+.addr-box input {
+	margin: 0 !important;
+	width: 0px;
+	border-radius: 0px;
+	background: transparent;
+}
+.addr-row {
+	display: flex;
+}
+.addr-row:first-child {
+	border-bottom: 1px solid #ABAEB7;
+}
+.addr-row input:not(:first-child) {
+	border-left: 1px solid #ABAEB7;
+}
+#address {
+	flex: 3;
+}
+#apt {
+	flex: 1;
+}
+#city {
+	flex: 2;
+}
+#state {
+	flex: 1;
+}
+#zip {
+	flex: 1;
+}
+#emergency-contact-box input {
+	flex: 1;
+}
+
+/** Race Cancellation */
+
+#cancel-container {
+	padding: 28px;
+	background-color: rgb(36, 39, 42);
+	min-height: 400px;
+}
+#cancel-container h1 {
+	padding: 30px 113px 30px 113px;
+}
+#cancel-container .close {
+	text-shadow: none;
+	color: #9B9B9B;
+	font-size: 14px;
+	opacity: 1;
+}
+#option-container {
+	margin: 5px auto;
+	width: 400px;
+	height: 350px;
+	text-align: center;
+}
+.cancel-option {
+	/*padding: 15px 9px 18px 8px;*/
+	width: 125px;
+	height: 54px;
+	margin: 3px 4px;
+	float: left;
+}
+#option-container .submit {
+	margin: 50px 0px 50px 0px;
+	height: 34px;
+}
+#option-container .writein {
+	margin-top: 28px;
+	border-radius: 8px;
+	padding: 14px;
+	color: black;
+}

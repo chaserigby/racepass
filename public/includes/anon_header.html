@@ -1,0 +1,25 @@
+<nav id="landing-nav" class="navbar navbar-custom">
+  <div class="">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-primary-collapse" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      </button>
+      <a href="/"><img src="imgs/logo.png" id="logo" /></a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-primary-collapse">
+      <ul id="primary-menu" class="nav navbar-nav">
+        <li id="menu-about"><a href="about">About</a></li>
+        <li id="menu-find-races"><a href="/#choose-from">Find Races</a></li>
+        <li id="menu-explore-passes"><a href="/#choose-pass">Explore Passes</a></li>
+        <li id="menu-faq"><a href="/#faq">FAQ</a></li>
+        <li role="separator" class="divider"></li>
+        <li class="mbutton mbutton-filled"><a id="get-racepass-button" href="/#choose-pass">Get Racepass</a></li>
+        <li role="separator" class="divider"></li>
+        <li class="mbutton mbutton-hollow"><a onclick="localStorage.token ? window.location = '/app' : null;" data-toggle="modal" data-target="#myModal">Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

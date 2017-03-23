@@ -1,0 +1,137 @@
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<div ng-click="search.containerclick($event)"  class="container">
+  <div ng-if="search.full_mode" id="filters">
+    <div class="filter" id="filter-date">
+      Date range <input class="date-picker" type="text" id="date-from" ng-model="search.start_date" ng-change="search.update()">
+      <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+      <input class="date-picker" type="text" id="date-to" ng-model="search.end_date" ng-change="search.update()">
+    </div>
+    <div ng-click="search.popupclick($event)" class="filter">
+      <div class="header">Race Distance</div>
+      <div class="value" ng-click="search.popup_open = 'type';">
+        <span ng-if="search.slider_types_range[0]==0 && search.slider_types_range[1]==5">All distances</span>
+        <em ng-if="!(search.slider_types_range[0]==0 && search.slider_types_range[1]==5)">{{search.slider_types[search.slider_types_range[0]]}} &nbsp;-&nbsp; {{search.slider_types[search.slider_types_range[1]]}}
+        </em>
+      </div>
+      <div ng-if="search.popup_open == 'type'" class="popup">
+        Race Type
+        <em ng-click="search.reset_types();" style="padding-left: 5px; font-size: 10px;">Clear</em>
+        <ul class="values">
+          <li ng-repeat="type in search.slider_types">{{type}}</li>
+        </ul>
+        <div class="slider" ui-slider="{range: true}" min="0" max="5" ng-change="search.update()" ng-model="search.slider_types_range"></div>
+        <div style="clear: both;"></div>
+      </div>
+    </div>
+    <div ng-click="search.popupclick($event)" class="filter">
+      <div class="header">Distance from home</div>
+      <div class="value" ng-click="search.popup_open = 'homedist';">
+        <span ng-if="search.slider_homedist_range[0]==0 && search.slider_homedist_range[1]==5">All distances</span>
+        <em ng-if="!(search.slider_homedist_range[0]==0 && search.slider_homedist_range[1]==5)">{{search.slider_homedist[search.slider_homedist_range[0]]}} &nbsp;-&nbsp; {{search.slider_homedist[search.slider_homedist_range[1]]}}
+        </em>
+      </div>
+      <div ng-if="search.popup_open == 'homedist'" class="popup">
+        Race Type
+        <em ng-click="search.reset_homedists();" style="padding-left: 5px; font-size: 10px;">Clear</em>
+        <ul class="values">
+          <li ng-repeat="type in search.slider_homedist">{{type}}</li>
+        </ul>
+        <div class="slider" ui-slider="{range: true}" min="0" max="5" ng-change="search.update()" ng-model="search.slider_homedist_range"></div>
+        <div style="clear: both;"></div>
+      </div>
+    </div>
+    <!--<div class="filter">
+      <div class="header">Starting altitude</div>
+      <div class="value">Any</div>
+      </div>
+      <div class="filter filter-wide">
+      <div class="header">Elevation Gain / Drop</div>
+      <div class="value">Any</div>
+      </div>
+      <div class="filter filter-wide">
+      <div class="header">Distance from home</div>
+      <div class="value">Any</div>-->
+  </div>
+</div>
+<section ng-click="search.containerclick($event)"  id="search">
+  <div ng-cloak id="map-container">
+    <div id="map-panel-outer" ng-class="{active: (search.panel != '')}">
+      <div ng-cloak id="map-panel">
+        <div ng-if="!search.full_mode" id="m-search-wrapper">
+          <div id="search-icon">
+            <i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;|
+          </div>
+          <div ng-click="search.mapClose();" id="search-close">X</div>
+          <input ng-focus="search.search_focus = true" ng-blur="search.lostFocus()" ng-model="search.search_text" ng-keyup="$event.keyCode == 13 && search.search()" id="pac-input" class="controls" type="text" placeholder="Find your city" />
+        </div>
+        <div ng-cloak ng-if="search.results && search.search_focus" id="search-results">
+          <div ng-click="search.selectSearchResult(result);" ng-repeat="result in search.results" class="result">
+            <i ng-if="result.type == 'race'" class="fa fa-road" aria-hidden="true"></i>
+            <i ng-if="result.type == 'place'" class="fa fa-map-marker" aria-hidden="true"></i>
+            {{result.name}}
+          </div>
+        </div>
+        <div ng-if="search.in_results" id="m-filter-wrapper">
+          <div class="filter">
+            <div class="header">Race Type</div>
+            <div class="value selected">
+              <span ng-if="search.slider_types_range==[0,5]">All distances</span>
+              <span ng-if="search.slider_types_range!=[0,5]">{{search.slider_types[search.slider_types_range[0]]}}</span>
+            </div>
+          </div>
+          <div class="filter">
+            <div class="header">Date range</div>
+            <div class="value">Next 12 months</div>
+          </div>
+          <div class="filter">
+            <div class="header">Done</div>
+            <div class="value">Clear All</div>
+          </div>
+        </div>
+        <div ng-if="false && search.in_results" id="filter-distance" class="filter-options">
+          <ul class="values">
+            <li>5K
+            <li>10K
+            <li>12K
+            <li>15K
+            <li>13.1 mile
+            <li>26.2 mile
+          </ul>
+        </div>
+        <div ng-if="search.panel == 'details'" id="race-details">
+          <div ng-if="search.full_mode" ng-click="search.panel = (search.full_mode ? 'results' : '');" class="close">X</div>
+          <h3 style="font-size: 20px;">{{search.selected.name}}</h3>
+          <img ng-if="search.selected_image" class="image" ng-src="{{search.selected_image}}" />
+          <dl ng-repeat="(label, value) in search.selected_details"">
+            <dt>{{label}}</dt>
+            <dd>{{value}}</dd>
+          </dl>
+          <!--<a target="_blank" href="{{search.selected.website}}">Website</a>-->
+          <a ng-if="!search.full_mode" id="btn-explore-pass" href="#choose-pass" ng-click="search.scrollTo($event);">
+          Explore Passes
+          </a>
+          <a ng-if="search.full_mode" ng-click="search.register()" id="btn-register">
+          Register
+          </a>
+        </div>
+        <div ng-click="search.selectRace(race);" ng-if="search.full_mode && (search.panel == 'results' || search.panel == 'details')" class="race" ng-repeat="race in search.races">
+          <div class="title">{{race.name}}</div>
+          <div class="info">{{race.type}}</div>
+          <div class="distance">{{race.distanceFromHome}} mile{{race.distanceFromHome == 1 ? '' : 's'}} from home</div>
+        </div>
+      </div>
+    </div>
+    <div id="map"></div>
+  </div>
+</section>
+</div>
+<script src="js/mapstyle.js"></script>    
+<script src="js/map.js"></script>
+<script>
+  $( function() {
+    console.log('map html loaded');
+    if ($( '.date-picker').length) {
+      $( '.date-picker').datepicker();
+    }
+  });
+</script>

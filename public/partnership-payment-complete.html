@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=utf-8 />
+    <title>Racepass - Payment Complete</title>
+    <!--#include virtual="/includes/head_standard.html" -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/payment.css" />
+    <script>
+      angular.module('paymentc', [])
+        .controller('PaymentCompleteController', function($timeout, $scope) {
+          /*this.payment = {
+            amount: 180,
+            num_races: 4,
+            details: '12314',
+          }*/
+          this.payment = JSON.parse(window.localStorage.payment);
+        });
+    </script>
+    <style>
+    .details {
+      max-width: 287.7px;
+      margin: 5px auto 45px auto;
+    }
+    table tr td:first-child {
+      text-align: start;
+    }
+    table tr td:nth-child(2) {
+      text-align: end;
+      width: 75px;
+    }
+    #payment-leave button {
+      display: block;
+      width: 287.95px;
+      height: 48.59px;
+      padding-top: 5px;
+      margin: 45px auto 5px auto;
+    }
+    </style>
+  </head>
+  <body id="partnership-payment-complete" ng-app="paymentc" ng-controller="PaymentCompleteController as paymentc">
+    <!--#include virtual="/includes/minimal_header.html" -->
+
+    <section class="solo">
+      <h3>Payment Complete</h3>
+      <p>Cool runnings! We've processed your payment and our RaceOps team will be in touch soon.</p>
+      <div class="bordered details">
+        <table class="divided" ng-cloak>
+          <tr style="font-weight: 900;">
+            <td colspan="2">
+              Race Partnership
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {{paymentc.payment.num_races}} Races
+            </td>
+            <td>
+              $45/each
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Total
+            </td>
+            <td>
+              ${{paymentc.payment.amount}}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              Order Confirmation Number<br>
+              <em>{{paymentc.payment.details}}</em>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <a id="payment-leave" href="/">
+        <button>
+        Go back to home
+        </button>
+      </a>
+
+    </section>
+
+    <!--#include virtual="/includes/footer.html" -->
+  </body>
+</html>

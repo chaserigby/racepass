@@ -1,0 +1,107 @@
+<!-- Cancellation Modal -->
+<div class="modal" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div id="cancel-container" class="modal-content">
+        <button type="button" ng-click="main.select_cancellation('not specified'); main.submit_cancellation()" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">No thanks</span></button>
+         <h2>Let us know why you’re cancelling so we can make Racepass work better for you</h2>
+         <div id="option-container">
+          <button ng-class="{'hollow': main.cancellation_reason!=reason}" class="cancel-option" ng-repeat="reason in main.cancellation_reasons" ng-click="main.select_cancellation(reason)">{{reason}}</button>
+         <textarea ng-model="main.cancellation_reason_other" ng-if="main.cancellation_reason=='Other'" class="full writein" placeholder="Write us a sentence or two why you cancelled"></textarea>
+         <button class="button full submit" ng-click="main.submit_cancellation()">Submit</button>
+         </div>
+      </div>
+  </div>
+</div>
+
+<section id="profile-info" class="container">
+  <div id="profile-left">
+    <div id="profile-photo-frame">
+      <img id="profile-photo" src="{{main.photo}}" />
+    </div>
+  </div>
+  <div id="profile-right">
+    <h1>{{main.user.first_name}} {{main.user.last_name}}</h1>
+    <dl>
+      <dt>Details</dt>
+      <dd>{{main.age}}, {{main.user.gender}}</dd>
+    </dl>
+    <dl>
+      <dt>Current City</dt>
+      <dd>{{main.user.address.city}}, {{main.user.address.state}}</dd>
+    </dl>
+    <dl>
+      <dt>2017 Races</dt>
+      <dd></dd>
+    </dl>
+    <dl>
+      <dt>Pass Type</dt>
+      <dd ng-if="main.passName">{{main.passName}} ({{main.racesLeft}} races left)</dd>
+      <dd ng-if="!main.passName">None <em>Buy a pass now</em></dd>
+    </dl>
+    <!--<dl>
+      <dt>Last Race</dt>
+      <dd>San Francisco Marathon</dd>
+    </dl>
+    <dl>
+      <dt>Next Race</dt>
+      <dd>Oakland Boys & Girl Club Fun Run</dd>
+    </dl>
+    <dl>
+      <dt>PR</dt>
+      <dd>3:23:18</dd>
+    </dl>
+    <dl>
+      <dt>Rank</dt>
+      <dd>Top 36%</dd>
+    </dl>!-->
+  </div>
+</section>
+
+<section id="registered-races" class="container">
+  <h3 style="float: left;">Registered Races</h3>
+  <a href="#!/search" style="float: left; margin: 26px 0px 0px 15px;" ><button class="button" style="border-radius: 15px; padding: 3px 8px;">Add race</button></a>
+  <table class="race-table">
+    <tr>
+      <th>Distance</th>
+      <th>Race</th>
+      <th>Date</th>
+      <th>Location</th>
+      <th>Actions</th>
+    </tr>
+    <tr ng-repeat="race in main.my_races">
+      <td>{{race.distance}}</td>
+      <td>{{race.name}}</td>
+      <td>{{race.datetime | date:'MM/dd/yyyy' }}</td>
+      <td>{{race.location.city}}, {{race.location.state}}</td>
+      <td ng-click="main.cancel_popup($index)">
+        <div class="button">Cancel</div>
+      </td>
+    </tr>
+  </table>
+</section>
+
+<section id="upcoming-races" class="container">
+  <h3>Upcoming Races</h3>
+  <table class="race-table">
+    <tr>
+      <th>Distance</th>
+      <th>Race</th>
+      <th>Date</th>
+      <th>Location</th>
+      <th>Actions</th>
+    </tr>
+    <tr ng-repeat="race in main.upcoming_races">
+      <td>{{race.distance}}</td>
+      <td>{{race.name}}</td>
+      <td>{{race.datetime | date:'MM/dd/yyyy' }}</td>
+      <td>{{race.location.city}}, {{race.location.state}}</td>
+      <td ng-click="main.race_register(race)">
+        <button class="button">Register</button>
+      </td>
+    </tr>
+  </table>
+</section>
+
+<div class="callout-small">
+   Can't find the race you're looking for? <a href="#"><em>Let us know!</em></a>
+</div>

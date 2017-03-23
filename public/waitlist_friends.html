@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=utf-8 />
+    <title>Racepass - Invite your friends</title>
+    <!--#include virtual="/includes/head_standard.html" -->
+    <style type="text/css">
+      #waitlist textarea {
+        width: 100%;
+        max-width: 256px;
+        margin: 14px auto 14px auto;
+        display: block;
+        font-size: 14px;
+        min-height: 167px;
+      }
+      #waitlist input, #waitlist button {
+        width: 100%;
+        max-width: 300px;
+        padding: 11px;
+        margin: 14px auto 14px auto;
+        display: block;
+        font-size: 14px;
+      }
+      #waitlist em {
+        text-align: center;
+        display: block;
+      }
+      #waitlist p {
+        margin-top: 25px;
+        margin-bottom: 20px;
+        max-width: 280px;
+      }
+    </style>
+    <script>
+      angular.module('waitlist', [])
+        .controller('WaitlistController', function() {
+
+          this.submit = function() {
+            var emails = this.emails.split('\n');
+            emails.forEach(function(email) {
+              if (!email) {
+                return;
+              }
+              data = {
+                'email': email,
+                'ip': window.localStorage.ip,
+                'zip': window.localStorage.zip,
+                'source': 'friend',
+                'referrer': window.localStorage.email,
+              }
+              $.post('https://api.racepass.com/email_signups', JSON.stringify(data), function(result) {
+                window.location.href = '/';
+              });
+            });
+          }
+        });
+    </script>
+  </head>
+  <body ng-app="waitlist" ng-controller="WaitlistController as waitlist">
+    <!--#include virtual="/includes/minimal_header.html" -->
+
+    <section class="solo" id="waitlist">
+      <h2>Thanks! We’ll hold your spot.</h2>
+      <p>If you have any running buddies, you can get them priority access to a pass when we launch by adding their emails below:</p>
+
+      <em>One per line</em>
+
+      <textarea name="emails" ng-model="waitlist.emails"></textarea>
+      <button type="button" ng-click="waitlist.submit()">Hold their spots too</button>
+    </section>
+
+    <!--#include virtual="/includes/footer.html" -->
+  </body>
+</html>

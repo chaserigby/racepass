@@ -1,0 +1,159 @@
+<link rel="stylesheet" type="text/css" media="screen" href="css/payment.css" />
+
+<section ng-cloak ng-if="!payment.paymentComplete" id="payment" ng-class="{paymentComplete: payment.paymentComplete}">
+  <h1 style="margin-top: 0px">Let's get you up & running</h1>
+  <div ng-cloak id="pane-container" class="row">
+    <div id="right-pane" class="col-sm-6 col-sm-push-6">
+      <h2 style="margin-left:15px;">{{payment.passName}} Pass</h2>
+      <div ng-if="payment.passType=='3races'" class="pass-body">
+        <div class="pass-count">3 Races</div>
+        <p>26.2 • 13.1<br>
+          10k • 5k • Fun Runs
+        </p>
+      </div>
+      <div ng-if="payment.passType=='5races'" class="pass-body">
+        <div class="pass-count">5 Races</div>
+        <p>26.2 • 13.1<br>
+          10k • 5k • Fun Runs
+        </p>
+      </div>
+      <div ng-if="payment.passType=='unlimited'" class="pass-body">
+        <div class="pass-count">Unlimited Races</div>
+        <p>26.2 • 13.1<br>
+          10k • 5k • Fun Runs
+        </p>
+      </div>
+      <div id="summary">
+        <table>
+          <tr>
+            <td>12 Month Subscription</td>
+            <td>${{payment.baseCost}}&nbsp;+&nbsp;Tax</td>
+          </tr>
+          <tr ng-if="payment.promoApplied">
+            <td><em>Promo</em></td>
+            <td><em>-${{payment.promoDiscount}}</em></td>
+          </tr>
+          <tr>
+            <td>Pass valid through</td>
+            <td>{{payment.endDate}}</td>
+          </tr>
+          <tr ng-if="payment.promoApplied">
+            <td>Final Cost</td>
+            <td>${{payment.finalCost}} + Tax</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div id="left-pane" class="col-sm-6 col-sm-pull-6">
+      <form id="checkout-form">
+        <div id="card-details">
+          <div id="error-message"></div>
+          <div id="payment-row-1">
+            <svg class="payment-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+              <path d="M0 0h24v24H0z" fill="none"/>
+              <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+            </svg>
+            <div class="hosted-field" id="card-number"></div>
+          </div>
+          <div id="payment-row-2">
+            <div class="half">
+              <svg class="payment-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+              </svg>
+              <div class="hosted-field" id="expiration-date"></div>
+            </div>
+            <div class="half" id="right-half">
+              <svg class="payment-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+              </svg>
+              <div class="hosted-field" id="cvv"></div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <p ng-click="payment.togglePromo()">Use <em>promo code</em> or <em>gift card</em>
+        <b ng-if="payment.promoOpen">⌵</b><b ng-if="!payment.promoOpen">></b>
+        </p>
+        <div ng-if="payment.promoOpen" id="promo-container">
+          <input id="email" placeholder="Code" ng-model="payment.promoCodeField" />
+          <button type="button" id="promo-apply" ng-click="payment.applyPromo()">Apply</button>
+        </div>
+        <input type="hidden" name="payment-method-nonce">
+        <button id="submit" type="submit" class="full" ng-click="payment.purchase(); $event.preventDefault()" disabled>
+          <span ng-if="!payment.paymentComplete">Pay ${{payment.finalCost}}</span>
+          <span ng-if="payment.paymentComplete">
+            (<i class="fa fa-check" aria-hidden="true"></i>)
+          </span>
+          <i ng-if="payment.purchaseInProgress" class="fa fa-spinner fa-spin fa-fw"></i>
+          <span ng-if="payment.purchaseInProgress" class="sr-only">Processing...</span>
+        </button>
+        <p id="footer-text">By purchasing, I agree to the Terms of Use & Privacy Policy. By purchasing, I understand my membership automatically renews at the annual subscription and I can cancel on site at any time.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section ng-cloak ng-if="payment.paymentComplete" id="payment-complete" class="solo">
+  <h2>Payment Complete</h2>
+  <p>Cool runnings! We’ve sent you an email with all of your payment details for your reference</p>
+  <div class="bordered details">
+    <table class="divided" ng-cloak>
+      <tr style="font-weight: 900;">
+        <td colspan="2">
+          {{payment.passName}} Pass
+        </td>
+      </tr>
+      <tr>
+        <td>
+          12 Month Subscription 
+          {{payment.start_date}} - {{payment.end_date}}
+        </td>
+        <td>
+          ${{payment.baseCost}}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Payment Method
+        </td>
+        <td>
+          {{payment.cardDetails.maskedNumber}}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Total
+        </td>
+        <td>
+          ${{payment.finalCost}}
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          Order Confirmation Number<br>
+          <em>{{payment.transaction_id}}</em>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!--transaction_id={{paymentc.payment.details}}-->
+  <a id="payment-leave" ng-click="payment.done();">
+    <button>
+      Set up my profile & register for races
+    </button>
+  </a>
+
+</section>
+
+<!-- Load the Client component. -->
+<script src="https://js.braintreegateway.com/web/3.6.3/js/client.min.js"></script>
+<!-- Load the Hosted Fields component. -->
+<script src="https://js.braintreegateway.com/web/3.6.3/js/hosted-fields.min.js"></script>
+<script>
+  $.getJSON(window.apiurl + 'checkouts/new')
+    .then(function(data) {
+      console.log(data);
+      loadBraintree(data.clientToken);
+    });
+</script>

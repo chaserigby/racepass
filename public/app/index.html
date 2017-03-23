@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset=utf-8 />
+      <title>Racepass</title>
+      <!--#include virtual="/includes/head_standard.html" -->
+      <script src="/deps/angular-route.js"></script>
+      <script src="/deps/jquery-ui/jquery-ui.js"></script>
+      <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAusDnCayfKbNkDbu6uBiYAgAK3Kk8tEL8&libraries=places"></script>-->
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYMq0Meyau1Q9hMFlyETxUdcv-io5NjwI&libraries=places,geometry"></script>
+      <script src="/deps/bower_components/angular-ui-slider/src/slider.js"></script>
+      <script src="deps/infobubble/infobubble.js"></script>
+      <script src="/deps/bower_components/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+      <script src="/app/js/app.js"></script>
+      <link rel="stylesheet" href="/deps/jquery-ui/jquery-ui.min.css">
+      <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
+      <link rel="stylesheet" href="/deps/jquery-ui-custom/jquery-ui.theme.min.css">
+      <link rel="stylesheet" href="/app/css/app.css" />
+      <link rel="stylesheet" href="/css/search.css" />
+      <script src="deps/parsley.min.js"></script>
+      <script src="/js/search.js"></script>
+      <script src="/app/js/registration.js"></script>
+      <script src="/app/js/payment.js"></script>
+   </head>
+   <body ng-app="main" ng-controller="MainController as main" class="loggedin">
+      <nav>
+        <div id="menu-left" class="menu-section">
+          <a href="#/">
+            <img id="logo-mini" src="imgs/rplogo.jpg" />
+          </a>
+        </div>
+        <div id="menu-middle" class="menu-section">
+        <div ng-cloak ng-if="main.results && main.search_focus" id="search-results">
+          <div ng-click="main.selectSearchResult(result);" ng-repeat="result in main.results" class="result">
+            <i ng-if="result.type == 'race'" class="fa fa-road" aria-hidden="true"></i>
+            <i ng-if="result.type == 'place'" class="fa fa-map-marker" aria-hidden="true"></i>
+            {{result.name}}
+          </div>
+        </div>
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <input ng-focus="main.search_focus = true" ng-blur="main.lostFocus()" ng-model="main.search_text" ng-keyup="$event.keyCode == 13 && main.search()" id="menu-search" placeholder="Search races or locations" type="textbox" />
+        </div>
+        <div id="menu-right" class="menu-section">
+          <a class="link" href="/app#!/">Home</a>
+          <div class="dropdown">
+            <div style="cursor: pointer;" class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <img class="profile" src="{{main.photo}}" ></span>
+              <i class="fa fa-angle-down" aria-hidden="true"></i>
+            </div>
+            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+              <li><a href="/app#!/registration">Update info</a></li>
+              <li><a href="javascript:delete localStorage.uid; delete localStorage.token; location = '/';">Sign out</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div ng-view></div>
+
+    <!--#include virtual="/includes/footer.html" -->
+  </body>
+</html>

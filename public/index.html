@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=utf-8 />
+    <title>Racepass - One annual pass. 5000+ races</title>
+    <!--#include virtual="/includes/head_standard.html" -->
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYMq0Meyau1Q9hMFlyETxUdcv-io5NjwI&libraries=places,geometry"
+         async defer></script>
+    <link rel="stylesheet" type="text/css" href="/deps/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="/deps/slick/slick-theme.css"/>
+    <script type="text/javascript" src="/deps/slick/slick.min.js"></script>
+    <script src="/deps/bower_components/angular-ui-slider/src/slider.js"></script>
+    <script src="/deps/infobubble/infobubble.js"></script>
+    <script src="/deps/parsley.min.js"></script>
+
+    <script src="js/index.js"></script>    
+    <script src="js/mapstyle.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/components.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/search.css" />
+  </head>
+  <body ng-init="full_mode = false;" ng-app="landing" ng-controller="LandingController as landing">
+    <!--#include virtual="/includes/login_modal.html" -->
+    <!--#include virtual="/includes/anon_header.html" -->
+    <div id="banner1">
+      <video poster="/videos/promo2.jpg" id="bgvid" playsinline autoplay muted loop>
+        <source src="/videos/promo2.mp4" type="video/mp4">
+        <source src="/videos/promo2.webm" type="video/webm">
+      </video>
+      <div id="find-races-panel">
+        <div class="title">One pass //&nbsp;5,000+&nbsp;races</div>
+        <div class="subtitle">Find races near<input id="search-location" class="location" name="location" type="text" ng-model="landing.locationName" /></div>
+        <button ng-click="landing.findRaces()" class="rounded">Go</button>
+      </div>
+    </div>
+    <div id="selling-points-wrapper">
+      <div class="container" id="selling-points">
+        <div class="row">
+          <h2>Racing made simple</h2>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 selling-point">
+            <div class="selling-icon"><img src="imgs/discover.png" /></div>
+            <h3>Discover</h3>
+            <p>Search more than 5,000 races anywhere in the world. Try local &amp; recommended races and invite friends to race.</p>
+          </div>
+          <div class="col-sm-4 selling-point">
+            <div class="selling-icon"><img src="imgs/register.png" /></div>
+            <h3>Register</h3>
+            <p>Register for any race with a single click. Manager your entire race calendar from one simple account.</p>
+          </div>
+          <div class="col-sm-4 selling-point">
+            <div class="selling-icon"><img src="imgs/race.png" /></div>
+            <h3>Race</h3>
+            <p>Get your racing bib, show up at the starting line &amp; finish. Track all your race results and photos from one dash.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="races-near-me" class="button-row">
+      <div class="button-continue">Find races near me</div>
+      <div class="button-continue-icon">⌵</div>
+    </div>
+    <div id="race-logos-wrapper">
+      <div id="race-logos"></div>
+    </div>
+    <div id="choose-from" class="callout" style="margin: 16px 0 41px 0; padding-top:40px">
+      Choose from over 5,000+ races anywhere in the world
+    </div>
+    
+    <ng-include ng-controller="SearchController as search" src="'app/templates/search.html'"></ng-include>
+
+    <div class="button-row">
+      <div id="choose-pass-button" class="button-continue">Choose your pass</div>
+      <div class="button-continue-icon">⌵</div>
+    </div>
+    <section id="choose-pass">
+      <div id="pass-header" class="callout">Let's get you up and running</div>
+      <div id="pass-wrapper" class="container row">
+        <div class="pass-container">
+          <div class="pass pass-side">
+            <div class="pass-title">Contender</div>
+            <div class="pass-body">
+              <div class="pass-top">
+                <div class="pass-count">3 Races</div>
+                <br>
+                <div class="distances">26.2 • 13.1<br>
+                  10k • 5k • Fun Runs
+                </div>
+              </div>
+              <div class="pass-price-row"><span class="pass-price">${{landing.passPrices['3races']}}</span>/yr</div>
+            </div>
+             <a id="buy1" ng-click="landing.buy('3races')" class="pass-buy"><button>Buy Contender</button></a>
+          </div>
+        </div>
+        <div class="pass-container">
+          <div class="pass">
+            <div class="pass-title">Athlete</div>
+            <div class="pass-body">
+              <div class="pass-top">
+                <div class="pass-count">5 Races</div>
+                <br>
+                <div class="distances">26.2 • 13.1<br>
+                  10k • 5k • Fun Runs
+                </div>
+              </div>
+              <div class="pass-price-row"><span class="pass-price">${{landing.passPrices['5races']}}</span>/yr</div>
+            </div>
+            <a id="buy2" ng-click="landing.buy('5races')" class="pass-buy"><button>Buy Athlete</button></a>
+          </div>
+        </div>
+        <div class="pass-container">
+          <div class="pass pass-side">
+            <div class="pass-title">Pro</div>
+            <div class="pass-body">
+              <div class="pass-top">
+                <div class="pass-count">Unlimited Races</div>
+                <br>
+                <div class="distances">26.2 • 13.1<br>
+                  10k • 5k • Fun Runs
+                </div>
+              </div>
+              <div class="pass-price-row"><span class="pass-price">${{landing.passPrices['unlimited']}}</span>/yr</div>
+            </div>
+            <a id="buy3" ng-click="landing.buy('unlimited')" class="pass-buy"><button>Buy Pro</button></a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div id="faq" class="container">
+      <div class="callout">
+        Any questions running through your mind?
+      </div>
+      <div class="qa collapsed" data-target="#q1" data-toggle="collapse">
+        <div class="question">What is Racepass?</div>
+        <div id="q1" class="answer collapse">Racepass is a subscription-based annual pass that helps runners run as many races as they can muster.</div>
+      </div>
+      <div class="qa collapsed" data-target="#q2" data-toggle="collapse">
+        <div class="question">Where can I use Racepass?</div>
+        <div id="q2" class="answer collapse">Racepass can be used at over 5,000 race events across the nation and more are being added everyday. For complete race listings please see racepass.com/map.</div>
+      </div>
+      <div class="qa collapsed" data-target="#q3" data-toggle="collapse">
+        <div class="question">How many races can I run?</div>
+        <div id="q3" class="answer collapse">Each Racepass plan has its own limitations. Please see our pricing page for complete plan details.</div>
+      </div>
+      <div class="qa collapsed" data-target="#q4" data-toggle="collapse">
+        <div class="question">When does Racepass membership begin?</div>
+        <div id="q4" class="answer collapse">You can begin signing up for races immediately after completing your purchase.</div>
+      </div>
+      <div ng-if="!landing.faq_expanded" ng-click="landing.faq_expanded = true;" id="faq-more-button" style="margin-bottom:75px;" class="button-row">
+        <div class="button-continue">More FAQs</div>
+      </div>
+      <div ng-if="landing.faq_expanded" id="faq-more">
+        <div class="qa collapsed" data-target="#q5" data-toggle="collapse">
+          <div class="question">Does my Racepass auto-renew?</div>
+          <div id="q5" class="answer collapse">Racepass will allow you to auto-renew your membership. If you choose to not auto-renew, you can opt out through your subscription settings in your profile.</div>
+        </div>
+        <div class="qa collapsed" data-target="#q6" data-toggle="collapse">
+          <div class="question">What are the benefits of Racepass?</div>
+          <div id="q6" class="answer collapse">Racepass eliminates the administrative headache of finding, registering and recruiting friends for races. It also allows you to run as many races as you can, tracking your times to help you train and run faster.</div>
+        </div>
+        <div class="qa collapsed" data-target="#q7" data-toggle="collapse">
+          <div class="question">Where can I use Racepass?</div>
+          <div id="q7" class="answer collapse">Racepass can be used at over 5,000 race events across the nation and more are being added everyday.</div>
+        </div>
+        <div class="qa collapsed" data-target="#q8" data-toggle="collapse">
+          <div class="question">How many races can I run?</div>
+          <div id="q8" class="answer collapse">Each Racepass plan is different. Check out our pricing tiers for complete plan details.</div>
+        </div>
+        <div class="qa collapsed" data-target="#q9" data-toggle="collapse">
+          <div class="question">Is there a cancellation policy?</div>
+          <div id="q9" class="answer collapse">Flexibility is a good thing. You can cancel your Racepass at anytime! To cancel your Racepass, head to your subscription settings in your profile.</div>
+        </div>
+      </div>
+    </div>
+    <div ng-if="landing.faq_expanded" id="faq-full" style="margin-bottom:75px;" class="button-row">
+      <a href="faq"><div class="button-continue">See full list of FAQs</div></a>
+    </div>
+
+    <!--#include virtual="/includes/footer.html" -->
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=utf-8 />
+    <title>Racepass - Priority Access</title>
+    <!--#include virtual="/includes/head_standard.html" -->
+    <style type="text/css">
+      #waitlist input, #waitlist button {
+        width: 100%;
+        max-width: 300px;
+        padding: 11px;
+        margin: 14px auto 14px auto;
+        display: block;
+        font-size: 14px;
+      }
+      #waitlist p {
+        margin-top: 25px;
+        margin-bottom: 30px;
+      }
+    </style>
+    <script>
+      angular.module('waitlist', [])
+        .controller('WaitlistController', function() {
+          this.email = window.localStorage.email || '';
+          this.submit = function(event) {
+            event.preventDefault();
+            window.localStorage.email = this.email;
+            data = {
+              'email': this.email,
+              'ip': window.localStorage.ip,
+              'zip': window.localStorage.zip,
+              'passtype': getQueryVariable('pass'),
+              'source': 'waitlist',
+            }
+            $.post('https://api.racepass.com/email_signups', JSON.stringify(data), function(result) {
+              window.location.href = 'waitlist_friends';
+            });
+          }
+        });
+    </script>
+  </head>
+  <body id="waitlist" ng-app="waitlist" ng-controller="WaitlistController as waitlist">
+    <!--#include virtual="/includes/minimal_header.html" -->
+
+    <section class="solo">
+      <h2>Sorry, we haven’t launched in your region yet</h2>
+      <p>Add your email below to reserve priority access to a pass when we launch. Thanks for your patience! We’ll be in touch soon.</p>
+
+      <form method="post" action="">
+      <input type="email" name="email" ng-model="waitlist.email" required="required" placeholder="Email" />
+      <button type="submit" ng-disabled="waitlist.email.$valid" ng-click="waitlist.submit($event)">Hold my spot</button>
+      </form>
+    </section>
+
+    <!--#include virtual="/includes/footer.html" -->
+  </body>
+</html>
