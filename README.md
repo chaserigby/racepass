@@ -1,7 +1,7 @@
 ## Setting up a local development environment
 1. clone the repository
 2. npm install
-3. node --use-strict app.js
+3. node --use-strict server.js
 4. Install postgres
 5. Create database racepass (use the same password as production or step 6)
 6. change postgresql_uri in data/settings/production.json to match password chosen in step 5 if different.

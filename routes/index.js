@@ -64,7 +64,7 @@ module.exports = function(expressa) {
       'unlimited': 695,
     }
 
-    var amount = passPrices[req.body.sku] - promo_amount;
+    var amount = passPrices[req.body.passType] - promo_amount;
     var nonce = req.body.payment_method_nonce;
     gateway.transaction.sale({
       amount: amount,
@@ -74,8 +74,8 @@ module.exports = function(expressa) {
       }
     }, function (err, result) {
       var data = {
-        passType: req.body.passType,
-        sku: req.body.sku,
+        passType: req.body.passName,
+        sku: req.body.passType,
         amount: amount,
         email: req.body.email,
         promo_code: req.body.promo,
@@ -86,6 +86,18 @@ module.exports = function(expressa) {
       if (result.success) {
         data.status = 'success';
         console.log(result);
+        expressa.db.users.get(req.uid)
+          .then(function(u) {
+            u.roles = u.roles || [];
+            if (!u.roles.includes('ActivePass')) {
+              u.roles.push('ActivePass');
+              u.passType = req.body.sku;
+            }
+            expressa.db.users.update(u._id, u);
+          }, function(err) {
+            console.error('invalid user when registering.')
+          })
+
         res.status(200).send({"status":"success",
           "cc": result.transaction.creditCard,
           "transaction_id": result.transaction.id});
@@ -100,6 +112,7 @@ module.exports = function(expressa) {
   }
 
   router.post('/purchase', function (req, res) {
+    console.log('processing purchase');
     if (!req.body.promo) {
       makePurchase(req, res, 0);
     } else {

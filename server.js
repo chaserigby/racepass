@@ -236,9 +236,15 @@ app.get('/nearby_races', function(req, res, next) {
   });
 });
 
-
 app.use(bodyParser.json({ type: "*/*" }))
-app.use('/', routes);
+
+var auth = require('./node_modules/expressa/auth');
+
+function settingsMiddleware(req, res, next) {
+  req.settings = expressa.settings;
+  next()
+}
+app.use('/', settingsMiddleware, auth.middleware, routes);
 
 app.use('/admin', expressa.admin({apiurl:'/'}));
 app.use('/', expressa);
