@@ -117,7 +117,7 @@
         <div ng-click="search.selectRace(race);" ng-if="search.full_mode && (search.panel == 'results' || search.panel == 'details')" class="race" ng-repeat="race in search.races">
           <div class="title">{{race.name}}</div>
           <div class="info">{{race.type}}</div>
-          <div class="distance">{{race.distanceFromHome}} mile{{race.distanceFromHome == 1 ? '' : 's'}} from home</div>
+          <div class="distance">{{race.distanceFromHome}} mile{{race.distanceFromHome == 1 ? '' : 's'}} from {{search.city}}</div>
         </div>
       </div>
     </div>

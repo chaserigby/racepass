@@ -36,7 +36,7 @@
     <dl>
       <dt>Pass Type</dt>
       <dd ng-if="main.passName">{{main.passName}} ({{main.racesLeft}} races left)</dd>
-      <dd ng-if="!main.passName">None <a ng-click="main.buy()"><em>Buy a pass now</em></a></dd>
+      <dd ng-if="!main.passName">None <a href="" ng-click="main.buy()"><em>Buy a pass now</em></a></dd>
     </dl>
     <!--<dl>
       <dt>Last Race</dt>
@@ -69,7 +69,7 @@
       <th>Actions</th>
     </tr>
     <tr ng-repeat="race in main.my_races">
-      <td>{{race.distance}}</td>
+      <td>{{main.formatRaceDistance(race.distance)}}</td>
       <td>{{race.name}}</td>
       <td>{{race.datetime | date:'MM/dd/yyyy' }}</td>
       <td>{{race.location.city}}, {{race.location.state}}</td>
@@ -91,7 +91,7 @@
       <th>Actions</th>
     </tr>
     <tr ng-repeat="race in main.upcoming_races">
-      <td>{{race.distance}}</td>
+      <td>{{main.formatRaceDistance(race.distance)}}</td>
       <td>{{race.name}}</td>
       <td>{{race.datetime | date:'MM/dd/yyyy' }}</td>
       <td>{{race.location.city}}, {{race.location.state}}</td>

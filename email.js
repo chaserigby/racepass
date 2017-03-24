@@ -53,22 +53,46 @@ exports.sendWelcomeEmail = function(user) {
 	console.log('emailing ' + user.email);
 }
 
+distanceMap = {
+  'Half Marathon': 21.09,
+  'Marathon': 42.19,
+  'Fun Run': 1,
+}
+function formatRaceDistance(dist) {
+  for (name in distanceMap) {
+    if (Math.abs(distanceMap[name] - dist) < 0.1) {
+      return name;
+    }
+  }
+  if (dist) {
+    return dist + 'K';
+  }
+  return '';
+}
+
+
 exports.sendRaceConfirmation = function(user, race) {
-  send('race_confirmation', user.email, 'Registration Confirmed for '+ race.name, { 'data': {
+  var data = {
     'name': race.name,
-    'start_time': moment(race.datetime).format('h:mm a'),
     'date': moment(race.datetime).format('l'),
-    'distance': race.type,
+    'distance': formatRaceDistance(race.distance),
     'website': race.website
-  }});
+  }
+  if (race.datetime.indexOf('T') != -1) {
+    data['start_time'] = moment(race.datetime).format('h:mm a');
+  }
+  send('race_confirmation', user.email, 'Registration Confirmed for '+ race.name, { 'data': data});
 }
 
 exports.sendRaceCancellation = function(user, race) {
-  send('race_cancellation', user.email, 'Cancellation Confirmed for '+ race.name, { 'data': {
+  var data = {
     'name': race.name,
-    'start_time': moment(race.datetime).format('h:mm a'),
     'date': moment(race.datetime).format('l'),
-    'distance': race.type,
+    'distance': formatRaceDistance(race.distance),
     'website': race.website
-  }});
+  }
+  if (race.datetime.indexOf('T') != -1) {
+    data['start_time'] = moment(race.datetime).format('h:mm a');
+  }
+  send('race_cancellation', user.email, 'Cancellation Confirmed for '+ race.name, { 'data': data});
 }

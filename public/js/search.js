@@ -64,6 +64,13 @@ app
       this.update();
     }
 
+    if (localStorage.city && localStorage.city != 'undefined') {
+      this.city = localStorage.city
+    } else {
+      this.city = 'home';
+    }
+    
+
     this.panel = '';
     this.races = [];
     this.selected_details = {}

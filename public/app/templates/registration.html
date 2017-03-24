@@ -175,11 +175,11 @@ font-weight: 500; padding: 5px 10px; margin-top: 8px;">Submit</button>
     <div class="err" id="medical-error"></div>
     <ul class="radio-buttons" style="margin-bottom: 0px;">
       <li>
-        <input ng-change="reg.toggleMedical()" ng-model="reg.data.raceinfo.has_medical" data-parsley-errors-container="#medical-error" required type="radio" id="yes" name="medical" value="true" />
+        <input ng-change="reg.toggleMedical()" ng-model="reg.data.raceinfo.has_medical" data-parsley-errors-container="#medical-error" required type="radio" id="yes" name="medical" data-ng-value="true" />
         <label for="yes">Yes</label>
       </li>
       <li>
-        <input ng-change="reg.toggleMedical()" ng-model="reg.data.raceinfo.has_medical" required type="radio" id="no" name="medical" value="false" />
+        <input ng-change="reg.toggleMedical()" ng-model="reg.data.raceinfo.has_medical" required type="radio" id="no" name="medical" data-ng-value="false" />
         <label for="no">No</label>
       </li>
     </ul>

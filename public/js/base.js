@@ -36,12 +36,15 @@ distanceMap = {
   'Fun Run': 1,
 }
 function formatRaceDistance(dist) {
-  Object.keys(distanceMap).forEach(function(name) {
+  for (name in distanceMap) {
     if (Math.abs(distanceMap[name] - dist) < 0.1) {
       return name;
     }
-  });
-  return dist + 'K';
+  }
+  if (dist) {
+    return dist + 'K';
+  }
+  return '';
 }
 
 function getQueryVariable(variable) {

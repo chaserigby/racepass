@@ -51,6 +51,7 @@ app.controller('MainController', function($location, $http, $scope, $timeout) {
           if (this.user.address && this.user.address.coordinates) {
             localStorage.lat = this.user.address.coordinates.lat;
             localStorage.lng = this.user.address.coordinates.lng;
+            localStorage.city = this.user.address.city;
           }
         }.bind(this));
     };
@@ -98,6 +99,8 @@ app.controller('MainController', function($location, $http, $scope, $timeout) {
 
     this.results = [];
     this.search_focus = false;
+
+    this.formatRaceDistance = formatRaceDistance;
 
     this.search = function() {
       var query = this.search_text;
@@ -170,14 +173,7 @@ app.controller('MainController', function($location, $http, $scope, $timeout) {
       };
       $http.post(window.apiurl + 'race_signup/?token=' + localStorage.token, JSON.stringify(race_signup))
         .then(function(result) {
-          var signup_id = result.data.id._id;
-          data = { $push: { 'races': race._id, 'race_signup_ids': signup_id } };
-
-          $http.post(window.apiurl + 'users/' + localStorage.uid + '/update?token=' + localStorage.token, JSON.stringify(data))
-            .then(function(result2) {
-              self.update_user_info();
-
-            })
+          self.update_user_info();
         }, function(err) {
           console.error(err);
           toastr.info(err.data);

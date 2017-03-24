@@ -91,8 +91,8 @@ module.exports = function(expressa) {
             u.roles = u.roles || [];
             if (u.roles.indexOf('ActivePass') == -1) {
               u.roles.push('ActivePass');
-              u.passType = req.body.sku;
             }
+            u.passType = req.body.passType;
             expressa.db.users.update(u._id, u);
           }, function(err) {
             console.error('invalid user when registering.')
