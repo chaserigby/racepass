@@ -53,7 +53,7 @@ exports.sendWelcomeEmail = function(user) {
 	console.log('emailing ' + user.email);
 }
 
-distanceMap = {
+var distanceMap = {
   'Half Marathon': 21.09,
   'Marathon': 42.19,
   'Fun Run': 1,
