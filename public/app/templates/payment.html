@@ -88,6 +88,7 @@
           <span ng-if="payment.purchaseInProgress" class="sr-only">Processing...</span>
         </button>
         <p id="footer-text">By purchasing, I agree to the Terms of Use & Privacy Policy. By purchasing, I understand my membership automatically renews at the annual subscription and I can cancel on site at any time.</p>
+        <p>Or <em ng-click="payment.skip()">skip payment</em> (try out the site first)</p> 
       </form>
     </div>
   </div>

@@ -91,7 +91,7 @@ function LoginController($filter, $location, $scope, $timeout) {
       .then(function(result) {
         window.localStorage.token = result.token;
         window.localStorage.uid = result.uid;
-        window.location = '/app'
+        window.location = '/app#/payment'
       }, function(err) {
         toastr.error('error logging in');
       })

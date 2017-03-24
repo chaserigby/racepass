@@ -34,6 +34,9 @@ app.controller('MainController', function($location, $http, $scope, $timeout) {
           if (!response.address || !response.address.line1) {
             $location.path('/registration');
           }
+          if (!response.paymentSkipped && !response.passType) {
+            $location.path('/payment');
+          }
           this.user = response;
           this.passName = passNames[this.user.passType];
           this.age = calculateAge(new Date(this.user.date_of_birth));

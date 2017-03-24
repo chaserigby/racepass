@@ -165,4 +165,17 @@ angular.module('main')
     this.done = function() {
       $location.path('/');
     }
+
+    this.skip = function() {
+      data = {
+        $set: { 'paymentSkipped' : true }
+      }
+      $http.post(window.apiurl + 'users/' + localStorage.uid + '/update?token=' + localStorage.token, JSON.stringify(data))
+          .then(function(result) {
+            $location.path('/');
+          }, function(err) {
+            console.error(err);
+            console.error('error saving pamyent skip status');
+          })
+    }
   });
