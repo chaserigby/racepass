@@ -154,7 +154,6 @@
 <script>
   $.getJSON(window.apiurl + 'checkouts/new')
     .then(function(data) {
-      console.log(data);
       loadBraintree(data.clientToken);
     });
 </script>

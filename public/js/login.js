@@ -3,7 +3,7 @@ if (typeof app == 'undefined') {
   app = angular.module('landing');
 } 
 
-function LoginController($filter, $location, $scope, $timeout) {
+function LoginController($filter, $location, $scope, $timeout, $http) {
   var self = this;
   try {
     this.payment = JSON.parse(window.localStorage.payment);
@@ -87,13 +87,14 @@ function LoginController($filter, $location, $scope, $timeout) {
       'email': this.email,
       'password': this.password,
     }
-    $.post(window.apiurl + 'user/login', JSON.stringify(data))
+    $http.post(window.apiurl + 'user/login', JSON.stringify(data))
       .then(function(result) {
-        window.localStorage.token = result.token;
-        window.localStorage.uid = result.uid;
-        window.location = '/app#/payment'
-      }, function(err) {
-        toastr.error('error logging in');
+        window.localStorage.token = result.data.token;
+        window.localStorage.uid = result.data.uid;
+        window.location = '/app'
+      }, function(result) {
+        result.data = result.data || {};
+        toastr.error(result.data.error || 'error logging in');
       })
   }.bind(this);
 }

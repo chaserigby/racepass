@@ -451,12 +451,13 @@
 
 
 #faq {
+	max-width: 920px !important;
 }
 .qa {
 	border: 1px solid #979797;
 	border-radius: 8px;
 	font-size: 18px;
-	margin: 10px 20px 10px 10px;
+	margin: 10px 20px;
 	padding: 17px 12px 10px 40px;
 	cursor: pointer;
 }
