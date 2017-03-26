@@ -89,9 +89,11 @@ app
       }
       if (window.updateMap)
         window.updateMap(this);
+      if (window.selectedResult) {
+        this.selectSearchResult(window.selectedResult);
+        window.selectedResult = null;
+      }
     }
-
-    this.update();
 
     this.results = [];
     this.search_focus = false;
@@ -136,6 +138,8 @@ app
         this.selectRace(choice.race);
       }
     }.bind(this);
+
+    this.update();
 
     this.updateRaces = function(races) {
       this.races = races;

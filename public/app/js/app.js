@@ -124,6 +124,7 @@ app.controller('MainController', function($location, $http, $scope, $timeout) {
     this.selectSearchResult = function(choice) {
       var appElement = document.querySelector('#map');
       if (!appElement) {
+        window.selectedResult = choice;
         $location.path('/search');
       }
       var $scope = angular.element(appElement).scope();
