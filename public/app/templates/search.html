@@ -62,7 +62,7 @@
             <i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;|
           </div>
           <div ng-click="search.mapClose();" id="search-close">X</div>
-          <input ng-focus="search.search_focus = true" ng-blur="search.lostFocus()" ng-model="search.search_text" ng-keyup="$event.keyCode == 13 && search.search()" id="pac-input" class="controls" type="text" placeholder="Find your city" />
+          <input ng-focus="search.search_focus = true" ng-blur="search.lostFocus()" ng-model="search.search_text" ng-change="search.search()" ng-keyup="$event.keyCode == 13 && search.search()" id="pac-input" class="controls" type="text" placeholder="Find your city" />
         </div>
         <div ng-cloak ng-if="search.results && search.search_focus" id="search-results">
           <div ng-click="search.selectSearchResult(result);" ng-repeat="result in search.results" class="result">
