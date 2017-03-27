@@ -87,6 +87,10 @@ function combinedSearch(queryText, callback) {
 
   var returnedCount = 0;
 
+  if (!queryText) {
+    return callback([]);
+  }
+
   service.getPlacePredictions({
     input: queryText,
     types: ['(regions)'],

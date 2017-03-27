@@ -38,7 +38,7 @@
           </div>
         </div>
           <i class="fa fa-search" aria-hidden="true"></i>
-          <input ng-focus="main.search_focus = true" ng-blur="main.lostFocus()" ng-model="main.search_text" ng-keyup="$event.keyCode == 13 && main.search()" id="menu-search" placeholder="Search races or locations" type="textbox" />
+          <input ng-focus="main.search_focus = true" ng-blur="main.lostFocus()" ng-model="main.search_text" ng-keyup="$event.keyCode == 13 && main.search()" ng-change="main.search()" id="menu-search" placeholder="Search races or locations" type="textbox" />
         </div>
         <div id="menu-right" class="menu-section">
           <a class="link" href="/app#!/">Home</a>

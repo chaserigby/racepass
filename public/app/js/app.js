@@ -104,11 +104,13 @@ app.controller('MainController', function($location, $http, $scope, $timeout) {
 
     this.search = function() {
       var query = this.search_text;
-      //service = new google.maps.places.PlacesService(window.map);
-      
+      if (!query) {
+        this.results = [];
+        return;
+      }
       combinedSearch(query, function(results) {
         this.results = results;
-        console.log('applying');
+        console.log('applying ' + query);
         $scope.$apply();
       }.bind(this));
 
@@ -126,10 +128,11 @@ app.controller('MainController', function($location, $http, $scope, $timeout) {
       if (!appElement) {
         window.selectedResult = choice;
         $location.path('/search');
+      } else {
+        var $scope = angular.element(appElement).scope();
+        $scope.search.selectSearchResult(choice);
+        console.log($scope)
       }
-      var $scope = angular.element(appElement).scope();
-      $scope.search.selectSearchResult(choice);
-      console.log($scope)
       this.results = [];
       this.search_text = '';
     }.bind(this);

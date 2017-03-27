@@ -90,7 +90,7 @@ app
       if (window.updateMap)
         window.updateMap(this);
       if (window.selectedResult) {
-        this.selectSearchResult(window.selectedResult);
+        self.selectSearchResult(window.selectedResult);
         window.selectedResult = null;
       }
     }
@@ -100,11 +100,16 @@ app
 
     this.search = function() {
       var query = this.search_text;
+
+      if (!query) {
+        return;
+      }
+
       //service = new google.maps.places.PlacesService(window.map);
       
       combinedSearch(query, function(results) {
         this.results = results;
-        console.log('applying');
+        console.log('applying ' + query);
         $scope.$apply();
       }.bind(this));
 
@@ -134,12 +139,14 @@ app
       } else {
         circle = new google.maps.Circle({radius: 1500, center: choice.location});
         //bounds.extend(circle.getBounds());
-        window.map.fitBounds(circle.getBounds());
-        this.selectRace(choice.race);
+
+        // this delay makes the map update location when seaching from other pages
+        setTimeout(function() {
+          window.map.fitBounds(circle.getBounds());
+        }, 300);
+        self.selectRace(choice.race);
       }
     }.bind(this);
-
-    this.update();
 
     this.updateRaces = function(races) {
       this.races = races;
@@ -277,5 +284,7 @@ app
       this.panel = '';
       $('#pac-input').val('');
     }.bind(this);
+
+    this.update();
 
   });
