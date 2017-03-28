@@ -5,6 +5,8 @@ app.controller('RegistrationController', function($location, $http, $scope, $tim
   this.page = 1;
   if (localStorage.token) {
     this.page = 2;
+  } else {
+    window.location = '/'
   }
   this.data = {
     address: {},

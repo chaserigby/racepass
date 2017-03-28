@@ -117,6 +117,7 @@ angular.module('main')
       hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
         if (tokenizeErr) {
           // Handle error in Hosted Fields tokenization
+          toastr.info(tokenizeErr.message);
           console.log(tokenizeErr);
           return;
         }
@@ -155,7 +156,7 @@ angular.module('main')
             self.cardDetails = data.cc;
             self.transaction_id = data.transaction_id;
           }, function(data) {
-            self.setError('We ran into an issue while processing your card. Please try again and contact info@racepass.com if the issue continues. Thanks for your patience.')
+            toastr.error('We ran into an issue while processing your card. Please try again and contact info@racepass.com if the issue continues. Thanks for your patience.')
             console.error(data);
           });
       });
