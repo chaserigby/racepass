@@ -162,7 +162,7 @@ expressa.addListener('changed', -10, function(req, collection, doc) {
               console.log(doc);
               email.sendRaceConfirmation(user, race)
             }
-            if (doc.status == 'cancelled') {
+            if (doc.status == 'canceled') {
               email.sendRaceCancellation(user, race)
             }
           })

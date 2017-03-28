@@ -23,6 +23,8 @@ function send(templateName, dest, subject, data) {
      ssl:     true
   });
 
+  console.log('email sent to ' + dest);
+
   server.send({
      text:    text[templateName](data), 
      from:    "Racepass <info@racepass.com>", 
@@ -59,15 +61,15 @@ var distanceMap = {
   'Fun Run': 1,
 }
 function formatRaceDistance(dist) {
-  for (name in distanceMap) {
+  if (!dist) {
+    return '';
+  }
+  for (var name in distanceMap) {
     if (Math.abs(distanceMap[name] - dist) < 0.1) {
       return name;
     }
   }
-  if (dist) {
-    return dist + 'K';
-  }
-  return '';
+  return dist + 'K';
 }
 
 
