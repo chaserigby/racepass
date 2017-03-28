@@ -402,7 +402,10 @@ footer a {
    background-color: white;
 }
 #login-container input {
-	margin: 8px;
+	margin: 8px 20px 8px 0px;
+}
+#login-container button {
+	margin-right: 0px;
 }
 #medical-container h1 {
 	font-size: 18px;
@@ -439,6 +442,7 @@ footer a {
 	display: flex;
 	flex-direction: column;
 	text-align: center;
+	margin-top: 45px;
 }
 #login-button {
 	float: right;

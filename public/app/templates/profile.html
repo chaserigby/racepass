@@ -59,7 +59,7 @@
 
 <section id="registered-races" class="container">
   <h3 style="float: left;">Registered Races</h3>
-  <a href="#!/search" style="float: left; margin: 26px 0px 0px 15px;" ><button class="button" style="border-radius: 15px; padding: 3px 8px;">Add race</button></a>
+  <a href="#!/search" style="float: left; margin: 20px 0px 0px 15px;" ><button>Add race</button></a>
   <table class="race-table">
     <tr>
       <th>Distance</th>
@@ -74,7 +74,7 @@
       <td>{{race.datetime | date:'MM/dd/yyyy' }}</td>
       <td>{{race.location.city}}, {{race.location.state}}</td>
       <td ng-click="main.cancel_popup($index)">
-        <div class="button">Cancel</div>
+        <em style="cursor: pointer;">Cancel</em>
       </td>
     </tr>
   </table>

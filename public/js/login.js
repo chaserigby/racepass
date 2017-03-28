@@ -5,14 +5,8 @@ if (typeof app == 'undefined') {
 
 function LoginController($filter, $location, $scope, $timeout, $http) {
   var self = this;
-  try {
-    this.payment = JSON.parse(window.localStorage.payment);
-  }
-  catch (e) {
-    console.error('no payment');
-  }
-  this.isCreation = !!this.payment && window.location.pathname.indexOf('app') != -1;
-  console.log('isCreation ' + this.isCreation)
+
+  this.isCreation = window.isCreation;
 
   this.facebook = function(success, reg) {
     if (self.isCreation) {
@@ -46,7 +40,7 @@ function LoginController($filter, $location, $scope, $timeout, $http) {
         self.pwdLogin(success);
       }, function(err) {
         if (err.status == 409) {
-          toastr.error('An account with this emali already exists.');
+          toastr.error('An account with this email already exists.');
         } else {
           toastr.error('error creating an account');
         }

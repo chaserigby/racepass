@@ -41,8 +41,16 @@ angular.module('landing', ['ui.slider'])
       console.log('initializing map');
     })
 
+    this.login = function() {
+        var login = angular.element(document.getElementsByClassName('login-panel')).scope().login;
+        login.isCreation = false;
+        $('#myModal').modal()
+    }
+
     this.buy = function(type) {
         localStorage.buyType = type;
+        var login = angular.element(document.getElementsByClassName('login-panel')).scope().login;
+        login.isCreation = true;
         $('#myModal').modal()
     }
 
