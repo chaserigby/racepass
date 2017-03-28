@@ -115,10 +115,12 @@ angular.module('main')
       this.purchaseInProgress = true;
 
       hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
+        self.purchaseInProgress = false;
         if (tokenizeErr) {
           // Handle error in Hosted Fields tokenization
           toastr.info(tokenizeErr.message);
           console.log(tokenizeErr);
+
           return;
         }
 
