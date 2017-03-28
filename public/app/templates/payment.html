@@ -4,7 +4,9 @@
   <h1 style="margin-top: 0px">Let's get you up & running</h1>
   <div ng-cloak id="pane-container" class="row">
     <div id="right-pane" class="col-sm-6 col-sm-push-6">
-      <h2 style="margin-left:15px;">{{payment.passName}} Pass</h2>
+      <select ng-model="payment.passType" ng-change="payment.update()" ng class="form-control">
+        <option ng-repeat="(name, type) in payment.fancyNameToType" ng-value="type">{{name}} Pass</option>
+      </select>
       <div ng-if="payment.passType=='3races'" class="pass-body">
         <div class="pass-count">3 Races</div>
         <p>26.2 • 13.1<br>

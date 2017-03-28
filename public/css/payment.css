@@ -73,13 +73,20 @@
 #footer-text {
 	font-size: 12px;
 }
-#right-pan p {
+#right-pane p {
 	margin: 0px 0px 15px 0px;
+}
+#right-pane select {
+	margin-top: 20px;
+	background-color: #323237;
+	color: #F7F7F7;
+	font-size: 24px;
+	height: 42px;
 }
 #right-pane .pass-body {
 	padding: 15px;
 	border-bottom: 1px solid white;
-	border-top: 1px solid white;
+	/*border-top: 1px solid white;*/
 	font-size: 20px;
 }
 #right-pane #summary {

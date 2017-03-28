@@ -78,7 +78,7 @@ function initAutocomplete(lat, lng) {
       }
       var icon = {
         labelOrigin: new google.maps.Point(15, 40),
-        url: 'https://demo.racepass.com/imgs/mapicon2x.png',
+        url: '/imgs/mapiconA2x.png',
         scaledSize: new google.maps.Size(20, 34),
       }
       m = new google.maps.Marker({

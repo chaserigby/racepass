@@ -61,19 +61,23 @@ function loadBraintree(authorization) {
 angular.module('main')
   .controller('PaymentController', function($timeout, $filter, $http, $location) {
     var self = this;
-    var fancyNameToSKU = {
+    this.fancyNameToType = {
       'Contender': '3races',
       'Athlete': '5races',
       'Pro': 'unlimited' 
     }
-    this.passType = localStorage.buyType;
+    this.passType = localStorage.buyType || '3races';
     this.passName = passNames[this.passType];
     this.email = window.localStorage.email || '';
     if (this.email == 'undefined') {
       this.email = '';
     }
-    this.baseCost = passPrices[this.passType];
-    this.finalCost = this.baseCost;
+
+    this.update = function() {
+      self.baseCost = passPrices[self.passType];
+      self.finalCost = self.baseCost;
+    }
+
     this.promoCode = '';
     nextYear = new Date();
     nextYear.setFullYear(nextYear.getFullYear() + 1);
@@ -178,4 +182,6 @@ angular.module('main')
             console.error('error saving pamyent skip status');
           })
     }
+
+    this.update();
   });
