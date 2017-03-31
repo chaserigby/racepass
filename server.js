@@ -259,6 +259,10 @@ app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });
 
+expressa.addListener('ready', function() {
+  console.log('Expressa ready');
+});
+
 /*setTimeout(function() {
   //email.sendTestEmail()
   expressa.db.race.get('f5619ec4-1248-4449-afd2-f5ed4b65c4df')

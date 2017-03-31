@@ -120,6 +120,8 @@
 	height: 24px;
 	margin-left: 10px;
 	padding-left: 0px;
+	padding-top: 3px;
+	padding-bottom: 3px;
 	background-color: transparent;
 }
 #find-races-panel input:focus {
