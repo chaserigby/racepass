@@ -93,21 +93,16 @@ angular.module('main')
     }.bind(this);
 
     this.applyPromo = function() {
-      //this.promoCodeField = '';
-      data = { 'name' : this.promoCodeField.toUpperCase() }
-      $http.get(window.apiurl + 'promo_code?limit=1&query=' + JSON.stringify(data))
+      var code = this.promoCodeField.toUpperCase();
+      $http.get(window.apiurl + 'apply_promo?code=' + code)
         .then(function(response) {
-          if (response.data.length == 0) {
-            toastr.error(self.promoCodeField.toUpperCase() + ' is not a valid promo code.');
-            return;
-          }
-          var code = response.data[0];
+          var codeDetails = response.data;
           self.promoApplied = true;
-          self.promoDiscount = code.value;
+          self.promoDiscount = codeDetails.value;
           self.finalCost = self.baseCost - self.promoDiscount;
           self.promoCode = self.promoCodeField;
         }, function(err) {
-          toastr.error('Error while attempting to apply promo code');
+          toastr.error(err.data.message || 'Error while attempting to apply promo code');
         })
 
     }.bind(this);

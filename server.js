@@ -242,6 +242,31 @@ app.get('/nearby_races', function(req, res, next) {
   });
 });
 
+app.get('/apply_promo', function(req, res, next) {
+  var code = req.query.code;
+  var codeDetails;
+  expressa.db.promo_code.find({'name': code})
+    .then(function(data) {
+      if (data.length == 0) {
+        return res.status(404).send({'message': code + ' is not a valid promo code.'})
+      }
+      codeDetails = data[0];
+      return expressa.db.user_payments.find({'promo_code': {"$regex": code, "$options":"i"}})
+    }, function(err) {
+      console.error(err);
+      res.status(500).send({'message': 'an error ocurred while applying the code.'});
+    })
+    .then(function(data) {
+      if (codeDetails.usage_limit && data.length >= codeDetails.usage_limit) {
+        return res.status(400).send({'message': 'This code has already been used the maximum number of times.'});
+      }
+      return res.send(codeDetails);
+    }, function(err) {
+      console.error(err);
+      res.status(500).send({'message': 'an error ocurred while applying the code.'});
+    })
+})
+
 app.use(bodyParser.json({ type: "*/*" }))
 
 var auth = require('./node_modules/expressa/auth');
