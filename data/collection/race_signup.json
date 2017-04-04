@@ -4,10 +4,24 @@
     "type": "object",
     "properties": {
       "race_id": {
-        "type": "string"
+        "type": "string",
+        "links": [             
+            {                  
+              "rel": "» view race details",        
+              "href": "/admin/#/edit/race/{{self}}", 
+              "class": "comment-link open-in-modal primary-text"
+            }
+        ]
       },
       "user_id": {
-        "type": "string"
+        "type": "string",
+        "links": [             
+            {                  
+              "rel": "» view user details",        
+              "href": "/admin/#/edit/users/{{self}}", 
+              "class": "comment-link open-in-modal primary-text"
+            }
+        ]
       },
       "status": {
         "type": "string",

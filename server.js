@@ -255,12 +255,10 @@ app.use('/', settingsMiddleware, auth.middleware, routes);
 app.use('/admin', expressa.admin({apiurl:'/'}));
 app.use('/', expressa);
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
-});
-
 expressa.addListener('ready', function() {
-  console.log('Expressa ready');
+  app.listen(3000, function () {
+    console.log('Example app listening on port 3000!');
+  });
 });
 
 /*setTimeout(function() {
