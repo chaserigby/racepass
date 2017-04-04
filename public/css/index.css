@@ -24,7 +24,8 @@
 }
 #primary-menu li.mbutton a {
 	border: 2px solid #0DFFAE;
-	border-radius: 8px;	margin-left: 20px;
+	border-radius: 8px;
+	margin-left: 20px;
 	margin-top: 4px;
 	width: 121.78px;
 	padding: 6px;
@@ -104,9 +105,9 @@
 }
 #find-races-panel .subtitle {
 	font-size: 20px;
-	font-weight: 500;
+	font-weight: bold;
 	line-height: 27px;
-	color: #FFFFFF;
+	color: #d8d8d8;
 	text-shadow: 0 0 6px rgba(0,0,0,0.5);
 	margin: 0 auto 30px auto;
 	width: 40%;
