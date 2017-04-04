@@ -108,7 +108,8 @@
 	line-height: 27px;
 	color: #FFFFFF;
 	text-shadow: 0 0 6px rgba(0,0,0,0.5);
-	margin-bottom: 30px;
+	margin: 0 auto 30px auto;
+	width: 40%;
 }
 #find-races-panel input {
 	color: #0DFFAE;
