@@ -369,6 +369,15 @@
 	font-size: 36px;
 	margin: 0px 25px 0px 25px;
 }
+
+#choose-pass .info {
+	color: #D8D8D8;
+	font-size: 14px;
+	margin: 0 auto 30px auto;
+	text-align: center;
+	width: 50%;
+}
+
 #pass-header {
 }
 
