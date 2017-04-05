@@ -52,8 +52,8 @@ app.controller('MainController', function($location, $http, $scope, $timeout) {
             localStorage.lat = this.user.address.coordinates.lat;
             localStorage.lng = this.user.address.coordinates.lng;
             localStorage.city = this.user.address.city;
-          }
-        }.bind(this),
+          },
+        }.bind(this), 
         function(err) {
           if (err.status == 404) {
             // user is not found, maybe old or invalid token

@@ -110,7 +110,8 @@
 	color: #d8d8d8;
 	text-shadow: 0 0 6px rgba(0,0,0,0.5);
 	margin: 0 auto 30px auto;
-	width: 40%;
+	max-width: 400px;
+	padding: 0px 10px;
 }
 #find-races-panel input {
 	color: #0DFFAE;
