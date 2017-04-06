@@ -58,6 +58,8 @@ function loadBraintree(authorization) {
   });
 }
 
+ga('require', 'ecommerce');
+
 angular.module('main')
   .controller('PaymentController', function($timeout, $filter, $http, $location) {
     var self = this;
@@ -131,22 +133,21 @@ angular.module('main')
         $http.post(window.apiurl + 'purchase?token=' + localStorage.token, JSON.stringify(paymentData))
           .then(function(result) {
             var data = result.data;
-            console.log(data);
             delete paymentData.payment_method_nonce;
             paymentData.details = data.transaction_id;
             window.localStorage.payment = JSON.stringify(paymentData);
+            ga('ecommerce:addTransaction', {
+              'id': data.transaction_id,        // Transaction ID. Required.
+              'affiliation': 'racepass',        // Affiliation or store name.
+              'revenue': self.finalCost,        // Grand Total.
+              'tax': '0'                        // Tax.
+            });
             ga('ecommerce:addItem', {
               'id': data.transaction_id,        // Transaction ID. Required.
               'name': self.passName,
               'sku': self.passType,
               'price': self.cost_per_event,
               'quantity': self.num_races,
-            });
-            ga('ecommerce:addTransaction', {
-              'id': data.transaction_id,        // Transaction ID. Required.
-              'affiliation': 'racepass',        // Affiliation or store name.
-              'revenue': self.finalCost,        // Grand Total.
-              'tax': '0'                        // Tax.
             });
             ga('ecommerce:send');
             self.paymentComplete = true;
