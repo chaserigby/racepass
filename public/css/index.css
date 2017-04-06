@@ -112,6 +112,10 @@
 	margin: 0 auto 30px auto;
 	width: 40%;
 }
+#find-races-panel button {
+	font-weight: 900;
+	padding: 10px 15px;
+}
 #find-races-panel input {
 	color: #0DFFAE;
 	border: none;
