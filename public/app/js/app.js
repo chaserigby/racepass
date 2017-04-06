@@ -53,8 +53,7 @@ app.controller('MainController', function($location, $http, $scope, $timeout) {
             localStorage.lng = this.user.address.coordinates.lng;
             localStorage.city = this.user.address.city;
           }
-        }.bind(this),
-        function(err) {
+        }.bind(this), function(err) {
           if (err.status == 404) {
             // user is not found, maybe old or invalid token
             delete localStorage.uid;

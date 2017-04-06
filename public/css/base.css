@@ -278,7 +278,7 @@ section.solo {
 	margin: 25px;
 }
 .vbar {
-	height: 50px;
+	height: 40px;
 	border-right: 1px solid white;
 	width: 1px;
 	margin: 0px auto;
@@ -420,7 +420,7 @@ footer a {
 	background-color: #24272A;
 	min-height: 400px;
 	border-radius: 3px;
-	margin: 50px;
+	margin: 25px;
 }
 .modal-inner {
 	width: 425px;
@@ -429,6 +429,15 @@ footer a {
 .login-panel {
 	display: flex;
 }
+#fb-login-container {
+	margin-top: 50px;
+}
+#login-divider {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	margin-top: 35px;
+}
 @media screen and (max-width: 750px) {
 	.login-panel {
 		display: block;
@@ -436,13 +445,12 @@ footer a {
 	.vbar {
 		display: none;
 	}
-}
-
-#login-divider {
-	display: flex;
-	flex-direction: column;
-	text-align: center;
-	margin-top: 45px;
+	#fb-login-container {
+		margin-top: 25px;
+	}
+	#login-divider {
+		margin-top: 15px;
+	}
 }
 #login-button {
 	float: right;

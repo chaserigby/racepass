@@ -22,7 +22,7 @@
    <div class="login-panel">
      <div style="flex: 1;">
         <div>Login/create account with social:</div>
-        <div style="margin-top: 70px;">
+        <div id="fb-login-container">
            <div id="fb-login" ng-click="login.facebook()">
             <i class="fa fa-facebook" aria-hidden="true"></i>
             CONTINUE WITH FACEBOOK
@@ -39,7 +39,7 @@
         <br>
         <input required ng-model="login.email" class="full" type="email" placeholder="Your email" /><br>
         <input required ng-model="login.password" class="full" type="password" placeholder="Your password" />
-        <div>
+        <div style="height: 50px;">
            <button ng-if="!login.isCreation" style="margin-left: 20px;" ng-click="login.pwdLogin()" id="login-button">Login</button>
            <button ng-if="login.isCreation" ng-click="login.pwdRegister()" id="login-button">Signup</button>
 
