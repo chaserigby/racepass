@@ -7,6 +7,9 @@
       <select ng-model="payment.passType" ng-change="payment.update()" ng class="form-control">
         <option ng-repeat="(name, type) in payment.fancyNameToType" ng-value="type">{{name}} Pass</option>
       </select>
+      <div ng-if="payment.passType=='freeTrial'" class="pass-body">
+        <div class="pass-count">Free Trial</div>
+      </div>
       <div ng-if="payment.passType=='3races'" class="pass-body">
         <div class="pass-count">3 Races</div>
         <p>26.2 • 13.1<br>
@@ -90,7 +93,7 @@
           <span ng-if="payment.purchaseInProgress" class="sr-only">Processing...</span>
         </button>
         <p id="footer-text">By purchasing, I agree to the Terms of Use & Privacy Policy. By purchasing, I understand my membership automatically renews at the annual subscription and I can cancel on site at any time.</p>
-        <p>Or <em ng-click="payment.skip()">skip payment</em> (try out the site first)</p> 
+        <p>Or <em ng-click="payment.skip()">skip payment</em> (try out the site first)</p>
       </form>
     </div>
   </div>
@@ -108,7 +111,7 @@
       </tr>
       <tr>
         <td>
-          12 Month Subscription 
+          12 Month Subscription
           {{payment.start_date}} - {{payment.end_date}}
         </td>
         <td>

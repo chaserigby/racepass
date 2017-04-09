@@ -81,6 +81,7 @@ expressa.addListener('post', -10, function(req, collection, doc) {
     return expressa.db.race_signup.find({ 'meta.owner' : req.user._id, 'status' : { '$in': ['pending', 'registered'] } })
       .then(function(race_signups) {
         var passRaceCount = {
+          'freeTrial': 0,
           '3races': 3,
           '5races': 5,
           'unlimited': 200,
