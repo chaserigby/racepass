@@ -59,6 +59,7 @@ module.exports = function(expressa) {
 
     // prices also in html site in js/base.js
     var passPrices = {
+      'freeTrial': 0,
       '3races': 195,
       '5races': 295,
       'unlimited': 695,

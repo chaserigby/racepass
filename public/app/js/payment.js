@@ -1,6 +1,6 @@
 function loadBraintree(authorization) {
   var submit = document.querySelector('button[type="submit"]');
-  
+
   braintree.client.create({
     authorization: authorization
   }, function (clientErr, clientInstance) {
@@ -8,7 +8,7 @@ function loadBraintree(authorization) {
       // Handle error in client creation
       return;
     }
-  
+
     braintree.hostedFields.create({
       client: clientInstance,
       styles: {
@@ -52,7 +52,7 @@ function loadBraintree(authorization) {
         return;
       }
       window.hostedFieldsInstance = hostedFieldsInstance;
-  
+
       submit.removeAttribute('disabled');
     });
   });
@@ -64,9 +64,10 @@ angular.module('main')
   .controller('PaymentController', function($timeout, $filter, $http, $location) {
     var self = this;
     this.fancyNameToType = {
+      'Free Trial': 'freeTrial',
       'Contender': '3races',
       'Athlete': '5races',
-      'Pro': 'unlimited' 
+      'Pro': 'unlimited'
     }
     this.passType = localStorage.buyType || '3races';
     this.passName = passNames[this.passType];
@@ -84,7 +85,7 @@ angular.module('main')
     nextYear = new Date();
     nextYear.setFullYear(nextYear.getFullYear() + 1);
     this.endDate = (nextYear.getMonth()+1) + '/' + (nextYear.getDate()) + '/' + nextYear.getFullYear();
-    
+
     this.promoOpen = false;
     this.promoApplied = false;
     this.purchaseInProgress = false;

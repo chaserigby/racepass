@@ -13,18 +13,21 @@ ga('send', 'pageview');
 
 // prices also in server in routes/index.js
 var passPrices = {
+  'freeTrial': 0,
   '3races': 195,
   '5races': 295,
   'unlimited': 695,
 }
 
 var passNames = {
+  'freeTrial': 'Free Trial',
   '3races': 'Contender',
   '5races': 'Athlete',
   'unlimited': 'Pro',
 }
 
 var passRaceCount = {
+  'freeTrial': 0,
   '3races': 3,
   '5races': 5,
   'unlimited': 200,

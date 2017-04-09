@@ -36,6 +36,7 @@
       "passType": {
         "type": "string",
         "enum": [
+          "freeTrial",
           "3races",
           "5races",
           "unlimited"
