@@ -1,0 +1,76 @@
+{
+  "_id": "log",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "severity": {
+        "type": "string",
+        "enum": [
+          "critical",
+          "error",
+          "warning",
+          "notice",
+          "info",
+          "debug"
+        ]
+      },
+      "user": {
+        "type": "string"
+      },
+      "req": {
+        "type": "object",
+        "properties": {
+          "ip": {
+            "type": "string"
+          },
+          "headers": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {}
+          }
+        }
+      },
+      "res": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "string"
+          },
+          "headers": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {}
+          }
+        }
+      },
+      "method": {
+        "type": "string"
+      },
+      "url": {
+        "type": "string"
+      },
+      "referer": {
+        "type": "string"
+      }
+    },
+    "listing": {
+      "columns": [
+        "severity",
+        "user",
+        "req.ip",
+        "res.statusCode",
+        "method",
+        "url",
+        "referer",
+        "meta.created"
+      ]
+    }
+  },
+  "storage": "memory",
+  "documentsHaveOwners": false,
+  "meta": {
+    "created": "2017-04-08T07:45:27.372Z",
+    "updated": "2017-04-10T07:11:46.052Z",
+    "owner": "a52ee085-ff47-4ee2-bac2-a8a319f674ed"
+  }
+}

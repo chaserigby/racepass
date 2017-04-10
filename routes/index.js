@@ -64,6 +64,12 @@ module.exports = function(expressa) {
       'unlimited': 695,
     }
 
+    var passRaceCount = {
+      '3races': 3,
+      '5races': 5,
+      'unlimited': 200,
+    }
+
     var amount = passPrices[req.body.passType] - promo_amount;
     var nonce = req.body.payment_method_nonce;
     gateway.transaction.sale({
@@ -93,6 +99,7 @@ module.exports = function(expressa) {
               u.roles.push('ActivePass');
             }
             u.passType = req.body.passType;
+            u.race_credits += passRaceCount[u.passType]
             expressa.db.users.update(u._id, u);
           }, function(err) {
             console.error('invalid user when registering.')

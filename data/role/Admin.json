@@ -59,7 +59,11 @@
     "race_signup: delete": true,
     "race_signup: view own": true,
     "race_signup: edit own": true,
-    "race_signup: delete own": true
+    "race_signup: delete own": true,
+    "log: create": true,
+    "log: view": true,
+    "log: edit": true,
+    "log: delete": true
   },
   "meta": {
     "created": "2016-12-14T08:09:54.875Z",

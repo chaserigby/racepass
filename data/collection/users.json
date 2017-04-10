@@ -127,17 +127,31 @@
       "paymentSkipped": {
         "type": "boolean",
         "format": "checkbox"
+      },
+      "race_credits": {
+        "type": "number"
       }
     },
     "required": [
       "email",
       "password"
-    ]
+    ],
+    "listing": {
+      "columns": [
+        "email",
+        "first_name",
+        "last_name",
+        "gender",
+        "roles",
+        "passType",
+        "meta.created"
+      ]
+    }
   },
   "storage": "postgres",
   "documentsHaveOwners": true,
   "meta": {
     "created": "2016-12-14T08:09:55.554Z",
-    "updated": "2017-03-31T08:44:29.157Z"
+    "updated": "2017-04-07T08:30:17.106Z"
   }
 }

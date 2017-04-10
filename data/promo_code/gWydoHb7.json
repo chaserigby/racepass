@@ -1,10 +1,11 @@
 {
   "name": "GOLD2017",
-  "value": 195,
+  "value": 0,
   "usage_limit": 1,
+  "race_credits": 1,
   "meta": {
     "created": "2017-04-04T07:54:57.385Z",
-    "updated": "2017-04-04T07:54:57.385Z",
+    "updated": "2017-04-07T08:37:46.097Z",
     "owner": "a52ee085-ff47-4ee2-bac2-a8a319f674ed"
   },
   "_id": "gWydoHb7"
