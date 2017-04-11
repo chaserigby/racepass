@@ -72,7 +72,7 @@ module.exports = function(expressa) {
       'unlimited': 200,
     }
 
-    var amount = max(Math.passPrices[req.body.passType] - promo_amount, 0);
+    var amount = Math.max(passPrices[req.body.passType] - promo_amount, 0);
     var nonce = req.body.payment_method_nonce;
     gateway.transaction.sale({
       amount: amount,
