@@ -97,13 +97,17 @@ angular.module('main')
 
     this.applyPromo = function() {
       var code = this.promoCodeField.toUpperCase();
-      $http.get(window.apiurl + 'apply_promo?code=' + code)
+      $http.get(window.apiurl + 'apply_promo?code=' + code + '&token=' + localStorage.token)
         .then(function(response) {
           var codeDetails = response.data;
           self.promoApplied = true;
           self.promoDiscount = codeDetails.value;
           self.finalCost = self.baseCost - self.promoDiscount;
           self.promoCode = self.promoCodeField;
+          if (codeDetails.race_credits) {
+            toastr.success(codeDetails.race_credits + 'race credit' + (codeDetails.race_credits > 1 ? 's' : '') + ' has been added to your account.')
+            self.skip();
+          }
         }, function(err) {
           toastr.error(err.data.message || 'Error while attempting to apply promo code');
         })

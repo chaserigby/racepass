@@ -163,7 +163,7 @@ app.controller('MainController', function($location, $http, $scope, $timeout) {
       return reason;
     }
     this.remove_race = function(i) {
-      var signup_id = self.my_race_signup_ids[i];
+      var signup_id = self.my_race_signup_ids[self.my_races[i]._id];
 
       data = {
         '$set': { 'status': 'canceled', 'cancellation_reason': self.get_cancellation_reason() }

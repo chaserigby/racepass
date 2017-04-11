@@ -78,42 +78,49 @@ expressa.addListener('post', -10, function(req, collection, doc) {
     }
   }*/
   if (collection == 'race_signup') {
+    var passRaceCount = {
+      'freeTrial': 0,
+      '3races': 3,
+      '5races': 5,
+      'unlimited': 200,
+    }
+
+    var race_credits = req.user.race_credits;
+    if (race_credits <= 0) {
+      if (req.user.passType) {
+        return {
+          code: '400',
+          message: 'You need to upgrade to a larger pass type to register for more races.',
+        }
+      } else {
+        return {
+          code: '400',
+          message: 'You need to purchase a pass to register for races.',
+        }
+      }
+    }
     return expressa.db.race_signup.find({ 'meta.owner' : req.user._id, 'status' : { '$in': ['pending', 'registered'] } })
       .then(function(race_signups) {
-        var passRaceCount = {
-          'freeTrial': 0,
-          '3races': 3,
-          '5races': 5,
-          'unlimited': 200,
-        }
-
-        var current_count = race_signups.length;
-        var plan_count = passRaceCount[req.user.passType] || 0;
-        console.log('using ' + current_count + ' of ' + plan_count);
-        if (plan_count == 0) {
-          return {
-            code: '400',
-            message: 'You need to purchase a pass to register for races.',
-          }
-        }
-        if (current_count >= plan_count) {
-          return {
-            code: '400',
-            message: 'Already signed up for maximum number of races your plan provides',
-          }
-        }
         var race_ids = race_signups.map(function(signup) { return signup.race_id; });
         if (race_ids.indexOf(doc.race_id) != -1) {
           return {
             code: '400',
             message: 'You are already signed up for this race.',
           }
+        } else {
+          req.user.race_credits -= 1
+          return expressa.db.users.update(req.user._id, req.user)
+            .then(function() {
+            }, function(err) {
+              console.error(err)
+              console.error('unable to deduct race credit')
+              return {
+                code: '500',
+                message: 'Unable to deduct race credit.',
+              }
+            })
         }
-
-      }, function(err) {
-        console.error(err);
-        console.error('failed to lookup user race count.')
-      });
+      })
   }
 })
 
@@ -128,10 +135,12 @@ expressa.addListener('put', -10, function(req, collection, doc) {
                 if (err) {
                   console.error(err);
                   console.error('failed to geolocate user\'s address');
+                  return resolve();
                 }
                 var data = JSON.parse(body);
                 if (!data.results[0]) {
-                  return console.error('failed to geolocate user\'s address due to empty response.');
+                  console.error('failed to geolocate user\'s address due to empty response.');
+                  return resolve();
                 }
                 var latlng = data.results[0].geometry.location;
                 doc.address.coordinates = latlng;
@@ -142,9 +151,22 @@ expressa.addListener('put', -10, function(req, collection, doc) {
   if (collection == 'race_signup') {
     return expressa.db.race_signup.get(doc._id)
       .then(function(old) {
-        if (doc.status == 'cancelled' && old.status == 'registered') {
+        if (doc.status == 'canceled' && old.status == 'registered') {
           doc.status = 'request_cancel';
           console.log('requested cancellation of a registered race');
+        } else if (doc.status == 'canceled' && old.status != 'cancellationed') {
+          req.user.race_credits += 1
+          return expressa.db.users.update(req.user._id, req.user)
+            .then(function() {
+              console.log('credit refunded')
+            }, function(err) {
+              console.error(err)
+              console.error('unable to refund race credit')
+              return {
+                code: '500',
+                message: 'Unable to refund race credit.',
+              }
+            })
         }
       }, function(err) {
         console.error('failed to load old race signup.');
@@ -177,10 +199,12 @@ expressa.addListener('get', -5, function(req, collection, data) {
   if (collection == 'users') {
     return expressa.db.race_signup.find({ 'meta.owner' : data._id, 'status' : { '$in': ['pending', 'registered'] } })
       .then(function(race_signups) {
-        var signup_ids = race_signups.map(function(signup) { return signup._id; });
-        data.race_signup_ids = signup_ids;
+        data.race_signup_ids = {};
+        var signup_ids = race_signups.forEach(function(signup) {
+          data.race_signup_ids[signup.race_id] = signup._id;
+        });
         var race_ids = race_signups.map(function(signup) { return signup.race_id; });
-        if (signup_ids.length) {
+        if (race_signups.length) {
           return expressa.db.race.find({ '_id' : { '$in' : race_ids } })
             .then(function(races) {
               data.race_listings = races;
@@ -243,31 +267,6 @@ app.get('/nearby_races', function(req, res, next) {
   });
 });
 
-app.get('/apply_promo', function(req, res, next) {
-  var code = req.query.code;
-  var codeDetails;
-  expressa.db.promo_code.find({'name': code})
-    .then(function(data) {
-      if (data.length == 0) {
-        return res.status(404).send({'message': code + ' is not a valid promo code.'})
-      }
-      codeDetails = data[0];
-      return expressa.db.user_payments.find({'promo_code': {"$regex": code, "$options":"i"}})
-    }, function(err) {
-      console.error(err);
-      res.status(500).send({'message': 'an error ocurred while applying the code.'});
-    })
-    .then(function(data) {
-      if (codeDetails.usage_limit && data.length >= codeDetails.usage_limit) {
-        return res.status(400).send({'message': 'This code has already been used the maximum number of times.'});
-      }
-      return res.send(codeDetails);
-    }, function(err) {
-      console.error(err);
-      res.status(500).send({'message': 'an error ocurred while applying the code.'});
-    })
-})
-
 app.use(bodyParser.json({ type: "*/*" }))
 
 var auth = require('./node_modules/expressa/auth');
@@ -277,6 +276,42 @@ function settingsMiddleware(req, res, next) {
   next()
 }
 app.use('/', settingsMiddleware, auth.middleware, routes);
+
+app.get('/apply_promo', settingsMiddleware, auth.middleware, function(req, res, next) {
+  var code = req.query.code;
+  var codeDetails;
+  expressa.db.promo_code.find({'name': code})
+    .then(function(data) {
+      if (data.length == 0) {
+        return res.status(404).send({'message': code + ' is not a valid promo code.'})
+      }
+      codeDetails = data[0];
+      if (codeDetails.usage_limit && codeDetails.usage_count >= codeDetails.usage_limit) {
+        return res.status(400).send({'message': 'This code has already been used the maximum number of times.'});
+      }
+      codeDetails.usage_count = (codeDetails.usage_count || 0) + 1
+      return expressa.db.promo_code.update(codeDetails._id, codeDetails)
+    }, function(err) {
+      console.error(err);
+      res.status(500).send({'message': 'an error ocurred while applying the code.'});
+    })
+    .then(function() {
+      expressa.db.users.get(req.uid)
+        .then(function(user) {
+          if (codeDetails.race_credits > 0) {
+            user.race_credits = (user.race_credits || 0) + 1
+            expressa.db.users.update(user._id, user)
+          }
+          return res.send(codeDetails);
+        }, function() {
+          console.error('failed to load user for applying credits')
+          res.send({'message': 'failed to load user for applying credits'})
+        });
+    }, function(err) {
+      console.error(err);
+      res.status(500).send({'message': 'an error ocurred while applying the code.'});
+    })
+})
 
 app.use('/admin', expressa.admin({apiurl:'/'}));
 app.use('/', expressa);

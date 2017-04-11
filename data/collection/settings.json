@@ -26,6 +26,18 @@
       "installed": {
         "type": "boolean",
         "description": "Used by the admin editor to track whether the installation is complete."
+      },
+      "logging_level": {
+        "type": "string",
+        "description": "Any errors with this severity level or higher will be logged to the 'log' collection",
+        "enum": [
+          "critical",
+          "error",
+          "warning",
+          "notice",
+          "info",
+          "debug"
+        ]
       }
     }
   },

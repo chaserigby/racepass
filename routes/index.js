@@ -94,6 +94,7 @@ module.exports = function(expressa) {
               u.roles.push('ActivePass');
             }
             u.passType = req.body.passType;
+            u.race_credits += passRaceCount[u.passType]
             expressa.db.users.update(u._id, u);
           }, function(err) {
             console.error('invalid user when registering.')
