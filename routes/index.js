@@ -65,6 +65,13 @@ module.exports = function(expressa) {
       'unlimited': 695,
     }
 
+    var passRaceCount = {
+      'freeTrial': 0,
+      '3races': 3,
+      '5races': 5,
+      'unlimited': 200,
+    }
+
     var amount = max(Math.passPrices[req.body.passType] - promo_amount, 0);
     var nonce = req.body.payment_method_nonce;
     gateway.transaction.sale({
