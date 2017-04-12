@@ -90,7 +90,11 @@ angular.module('main')
     this.update = function() {
       self.baseCost = passPrices[self.passType];
       self.finalCost = self.baseCost;
-      loadBraintreeIfNotLoaded();
+      if (self.passType == 'freeTrial') {
+        delete windlow.hostedFieldsInstance;
+      } else {
+        loadBraintreeIfNotLoaded();
+      }
     }
 
     this.promoCode = '';
