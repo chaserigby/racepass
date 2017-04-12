@@ -3,7 +3,10 @@
 	font-size: 18px;
 	height: 38px;
 	line-height: 38px;
+	position: fixed;
 	text-align: center;
+	width: 100%;
+	z-index: 1000;
 }
 #promo a {
 	color: #0dffae;
