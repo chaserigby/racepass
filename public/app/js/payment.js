@@ -91,7 +91,7 @@ angular.module('main')
       self.baseCost = passPrices[self.passType];
       self.finalCost = self.baseCost;
       if (self.passType == 'freeTrial') {
-        delete windlow.hostedFieldsInstance;
+        delete window.hostedFieldsInstance;
       } else {
         loadBraintreeIfNotLoaded();
       }
