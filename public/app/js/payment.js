@@ -79,9 +79,6 @@ angular.module('main')
     this.update = function() {
       self.baseCost = passPrices[self.passType];
       self.finalCost = self.baseCost;
-      if (self.passType == 'freeTrial') {
-        self.skip();
-      }
     }
 
     this.promoCode = '';
