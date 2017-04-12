@@ -38,7 +38,7 @@
     },
     "listing": {
       "columns": [
-        "_id",
+	"status",
         "race.name",
         "race.distance",
         "race.datetime",
