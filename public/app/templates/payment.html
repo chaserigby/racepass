@@ -86,7 +86,7 @@
           </div>
         </div>
         <input type="hidden" name="payment-method-nonce">
-        <button ng-cload ng-if="payment.passType == 'freeTrial'" id="submit" type="submit" class="full" ng-click="payment.purchaseFreeTrial(); $event.preventDefault()">
+        <button ng-cload ng-if="payment.passType == 'freeTrial'" id="submit" type="submit" class="full" ng-click="payment.skip(); $event.preventDefault()">
           <span ng-if="!payment.paymentComplete">Free!</span>
           <span ng-if="payment.paymentComplete">
             (<i class="fa fa-check" aria-hidden="true"></i>)
