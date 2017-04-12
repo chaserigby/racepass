@@ -112,7 +112,7 @@ function initAutocomplete(lat, lng) {
     });
 
     prevClusterer = new MarkerClusterer(map, race_markers, {
-      imagePath: 'https://api.racepass.com/static/concepts/images-dark/m',
+      imagePath: '/imgs/markers/m',
       gridSize: 100,
       maxZoom: 6,
     });

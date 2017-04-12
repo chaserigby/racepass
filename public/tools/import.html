@@ -119,7 +119,7 @@
         }).then(function(response) {
           var range = response.result;
           if (range.values.length > 0) {
-            columns = ['source','name','datetime','distance', 'category', 'organization','price','details','address','city','state','zip','country','coordinates','timezone','website','images','url','description'];
+            columns = ['source','name','datetime','distance', 'category', 'organization','price','details','address','city','state','zip','country','coordinates','timezone','website','images','url','_id','status','description'];
             var loc_columns = ['address','city','state','zip','country','coordinates','timezone'];
 
             var processBatch = function(begin) {
