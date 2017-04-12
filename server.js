@@ -41,6 +41,9 @@ function populateUserFromFacebook(doc) {
 }
 
 expressa.addListener('post', -10, function(req, collection, doc) {
+  if (collection == 'promo_code') {
+    doc.name = doc.name.toUpperCase()
+  } 
   if (collection == 'users') {
     if (doc.fbAccessToken) {
       return populateUserFromFacebook(doc);
@@ -125,6 +128,9 @@ expressa.addListener('post', -10, function(req, collection, doc) {
 })
 
 expressa.addListener('put', -10, function(req, collection, doc) {
+  if (collection == 'promo_code') {
+    doc.name = doc.name.toUpperCase()
+  } 
   if (collection == 'users' && doc.address && doc.address.city) {
     var key = 'AIzaSyDOZ8hCqFBA-vK2S5rt2eOJm_6FS36N2fE';
     var loc = doc.address.line1 + ',' + doc.address.city + ',' + doc.address.state + ',' + doc.address.zip;

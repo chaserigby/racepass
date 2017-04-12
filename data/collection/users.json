@@ -145,6 +145,7 @@
         "gender",
         "roles",
         "passType",
+        "race_credits",
         "meta.created"
       ]
     }

@@ -1,10 +1,11 @@
 {
   "name": "LACEUP",
-  "value": 40,
+  "value": 20,
+  "usage_count": 3,
   "usage_limit": 0,
   "meta": {
     "created": "2017-03-12T00:58:08.797Z",
-    "updated": "2017-04-04T08:09:47.078Z",
+    "updated": "2017-04-12T01:33:44.235Z",
     "owner": "a52ee085-ff47-4ee2-bac2-a8a319f674ed"
   },
   "_id": "MuYjqLBD"
