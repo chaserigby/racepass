@@ -1,3 +1,19 @@
+#promo {
+	background-color: #323237;
+	font-size: 18px;
+	height: 38px;
+	line-height: 38px;
+	position: fixed;
+	text-align: center;
+	width: 100%;
+	z-index: 1000;
+}
+#promo a {
+	color: #0dffae;
+	cursor: pointer;
+	font-weight: bold;
+	text-decoration: none;
+}
 ﻿#landing-nav {
 	padding-bottom: 0px;
 }
@@ -483,12 +499,12 @@
 	font-size: 16px;
 	color: #ABAEB7;
 }
-.qa .question::after { 
+.qa .question::after {
     color: #0DFFAE;
     content: "-";
     float: right;
 }
-.collapsed .question::after { 
+.collapsed .question::after {
     color: #0DFFAE;
     content: "+";
     float: right;

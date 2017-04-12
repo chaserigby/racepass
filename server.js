@@ -82,6 +82,7 @@ expressa.addListener('post', -10, function(req, collection, doc) {
   }*/
   if (collection == 'race_signup') {
     var passRaceCount = {
+      'freeTrial': 0,
       '3races': 3,
       '5races': 5,
       'unlimited': 200,

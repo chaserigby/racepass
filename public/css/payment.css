@@ -65,8 +65,8 @@
 	height: 40px;
 	width: 100px;
 }
-#submit {
-	margin-top: 10px;
+#submit, #free-submit {
+	margin: 10px 0;
 	padding: 5px;
 	font-size: 18px;
 }
