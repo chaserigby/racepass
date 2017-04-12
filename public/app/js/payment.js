@@ -1,3 +1,14 @@
+function loadBraintreeIfNotLoaded() {
+  if (window.hostedFieldsInstance) {
+    return;
+  }
+
+  $.getJSON(window.apiurl + 'checkouts/new')
+    .then(function(data) {
+      loadBraintree(data.clientToken);
+    });
+}
+
 function loadBraintree(authorization) {
   var submit = document.querySelector('button[type="submit"]');
 
@@ -79,6 +90,7 @@ angular.module('main')
     this.update = function() {
       self.baseCost = passPrices[self.passType];
       self.finalCost = self.baseCost;
+      loadBraintreeIfNotLoaded();
     }
 
     this.promoCode = '';

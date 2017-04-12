@@ -86,7 +86,7 @@
           </div>
         </div>
         <input type="hidden" name="payment-method-nonce">
-        <button ng-cload ng-if="payment.passType == 'freeTrial'" id="submit" type="submit" class="full" ng-click="payment.skip(); $event.preventDefault()">
+        <button ng-cloak ng-if="payment.passType == 'freeTrial'" id="free-submit" class="full" ng-click="payment.skip(); $event.preventDefault()">
           <span ng-if="!payment.paymentComplete">Free!</span>
           <span ng-if="payment.paymentComplete">
             (<i class="fa fa-check" aria-hidden="true"></i>)
@@ -94,7 +94,7 @@
           <i ng-if="payment.purchaseInProgress" class="fa fa-spinner fa-spin fa-fw"></i>
           <span ng-if="payment.purchaseInProgress" class="sr-only">Processing...</span>
         </button>
-        <button ng-cload ng-if="payment.passType != 'freeTrial'" id="submit" type="submit" class="full" ng-click="payment.purchase(); $event.preventDefault()" disabled>
+        <button ng-cloak ng-if="payment.passType != 'freeTrial'" id="submit" type="submit" class="full" ng-click="payment.purchase(); $event.preventDefault()" disabled>
           <span ng-if="!payment.paymentComplete">Pay ${{payment.finalCost}}</span>
           <span ng-if="payment.paymentComplete">
             (<i class="fa fa-check" aria-hidden="true"></i>)
@@ -167,8 +167,5 @@
 <!-- Load the Hosted Fields component. -->
 <script src="https://js.braintreegateway.com/web/3.6.3/js/hosted-fields.min.js"></script>
 <script>
-  $.getJSON(window.apiurl + 'checkouts/new')
-    .then(function(data) {
-      loadBraintree(data.clientToken);
-    });
+  loadBraintreeIfNotLoaded();
 </script>
