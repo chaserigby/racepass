@@ -114,7 +114,9 @@ function combinedSearch(queryText, callback) {
     }
   });
 
-  var query = {'$and': []}
+  var query = {'$and': [
+    {'status': {'$ne': 'hidden'}}
+  ]}
   queryText.split(' ').forEach(function(word) {
     query['$and'].push({"name":{"$regex": word, "$options":"i"}})
   });

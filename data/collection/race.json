@@ -72,6 +72,9 @@
       },
       "distance": {
         "type": "number"
+      },
+      "status": {
+        "type": "string"
       }
     }
   },

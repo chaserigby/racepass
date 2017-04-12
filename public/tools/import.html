@@ -169,6 +169,10 @@
                   delete record['location']['zip'];
                 }
 
+                if (!record['status']) {
+                  record['status'] = 'visible'
+                }
+
                 record['distance'] = processDistance(record['distance']);
                 console.log(record['distance']);
 
