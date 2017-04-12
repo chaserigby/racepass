@@ -35,6 +35,18 @@
       "cancellation_reason": {
         "type": "string"
       }
+    },
+    "listing": {
+      "columns": [
+        "_id",
+        "race.name",
+        "race.distance",
+        "race.datetime",
+        "race.website",
+        "user.email",
+        "user.first_name",
+        "user.last_name"
+      ]
     }
   },
   "storage": "postgres",

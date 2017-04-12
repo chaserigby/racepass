@@ -223,6 +223,17 @@ expressa.addListener('get', -5, function(req, collection, data) {
         console.error('failed to lookup user races')
       });
   }
+  if (collection == 'race_signup') {
+    var userPromise = expressa.db.users.get(data.meta.owner)
+    var racePromise = expressa.db.race.get(data.race_id)
+    return Promise.all([userPromise, racePromise])
+      .then(function(results) {
+        data.user = results[0];
+        data.race = results[1]
+      }, function(err) {
+        console.error(err)
+      })
+  }
 })
 
 var handler = require('./node_modules/expressa/auth/jwt');
