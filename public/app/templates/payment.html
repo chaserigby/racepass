@@ -8,7 +8,10 @@
         <option ng-repeat="(name, type) in payment.fancyNameToType" ng-value="type">{{name}} Pass</option>
       </select>
       <div ng-if="payment.passType=='freeTrial'" class="pass-body">
-        <div class="pass-count">Free Trial</div>
+        <ul>
+          <li>Search our inventory</li>
+          <li>Try it out now</li>
+        </ul>
       </div>
       <div ng-if="payment.passType=='3races'" class="pass-body">
         <div class="pass-count">3 Races</div>
@@ -32,7 +35,7 @@
         <table>
           <tr>
             <td>12 Month Subscription</td>
-            <td>${{payment.baseCost}}&nbsp;+&nbsp;Tax</td>
+            <td>${{payment.baseCost}}<span ng-if="payment.finalCost > 0">&nbsp;+&nbsp;Tax</span></td>
           </tr>
           <tr ng-if="payment.promoApplied">
             <td><em>Promo</em></td>
@@ -44,7 +47,7 @@
           </tr>
           <tr ng-if="payment.promoApplied">
             <td>Final Cost</td>
-            <td>${{payment.finalCost}} + Tax</td>
+            <td>${{payment.finalCost}}<span ng-if="payment.finalCost > 0"> + Tax</span></td>
           </tr>
         </table>
       </div>
@@ -87,7 +90,7 @@
         </div>
         <input type="hidden" name="payment-method-nonce">
         <button ng-cloak ng-if="payment.passType == 'freeTrial'" id="free-submit" class="full" ng-click="payment.skip(); $event.preventDefault()">
-          <span ng-if="!payment.paymentComplete">Free!</span>
+          <span ng-if="!payment.paymentComplete">Free! Create your profile</span>
           <span ng-if="payment.paymentComplete">
             (<i class="fa fa-check" aria-hidden="true"></i>)
           </span>
@@ -103,7 +106,7 @@
           <span ng-if="payment.purchaseInProgress" class="sr-only">Processing...</span>
         </button>
         <p id="footer-text">By purchasing, I agree to the Terms of Use & Privacy Policy. By purchasing, I understand my membership automatically renews at the annual subscription and I can cancel on site at any time.</p>
-        <p>Or <em ng-click="payment.skip()">skip payment</em> (try out the site first)</p>
+        <p ng-if="payment.passType!='freeTrial'">Or <em ng-click="payment.skip()">skip payment</em> (try out the site first)</p>
       </form>
     </div>
   </div>

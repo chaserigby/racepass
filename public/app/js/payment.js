@@ -191,6 +191,9 @@ angular.module('main')
     }
 
     this.skip = function() {
+      if (localStorage.buyType == 'freeTrial') {
+        localStorage.buyType = '3races'
+      }
       data = {
         $set: { 'paymentSkipped' : true }
       }

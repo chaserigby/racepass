@@ -229,8 +229,11 @@ section.solo {
 
 
 #landing-nav {
-	padding: 53px 15px 8px 0px;
+	padding: 15px 15px 8px 0px;
 	margin-bottom: 0px;
+}
+#home #landing-nav {
+	padding-top: 53px;
 }
 #logo {
 	width: 160px;
