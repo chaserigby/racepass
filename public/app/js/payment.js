@@ -113,7 +113,6 @@ angular.module('main')
         })
 
     }.bind(this);
-
     this.purchase = function() {
       this.purchaseInProgress = true;
 
@@ -127,7 +126,42 @@ angular.module('main')
           return;
         }
 
-        this.processPurchase(payload.nonce);
+        var paymentData = {
+          passType: self.passType,
+          payment_method_nonce: payload.nonce,
+          promo: self.promoCode,
+          base_cost: self.baseCost,
+          final_cost: self.finalCost,
+          start_date: $filter('date')(new Date(), 'MM/dd/yyyy'),
+          end_date: $filter('date')(new Date().setDate(new Date().getDate() + 365)  , 'MM/dd/yyyy'),
+        };
+        $http.post(window.apiurl + 'purchase?token=' + localStorage.token, JSON.stringify(paymentData))
+          .then(function(result) {
+            var data = result.data;
+            delete paymentData.payment_method_nonce;
+            paymentData.details = data.transaction_id;
+            window.localStorage.payment = JSON.stringify(paymentData);
+            ga('ecommerce:addTransaction', {
+              'id': data.transaction_id,        // Transaction ID. Required.
+              'affiliation': 'racepass',        // Affiliation or store name.
+              'revenue': self.finalCost,        // Grand Total.
+              'tax': '0'                        // Tax.
+            });
+            ga('ecommerce:addItem', {
+              'id': data.transaction_id,        // Transaction ID. Required.
+              'name': self.passName,
+              'sku': self.passType,
+              'price': self.cost_per_event,
+              'quantity': self.num_races,
+            });
+            ga('ecommerce:send');
+            self.paymentComplete = true;
+            self.cardDetails = data.cc;
+            self.transaction_id = data.transaction_id;
+          }, function(data) {
+            toastr.error('We ran into an issue while processing your card. Please try again and contact info@racepass.com if the issue continues. Thanks for your patience.')
+            console.error(data);
+          });
       });
 
       /*$timeout(function() {
@@ -135,52 +169,6 @@ angular.module('main')
         this.paymentComplete = true;
       }.bind(this), 1000)*/
     }.bind(this);
-
-    this.purchaseFreeTrial = function() {
-      this.purchaseInProgress = true;
-
-      this.processPurchase(0);
-    }
-
-    this.processPurchase = function(nonce) {
-      var paymentData = {
-        passType: self.passType,
-        payment_method_nonce: nonce,
-        promo: self.promoCode,
-        base_cost: self.baseCost,
-        final_cost: self.finalCost,
-        start_date: $filter('date')(new Date(), 'MM/dd/yyyy'),
-        end_date: $filter('date')(new Date().setDate(new Date().getDate() + 365), 'MM/dd/yyyy'),
-      };
-
-      $http.post(window.apiurl + 'purchase?token=' + localStorage.token, JSON.stringify(paymentData))
-        .then(function(result) {
-          var data = result.data;
-          delete paymentData.payment_method_nonce;
-          paymentData.details = data.transaction_id;
-          window.localStorage.payment = JSON.stringify(paymentData);
-          ga('ecommerce:addTransaction', {
-            'id': data.transaction_id,        // Transaction ID. Required.
-            'affiliation': 'racepass',        // Affiliation or store name.
-            'revenue': self.finalCost,        // Grand Total.
-            'tax': '0'                        // Tax.
-          });
-          ga('ecommerce:addItem', {
-            'id': data.transaction_id,        // Transaction ID. Required.
-            'name': self.passName,
-            'sku': self.passType,
-            'price': self.cost_per_event,
-            'quantity': self.num_races,
-          });
-          ga('ecommerce:send');
-          self.paymentComplete = true;
-          self.cardDetails = data.cc;
-          self.transaction_id = data.transaction_id;
-        }, function(data) {
-          toastr.error('We ran into an issue while processing your card. Please try again and contact info@racepass.com if the issue continues. Thanks for your patience.')
-          console.error(data);
-        });
-    }
 
     this.done = function() {
       $location.path('/');
