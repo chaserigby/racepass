@@ -42,6 +42,16 @@ app.controller('MainController', function($location, $http, $scope, $timeout) {
           this.age = calculateAge(new Date(this.user.date_of_birth));
           this.photo = 'https://graph.facebook.com/'+this.user.facebook_id+'/picture?type=large&w‌​idth=720&height=720'
           this.my_races = response.race_listings;
+          var now = new Date().toISOString()
+          var cutoff = new Date();
+          cutoff.setDate(cutoff.getDate() + 1);
+          this.cancel_cutoff = cutoff.toISOString()
+          this.registered_races = response.race_listings.filter(function(race) {
+            return race.datetime > now;
+          });
+          this.completed_races = response.race_listings.filter(function(race) {
+            return race.datetime <= now;
+          });
           if (this.user.passType == 'unlimited') {
             this.racesLeft = 'unlimited';
           } else {

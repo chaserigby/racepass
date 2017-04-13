@@ -72,13 +72,35 @@
       <th>Location</th>
       <th>Actions</th>
     </tr>
-    <tr ng-repeat="race in main.my_races">
+    <tr ng-repeat="race in main.registered_races">
       <td>{{main.formatRaceDistance(race.distance)}}</td>
       <td>{{race.name}}</td>
       <td>{{race.datetime | date:'MM/dd/yyyy' }}</td>
       <td>{{race.location.city}}, {{race.location.state}}</td>
-      <td ng-click="main.cancel_popup($index)">
-        <em style="cursor: pointer;">Cancel</em>
+      <td ng-if="race.datetime >= main.cancel_cutoff" ng-click="main.cancel_popup($index)">
+        <em  style="cursor: pointer;">Cancel</em>
+      </td>
+    </tr>
+  </table>
+</section>
+
+<section ng-if="main.completed_races" id="completed-races" class="container">
+  <h3 style="float: left;">Completed Races</h3>
+  <table class="race-table">
+    <tr>
+      <th>Distance</th>
+      <th>Race</th>
+      <th>Date</th>
+      <th>Location</th>
+      <th>Actions</th>
+    </tr>
+    <tr ng-repeat="race in main.completed_races">
+      <td>{{main.formatRaceDistance(race.distance)}}</td>
+      <td>{{race.name}}</td>
+      <td>{{race.datetime | date:'MM/dd/yyyy' }}</td>
+      <td>{{race.location.city}}, {{race.location.state}}</td>
+      <td">
+        
       </td>
     </tr>
   </table>
