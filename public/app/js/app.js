@@ -137,7 +137,7 @@ app.controller('MainController', function($location, $http, $scope, $timeout) {
     this.lostFocus = function() {
       $timeout(function() {
         this.search_focus = false;
-      }.bind(this), 100);
+      }.bind(this), 300);
     }
 
     this.selectSearchResult = function(choice) {
