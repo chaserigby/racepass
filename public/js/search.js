@@ -5,6 +5,13 @@ if (typeof app == 'undefined') {
   app = angular.module('landing');
 } 
 
+var backup_race_images = [
+  '/imgs/stock/running1.jpg',
+  '/imgs/stock/iStock-498663644.jpg',
+  '/imgs/stock/iStock-501644332.jpg',
+  '/imgs/stock/iStock-587513024.jpg'
+];
+
 app
   .controller('SearchController', function($filter, $scope, $timeout, $location, $http) {
     var self = this;
@@ -192,7 +199,8 @@ app
           this.selected_image += '.jpg';
         }
       } else {
-        this.selected_image = '/imgs/stock/running1.jpg';
+        // choose a random backup image to use
+        this.selected_image = backup_race_images[Math.floor(Math.random()*backup_race_images.length)];
       }
       if (typeof race.distance != 'undefined' && race.distance) {
         this.selected_details['Distance'] = formatRaceDistance(race.distance);

@@ -131,6 +131,9 @@
       },
       "race_credits": {
         "type": "number"
+      },
+      "profile_photo": {
+        "type": "string"
       }
     },
     "required": [
