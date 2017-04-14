@@ -267,6 +267,7 @@ app.get('/nearby_races', function(req, res, next) {
     }
     var query = "SELECT * FROM race "
     + " WHERE data->>'datetime' >= $4"
+    + " AND data->>'status' != 'hidden'"
      + " ORDER BY "
      + "abs($1::numeric - (data->'location'->'coordinates'->>'lat')::numeric)"
      + " + abs($2::numeric - (data->'location'->'coordinates'->>'lng')::numeric) ASC LIMIT $3;"
