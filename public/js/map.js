@@ -28,6 +28,9 @@ function initAutocomplete(lat, lng) {
       console.error('map bounds missing');
     }
 
+    controller.query['status'] = {
+      "$ne": 'hidden'
+    }
     controller.query["location.coordinates.lat"] = {
       "$gt": b.f.f,
       "$lt": b.f.b,
