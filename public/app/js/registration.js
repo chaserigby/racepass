@@ -27,8 +27,10 @@ app.controller('RegistrationController', function($location, $http, $scope, $tim
     } else if ($('#p' + this.page).parsley().validate()) {
       if (this.page == 4) {
         this.data.raceinfo.has_medical = (this.data.raceinfo.has_medical == 'true');
+        delete this.data.permissions;
         data = {
-          $set: this.data
+          $set: this.data,
+          $unset: {'permissions': true}
         }
         $.post(window.apiurl + 'users/' + localStorage.uid + '/update?token=' + localStorage.token, JSON.stringify(data))
           .then(function(result) {
