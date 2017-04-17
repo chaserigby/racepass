@@ -85,8 +85,8 @@ module.exports = function(expressa) {
         passType: req.body.passName,
         sku: req.body.passType,
         amount: amount,
-        email: req.body.email,
         promo_code: req.body.promo,
+        uid: req.uid,
       };
       if (result.transaction) {
         data.transaction_id = result.transaction.id;
@@ -103,8 +103,11 @@ module.exports = function(expressa) {
             u.passType = req.body.passType;
             u.race_credits = (u.race_credits || 0) + passRaceCount[u.passType]
             expressa.db.users.update(u._id, u);
+            data['email'] = u.email,
+            expressa.db.user_payments.create(data);
           }, function(err) {
             console.error('invalid user when registering.')
+            expressa.db.user_payments.create(data);
           })
 
         res.status(200).send({"status":"success",
@@ -115,8 +118,9 @@ module.exports = function(expressa) {
         data.status = 'failure';
         data.errors = JSON.stringify(result.errors.deepErrors());
         res.status(400).send({"status":"failure", "error": transactionErrors});
+        expressa.db.user_payments.create(data);
       }
-      expressa.db.user_payments.create(data);
+      
     });
   }
 

@@ -27,11 +27,18 @@
       "transaction_id": {
         "type": "string"
       },
-      "linked_user": {
-        "type": "string"
-      },
       "promo_code": {
         "type": "string"
+      },
+      "uid": {
+        "type": "string",
+        "links": [
+            {
+              "rel": "» view user details",
+              "href": "/admin/#/edit/users/{{self}}",
+              "class": "comment-link open-in-modal primary-text"
+            }
+        ]
       }
     }
   },
