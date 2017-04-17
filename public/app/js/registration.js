@@ -26,7 +26,6 @@ app.controller('RegistrationController', function($location, $http, $scope, $tim
       $scope.$apply();
     } else if ($('#p' + this.page).parsley().validate()) {
       if (this.page == 4) {
-        this.data.raceinfo.has_medical = (this.data.raceinfo.has_medical == 'true');
         delete this.data.permissions;
         data = {
           $set: this.data,
@@ -48,7 +47,7 @@ app.controller('RegistrationController', function($location, $http, $scope, $tim
     }
   }.bind(this);
   this.toggleMedical = function() {
-    if (this.data.raceinfo.has_medical == 'true') {
+    if (this.data.raceinfo.has_medical) {
       $('#medicalModal').modal('toggle');
     }
   }.bind(this);

@@ -89,7 +89,7 @@ expressa.addListener('post', -10, function(req, collection, doc) {
     }
 
     var race_credits = req.user.race_credits;
-    if (race_credits <= 0) {
+    if (!race_credits || race_credits <= 0) {
       if (req.user.passType) {
         return {
           code: '400',
