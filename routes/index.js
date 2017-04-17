@@ -102,6 +102,9 @@ module.exports = function(expressa) {
             }
             u.passType = req.body.passType;
             u.race_credits = (u.race_credits || 0) + passRaceCount[u.passType]
+            if (result.transaction) {
+              u.transaction_id = result.transaction.id
+            }
             expressa.db.users.update(u._id, u);
             data['email'] = u.email,
             expressa.db.user_payments.create(data);
