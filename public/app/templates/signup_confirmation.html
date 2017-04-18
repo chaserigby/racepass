@@ -1,0 +1,15 @@
+<div  id="signup-contents" style="text-align: center">
+  <div ng-if="signup && signup.distance">
+    <h3>Confirm you’re ready to commit to running {{signup.race.name}}</h3>
+    <button style="margin-top: 25px;padding: 12px 15px;" ng-click="signup.finish_race_register()" id="confirm-button">Confirm</button>
+    <p style="margin-top: 25px;">*by confirming you are adhering to our race policies found <a href="/terms">here</a>.</p>
+  </div>
+</div>
+<div  id="signup-contents" style="text-align: center">
+  <div ng-if="signup && !signup.distance">
+    <h3>Tell us which distance of {{signup.race.name}} do you wish to run.</h3>
+    <input type="textfield" id="distance" placeholder="distance" ng-model="signup.distance_temp" />
+    <p style="margin-top: 10px;">e.g. 5K, half marathon, etc.</p>
+    <button style="margin-top: 25px;padding: 12px 15px;" ng-click="signup.next()" id="confirm-button">Next</button>
+  </div>
+</div>

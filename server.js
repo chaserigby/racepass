@@ -96,43 +96,61 @@ expressa.addListener('post', -10, function(req, collection, doc) {
       '5races': 5,
       'unlimited': 200,
     }
+    return expressa.db.race.get(doc.race_id)
+      .then(function(race) {
 
-    var race_credits = req.user.race_credits;
-    if (!race_credits || race_credits <= 0) {
-      if (req.user.passType) {
-        return {
-          code: '400',
-          message: 'You need to upgrade to a larger pass type to register for more races.',
-        }
-      } else {
-        return {
-          code: '400',
-          message: 'You need to purchase a pass to register for races.',
-        }
-      }
-    }
-    return expressa.db.race_signup.find({ 'meta.owner' : req.user._id, 'status' : { '$in': ['pending', 'registered'] } })
-      .then(function(race_signups) {
-        var race_ids = race_signups.map(function(signup) { return signup.race_id; });
-        if (race_ids.indexOf(doc.race_id) != -1) {
+        var cutoff = new Date().toISOString();
+
+        console.log(race)
+        if (race.datetime < cutoff) {
+          console.log('user tried to signup for expired race.')
           return {
             code: '400',
-            message: 'You are already signed up for this race.',
+            message: 'This race is no longer available for registration.',
           }
-        } else {
-          req.user.race_credits -= 1
-          return expressa.db.users.update(req.user._id, req.user)
-            .then(function() {
-            }, function(err) {
-              console.error(err)
-              console.error('unable to deduct race credit')
-              return {
-                code: '500',
-                message: 'Unable to deduct race credit.',
-              }
-            })
         }
-      })
+
+        var race_credits = req.user.race_credits;
+        if (!race_credits || race_credits <= 0) {
+          if (req.user.passType) {
+            return {
+              code: '400',
+              message: 'You need to upgrade to a larger pass type to register for more races.',
+            }
+          } else {
+            return {
+              code: '400',
+              message: 'You need to purchase a pass to register for races.',
+            }
+          }
+        }
+        return expressa.db.race_signup.find({ 'meta.owner' : req.user._id, 'status' : { '$in': ['pending', 'registered'] } })
+          .then(function(race_signups) {
+            var race_ids = race_signups.map(function(signup) { return signup.race_id; });
+            if (race_ids.indexOf(doc.race_id) != -1) {
+              return {
+                code: '400',
+                message: 'You are already signed up for this race.',
+              }
+            } else {
+              req.user.race_credits -= 1
+              return expressa.db.users.update(req.user._id, req.user)
+                .then(function() {
+                }, function(err) {
+                  console.error(err)
+                  console.error('unable to deduct race credit')
+                  return {
+                    code: '500',
+                    message: 'Unable to deduct race credit.',
+                  }
+                })
+            }
+          })
+
+      }, function(err) {
+        console.error('could not find race from race_signup')
+        console.error(err)
+      });
   }
 })
 

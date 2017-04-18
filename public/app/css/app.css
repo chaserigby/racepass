@@ -182,3 +182,7 @@
 	padding: 14px;
 	color: black;
 }
+
+#signupConfirmModal {
+	height: 350px;
+}
