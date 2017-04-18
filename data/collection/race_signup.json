@@ -38,7 +38,8 @@
     },
     "listing": {
       "columns": [
-	"status",
+        "race.meta.created",
+        "status",
         "race.name",
         "race.distance",
         "race.datetime",

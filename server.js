@@ -40,6 +40,15 @@ function populateUserFromFacebook(doc) {
     })
 }
 
+expressa.addMetaData = function(data, req, res) {
+  data.meta = data.meta || {};
+  data.meta.created = new Date().toISOString();
+  data.meta.updated = new Date().toISOString();
+  if (req && req.user) {
+    data.meta.owner = req.user._id;
+  }
+}
+
 expressa.addListener('post', -10, function(req, collection, doc) {
   if (collection == 'promo_code') {
     doc.name = doc.name.toUpperCase()

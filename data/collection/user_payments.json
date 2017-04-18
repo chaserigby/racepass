@@ -40,6 +40,19 @@
             }
         ]
       }
+    },
+    "listing": {
+      "columns": [
+        "meta.created",
+        "email",
+        "sku",
+        "status",
+        "amount",
+        "errors",
+        "transaction_id",
+        "promo_code",
+        "uid"
+      ]
     }
   },
   "storage": "postgres",

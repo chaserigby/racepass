@@ -88,6 +88,7 @@ module.exports = function(expressa) {
         promo_code: req.body.promo,
         uid: req.uid,
       };
+      expressa.addMetaData(data, req, res)
       if (result.transaction) {
         data.transaction_id = result.transaction.id;
       }
@@ -182,6 +183,7 @@ module.exports = function(expressa) {
         data.errors = JSON.stringify(result.errors.deepErrors());
         res.status(400).send({"status":"failure", "error": transactionErrors});
       }
+      expressa.addMetaData(data, req, res)
       expressa.db.partner_payments.create(data);
     });
   });
