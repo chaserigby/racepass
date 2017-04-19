@@ -212,19 +212,14 @@ app
     }.bind(this);
 
     this.register = function() {
-      var race = self.selected
-      race_signup = {
-        'race_id' : race._id,
-        'status' : 'pending',
-      };
-      $http.post(window.apiurl + 'race_signup/?token=' + localStorage.token, JSON.stringify(race_signup))
-        .then(function(result) {
-          var signup_id = result.data.id._id;
+      $('#signupConfirmModal').modal('show')
+      var race = self.selected;
+      var appElement = document.querySelector('#signup-contents');
+      var $scope = angular.element(appElement).scope();
+      $scope.signup.update(race, function() {
           $location.path('/');
-        }, function(err) {
-          console.error(err);
-          toastr.info(err.data);
-        });
+          $('#signupConfirmModal').modal('hide')
+      })
     }
 
     this.scheduledPopups = [];

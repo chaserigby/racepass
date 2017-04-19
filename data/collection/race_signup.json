@@ -32,6 +32,9 @@
           "canceled"
         ]
       },
+      "distance": {
+        "type": "string"
+      },
       "cancellation_reason": {
         "type": "string"
       }
@@ -41,7 +44,7 @@
         "race.meta.created",
         "status",
         "race.name",
-        "race.distance",
+        "distance",
         "race.datetime",
         "race.website",
         "user.email",

@@ -20,6 +20,12 @@ app.config(function($routeProvider) {
     })
 });
 
+app.component('rpRaceConfirmation', {
+  templateUrl: 'app/templates/race_confirmation.html',
+  controller: RaceConfirmationController,
+  controllerAs: 'raceconfirmation'
+});
+
 app.controller('MainController', function($location, $http, $scope, $timeout) {
     var self = this;
 
@@ -188,17 +194,13 @@ app.controller('MainController', function($location, $http, $scope, $timeout) {
     };
 
     this.race_register = function(race) {
-      race_signup = {
-        'race_id' : race._id,
-        'status' : 'pending',
-      };
-      $http.post(window.apiurl + 'race_signup/?token=' + localStorage.token, JSON.stringify(race_signup))
-        .then(function(result) {
-          self.update_user_info();
-        }, function(err) {
-          console.error(err);
-          toastr.info(err.data);
-        });
+      $('#raceConfirmModal').modal('show')
+      var appElement = document.querySelector('#raceconfirmation-contents');
+      var $scope = angular.element(appElement).scope();
+      $scope.raceconfirmation.update(race, function() {
+        self.update_user_info();
+        $('#raceConfirmModal').modal('hide')
+      })
     }
 
     this.types = ['5k', '10k', 'Obstacle/Relay', '13.1mi', '26.2mi', 'Ultramarathon'];
