@@ -209,8 +209,6 @@ app
       }
       this.selected_details['City'] = race.location.city;
       this.selected_details['Date'] = $filter('date')(race.datetime, 'MM/dd/yyyy');
-
-      race.temp
     }.bind(this);
 
     this.register = function() {

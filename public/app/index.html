@@ -11,7 +11,7 @@
       <script src="/deps/bower_components/angular-ui-slider/src/slider.js"></script>
       <script src="deps/infobubble/infobubble.js"></script>
       <script src="/deps/bower_components/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
-      <script src="/app/js/signup_confirmation.js"></script>
+      <script src="/app/js/race_confirmation.js"></script>
       <script src="/app/js/app.js"></script>
       <link rel="stylesheet" href="/deps/jquery-ui/jquery-ui.min.css">
       <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
@@ -24,12 +24,12 @@
       <script src="/app/js/payment.js"></script>
    </head>
    <body ng-app="main" ng-controller="MainController as main" class="loggedin">
-      <div class="modal" id="signupConfirmModal" tabindex="-1" role="dialog" aria-labelledby="signupConfirmModalLabel">
+      <div class="modal" id="raceConfirmModal" tabindex="-1" role="dialog" aria-labelledby="raceConfirmModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-container" id=signup-confirm-container" class="modal-content" style="min-height:275px;">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-            <rp-signup-confirmation></rp-signup-confirmation>
+            <rp-race-confirmation></rp-race-confirmation>
 
           </div>
         </div>

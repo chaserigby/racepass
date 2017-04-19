@@ -20,10 +20,10 @@ app.config(function($routeProvider) {
     })
 });
 
-app.component('rpSignupConfirmation', {
-  templateUrl: 'app/templates/signup_confirmation.html',
-  controller: SignupConfirmationController,
-  controllerAs: 'signup'
+app.component('rpRaceConfirmation', {
+  templateUrl: 'app/templates/race_confirmation.html',
+  controller: RaceConfirmationController,
+  controllerAs: 'raceconfirmation'
 });
 
 app.controller('MainController', function($location, $http, $scope, $timeout) {
@@ -194,12 +194,12 @@ app.controller('MainController', function($location, $http, $scope, $timeout) {
     };
 
     this.race_register = function(race) {
-      $('#signupConfirmModal').modal('show')
-      var appElement = document.querySelector('#signup-contents');
+      $('#raceConfirmModal').modal('show')
+      var appElement = document.querySelector('#raceconfirmation-contents');
       var $scope = angular.element(appElement).scope();
-      $scope.signup.update(race, function() {
+      $scope.raceconfirmation.update(race, function() {
         self.update_user_info();
-        $('#signupConfirmModal').modal('hide')
+        $('#raceConfirmModal').modal('hide')
       })
     }
 

@@ -1,4 +1,4 @@
-function SignupConfirmationController($filter, $location, $scope, $timeout, $http) {
+function RaceConfirmationController($filter, $location, $scope, $timeout, $http) {
   var self = this;
 
   self.distance = ''
