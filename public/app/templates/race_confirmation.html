@@ -7,7 +7,7 @@
 </div>
 <div id="raceconfirmation-contents" style="text-align: center">
   <div ng-if="raceconfirmation && !raceconfirmation.distance">
-    <h3>Tell us which distance of {{raceconfirmation.race.name}} do you wish to run.</h3>
+    <h3>Tell us which distance of {{raceconfirmation.race.name}} you wish to run.</h3>
     <input type="textfield" id="distance" placeholder="distance" ng-model="raceconfirmation.distance_temp" />
     <p style="margin-top: 10px;">e.g. 5K, half marathon, etc.</p>
     <button style="margin-top: 25px;padding: 12px 15px;" ng-click="raceconfirmation.next()" id="confirm-button">Next</button>
