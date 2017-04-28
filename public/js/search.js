@@ -1,9 +1,9 @@
-var infowindow;
+raceConfirmModalvar infowindow;
 
 // On the home page, no module has been defined yet
 if (typeof app == 'undefined') {
   app = angular.module('landing');
-} 
+}
 
 var backup_race_images = [
   '/imgs/stock/running1.jpg',
@@ -76,7 +76,7 @@ app
     } else {
       this.city = 'home';
     }
-    
+
 
     this.panel = '';
     this.races = [];
@@ -113,7 +113,7 @@ app
       }
 
       //service = new google.maps.places.PlacesService(window.map);
-      
+
       combinedSearch(query, function(results) {
         this.results = results;
         console.log('applying ' + query);
@@ -165,7 +165,7 @@ app
           var mileToMeter = 0.000621371;
           race.distanceFromHome = Math.round(dist * mileToMeter);
         });
-      
+
         this.races = this.races.filter(function(race) {
           var mn = this.slider_homedist_values[this.slider_homedist_range[0]]
           var mx = this.slider_homedist_values[this.slider_homedist_range[1]]
@@ -175,7 +175,7 @@ app
         this.races = this.races.filter(function(race) {
           if (this.slider_types_range[0] == 0 && this.slider_types_range[1] == 5
               && typeof race.distance == 'undefined') {
-            // don't exclude races without distances when no filter is set. 
+            // don't exclude races without distances when no filter is set.
             return true;
           }
           var mn = this.slider_types_values[this.slider_types_range[0]]
@@ -212,13 +212,13 @@ app
     }.bind(this);
 
     this.register = function() {
-      $('#signupConfirmModal').modal('show')
+      $('#raceConfirmModal').modal('show')
       var race = self.selected;
-      var appElement = document.querySelector('#signup-contents');
+      var appElement = document.querySelector('#raceconfirmation-contents');
       var $scope = angular.element(appElement).scope();
-      $scope.signup.update(race, function() {
+      $scope.raceconfirmation.update(race, function() {
           $location.path('/');
-          $('#signupConfirmModal').modal('hide')
+          $('#raceConfirmModal').modal('hide')
       })
     }
 
