@@ -1,4 +1,4 @@
-raceConfirmModalvar infowindow;
+var infowindow;
 
 // On the home page, no module has been defined yet
 if (typeof app == 'undefined') {
