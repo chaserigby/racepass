@@ -1,5 +1,3 @@
-var infowindow;
-
 // On the home page, no module has been defined yet
 if (typeof app == 'undefined') {
   app = angular.module('landing');
@@ -77,12 +75,9 @@ app
       this.city = 'home';
     }
 
-
     this.panel = '';
     this.races = [];
     this.selected_details = {}
-    this.prevInfowindow = null;
-    this.prevHighlight = null;
 
     this.start_date = $filter('date')(new Date(), 'MM/dd/yyyy');
     this.end_date = $filter('date')(new Date().setDate(new Date().getDate() + 364)  , 'MM/dd/yyyy');
@@ -112,15 +107,11 @@ app
         return;
       }
 
-      //service = new google.maps.places.PlacesService(window.map);
-
       combinedSearch(query, function(results) {
         this.results = results;
         console.log('applying ' + query);
         $scope.$apply();
       }.bind(this));
-
-      //$location.path('/search');
     }.bind(this);
 
     this.lostFocus = function() {
@@ -145,7 +136,6 @@ app
         }
       } else {
         circle = new google.maps.Circle({radius: 1500, center: choice.location});
-        //bounds.extend(circle.getBounds());
 
         // this delay makes the map update location when seaching from other pages
         setTimeout(function() {
@@ -183,10 +173,6 @@ app
           return (race.distance >= (mn - .1) && race.distance <= (mx + .1));
         }.bind(this));
       }
-      if (this.prevInfowindow != null) {
-        this.prevInfowindow.close();
-        //this.prevInfowindow = null;
-      }
       return this.races;
     }.bind(this);
 
@@ -222,72 +208,10 @@ app
       })
     }
 
-    this.scheduledPopups = [];
-
-    this.schedulePopup = function(race) {
-      if (this.panel == 'details') {
-        return;
-      }
-      this.scheduledPopups = [race];
-      setTimeout(function() {
-        var index = this.scheduledPopups.indexOf(race);
-        if (index != -1) {
-          this.highlightRace(race);
-          this.scheduledPopups.splice(index, 1);
-        }
-      }.bind(this), 350);
-    }
-    this.cancelPopup = function(race) {
-      var index = this.scheduledPopups.indexOf(race);
-      if (index != -1) {
-        this.scheduledPopups.splice(index, 1);
-      }
-    }
-
-    this.highlightRace = function(race) {
-      return;
-
-      this.prevHighlightTime = new Date().getTime();
-      if (this.prevHighlight == race) {
-        return;
-      }
-
-      var content = '<div style="padding: 21px; white-space: nowrap; text-align: center;">' +
-        '<div class="p-name">' + race.name + '</div>' +
-        '<span class="p-distance">' + race.type + '</span> • ' +
-        '<span class="p-date">' +$filter('date')(race.datetime, 'MM/dd/yyyy') + '</span>' +
-        '</div>';
-
-      if (infowindow) {
-        infowindow.close();
-      }
-      infowindow = new InfoBubble({
-          map: map,
-          content: content,
-          //position: new google.maps.LatLng(race.location.coordinates.lat, race.location.coordinates.lng),
-          position: race.temp.marker.getPosition(),
-          shadowStyle: 1,
-          padding: 0,
-          backgroundColor: '#323237',
-          borderRadius: 4,
-          arrowSize: 10,
-          borderWidth: 1,
-          borderColor: '#2c2c2c',
-          disableAutoPan: true,
-          hideCloseButton: true,
-          arrowPosition: 30,
-          backgroundClassName: 'phoney',
-          arrowStyle: 2
-        });
-      infowindow.open();
-      this.prevHighlight = race;
-    }.bind(this);
-
     this.mapClose = function() {
       this.panel = '';
       $('#pac-input').val('');
     }.bind(this);
 
     this.update();
-
   });
