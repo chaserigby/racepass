@@ -120,29 +120,6 @@ function initAutocomplete(lat, lng) {
       maxZoom: 6,
     });
   }
-  //updateMarkers();
-
-  // Listen for the event fired when the user selects a prediction and retrieve
-  // more details for that place.
-  /*searchBox.addListener('place_changed', function() {
-    var place = searchBox.getPlace();
-
-    // For each place, get the icon, name and location.
-    var bounds = new google.maps.LatLngBounds();
-
-    if (!place.geometry) {
-      console.log("Returned place contains no geometry");
-      return;
-    }
-
-    if (place.geometry.viewport) {
-      // Only geocodes have viewport.
-      bounds.union(place.geometry.viewport);
-    } else {
-      bounds.extend(place.geometry.location);
-    }
-    map.fitBounds(bounds);
-  });*/
 }
 
 $(function() {

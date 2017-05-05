@@ -1,4 +1,3 @@
-//var race_logos = ['107th Thanksgiving Day Race logo.jpg','Across the bay 10k logo.jpg','AJC Peachtree Road Race Logo.jpg','Army Ten Miler Logo.jpg','Bank of America Shamrock Shuffle.jpeg','Blue Cross Blue Shield Broad Street Run 10 Miler.jpg','Bolder Boulder Logo.jpg','Boston Marathon Logo.jpg','Brooklyn Half Marathon Logo.jpg','Cherry Blossom run Logo.jpg','Chicago Marathon Logo.jpg','Cooper River Bridge Run Logo.jpg','Country Music Marathon and Half Marathon Nashville logo.jpg','Crescent City Classic 10k.jpg','Disney Princess Half Marathon Weekend logo.jpg','Gate River Run logo.jpg','Great aloha run logo.jpg','Hot Cholocate 15k_5k Logo.jpg','LA Marathon logo.jpg','Lilac Bloomsday Run Logo.jpg','Marine Corps Marathon logo.JPG','Nike womens half marathon sf logo.jpg','NYC Half Marathon logo.jpg','Ohio State Four Miler logo.jpg','Oneamerica 500 Festival Mini-marathon.jpg','Pats Run logo .jpg','Pittsburgh_Marathon logo.jpg','Rock n roll marathon las vegas logo.jpg','Rock n Roll Philadelphia Half logo.jpg','Rock N Roll Series generic logo.jpg','San Diego Rock N Roll Marathon logo.jpeg','San Francisco Marathon logo.jpg','Spartan Race logo 2.jpg','Spartan Race logo.jpg','Statesman Capitol 10k logo.jpg','SurfCity marathon logo.jpg','the-color-run-logo.jpg','TJC New York City Marathon.jpg','Tough Mudder Logo .jpg','Ukrop Monument Ave 10K logo.jpg','Walt Disney World Marathon Weekend.jpg','Zappos.com Bay to Breakers Logo.jpg'];
 var race_logos = ['107th Thanksgiving Day Race logo.jpg','Across the bay 10k logo.jpg','AJC Peachtree Road Race Logo.jpg','Army Ten Miler Logo.jpg','Bank of America Shamrock Shuffle.jpeg','Blue Cross Blue Shield Broad Street Run 10 Miler.jpg','Bolder Boulder Logo.jpg','Cherry Blossom run Logo.jpg','Cooper River Bridge Run Logo.jpg','Country Music Marathon and Half Marathon Nashville logo.jpg','Crescent City Classic 10k.jpg','Gate River Run logo.jpg','Great aloha run logo.jpg','Honolulu Marathon.jpg','Hot Cholocate 15k_5k Logo.jpg','Lilac Bloomsday Run Logo.jpg','NYC Half Marathon logo.jpg','Ohio State Four Miler logo.jpg','Oneamerica 500 Festival Mini-marathon.jpg','Pat\'s Run logo .jpg','Pittsburgh_Marathon logo.jpg','Rock N Roll Series generic logo.jpg','San Francisco Marathon logo.jpg','Statesman Capitol 10k logo.jpg','SurfCity marathon logo.jpg','the-color-run-logo.jpg','Ukrop Monument Ave 10K logo.jpg','Zappos.com Bay to Breakers Logo.jpg'];
 
 $(function() {
@@ -16,7 +15,6 @@ $(function() {
 $(window).scroll(function(){
     var panel = document.getElementById('race-logos');
     panel.style['margin-left'] = -$(window).scrollTop() + 'px';
-  //$("#div").css({"margin-top": ($(window).scrollTop()) + "px", "margin-left":($(window).scrollLeft()) + "px"});
 });
 
 angular.module('landing', ['ui.slider'])
@@ -27,8 +25,6 @@ angular.module('landing', ['ui.slider'])
     this.in_race_details = false;
     this.races = [];
     this.selected_details = {}
-    this.prevInfowindow = null;
-    this.prevHighlight = null;
 
     $http.get('https://freegeoip.net/json/')
     .then(function(response) {
@@ -90,10 +86,6 @@ angular.module('landing', ['ui.slider'])
     }
     this.updateRaces = function(races) {
         this.races = races;
-        if (this.prevInfowindow != null) {
-            this.prevInfowindow.close();
-            //this.prevInfowindow = null;
-        }
     }.bind(this);
     this.selectRace = function(race) {
         this.in_race_details = true;
@@ -110,42 +102,6 @@ angular.module('landing', ['ui.slider'])
       this.selected_details['City'] = race.location.city;
         this.selected_details['Date'] = $filter('date')(race.datetime, 'MM/dd/yyyy');
     }.bind(this);
-    this.highlightRace = function(race) {
-        if (this.prevHighlight == race) {
-            return;
-        }
-        if (this.prevInfowindow != null) {
-            this.prevInfowindow.close();
-        }
-
-        var content = '<div style="padding: 21px; white-space: nowrap; text-align: center;">' +
-            '<div class="p-name">' + race.name + '</div>' +
-            '<span class="p-distance">' + race.type + '</span> • ' +
-            '<span class="p-date">' +$filter('date')(race.datetime, 'MM/dd/yyyy') + '</span>' +
-            '</div>';
-
-        var infowindow = new InfoBubble({
-          map: map,
-          content: content,
-          //position: new google.maps.LatLng(race.location.coordinates.lat, race.location.coordinates.lng),
-          position: race.temp.marker.getPosition(),
-          shadowStyle: 1,
-          padding: 0,
-          backgroundColor: '#323237',
-          borderRadius: 4,
-          arrowSize: 10,
-          borderWidth: 1,
-          borderColor: '#2c2c2c',
-          disableAutoPan: true,
-          hideCloseButton: true,
-          arrowPosition: 30,
-          backgroundClassName: 'phoney',
-          arrowStyle: 2
-        });
-        infowindow.open();
-        this.prevInfowindow = infowindow;
-        this.prevHighlight = race;
-    };
     this.mapClose = function() {
         this.in_race_details = false;
         this.in_results = false;
