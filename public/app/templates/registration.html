@@ -94,7 +94,7 @@ font-weight: 500; padding: 5px 10px; margin-top: 8px;">Submit</button>
     </div>
     <h3>What's your date of birth?</h3>
     <input  ng-model="reg.data.date_of_birth" required type="text" name="date_of_birth" placeholder="MM/DD/YYYY" />
-    <button type="submit" ng-click="reg.next()" class="next">Save & Register</button>
+    <button type="submit" ng-click="reg.next()" class="next">Next</button>
   </form>
   <form id="p3" name="p3" ng-if="reg.page == 3">
     <h3>What's your gender?</h3>
@@ -108,10 +108,14 @@ font-weight: 500; padding: 5px 10px; margin-top: 8px;">Submit</button>
         <input required type="radio" ng-model="reg.data.gender" id="female" name="gender" value="female" />
         <label for="female">Female</label>
       </li>
+      <li>
+        <input required type="radio" ng-model="reg.data.gender" id="other" name="gender" value="other" />
+        <label for="other">Other</label>
+      </li>
     </ul>
     <h3>What's your t-shirt size? Races love to give out free swag.</h3>
     <div class="err" id="tshirt-error"></div>
-    <ul class="radio-buttons radio-buttons-tall">
+    <ul class="radio-buttons">
       <li>
         <input ng-model="reg.data.raceinfo.tshirt" data-parsley-errors-container="#tshirt-error" required type="radio" id="xsmall" value="xsmall" name="tshirt" />
         <label for="xsmall">Extra Small</label>
@@ -153,7 +157,7 @@ font-weight: 500; padding: 5px 10px; margin-top: 8px;">Submit</button>
         <label for="hand-cycle">Hand Cycle</label>
       </li>
     </ul>
-    <button type="submit" ng-click="reg.next()" class="next">Save & Register</button>
+    <button type="submit" ng-click="reg.next()" class="next">Next</button>
   </form>
   <form id="p4" name="p4" ng-if="reg.page == 4">
     <h3>What number should races send updates and annoucements to?</h3>

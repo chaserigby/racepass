@@ -33,6 +33,9 @@
 #profile-right dd {
 	display: inline-block;
 }
+#profile-gender {
+	text-transform: capitalize;
+}
 
 
 .race-table {
