@@ -46,7 +46,12 @@ app.controller('MainController', function($location, $http, $scope, $timeout) {
           this.user = response;
           this.passName = passNames[this.user.passType];
           this.age = calculateAge(new Date(this.user.date_of_birth));
-          this.photo = 'https://graph.facebook.com/'+this.user.facebook_id+'/picture?type=large&w‌​idth=720&height=720'
+          if (this.user.facebook_id) {
+            this.photo = 'https://graph.facebook.com/' + this.user.facebook_id +
+                         '/picture?type=large&w‌​idth=720&height=720'
+          } else {
+            this.photo = 'imgs/profiles/default-user-avatar.png';
+          }
           this.my_races = response.race_listings;
           var now = new Date().toISOString()
           var cutoff = new Date();
