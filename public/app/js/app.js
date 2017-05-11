@@ -10,6 +10,10 @@ app.config(function($routeProvider) {
         templateUrl : "app/templates/search.html",
         controller: 'SearchController as search'
     })
+    .when("/list", {
+      templateUrl : "app/templates/list.html",
+      controller: 'ListController as list'
+    })
     .when("/registration", {
         templateUrl : "app/templates/registration.html",
         controller: 'RegistrationController as reg'
