@@ -1,0 +1,21 @@
+<section id="race-listings" class="container">
+  <h3>Upcoming Races</h3>
+  <table class="race-table" ng-click="list.populateRaceInfo()">
+    <tr>
+      <th>Distance</th>
+      <th>Race</th>
+      <th>Date</th>
+      <th>Location</th>
+      <th>Actions</th>
+    </tr>
+    <tr ng-repeat="race in list.raceInfo">
+      <td>{{main.formatRaceDistance(race.distance)}}</td>
+      <td>{{race.name}}</td>
+      <td>{{race.datetime | date:'MM/dd/yyyy' }}</td>
+      <td>{{race.location.city}}, {{race.location.state}}</td>
+      <td ng-click="main.race_register(race)">
+        <button class="button">Register</button>
+      </td>
+    </tr>
+  </table>
+</section>
