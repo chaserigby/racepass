@@ -79,7 +79,8 @@ app
     this.races = [];
     this.selected_details = {}
 
-    this.start_date = $filter('date')(new Date(), 'MM/dd/yyyy');
+    // We show races that are up to a year old.
+    this.start_date = $filter('date')(new Date().setDate(new Date().getDate() - 365), 'MM/dd/yyyy');
     this.end_date = $filter('date')(new Date().setDate(new Date().getDate() + 364)  , 'MM/dd/yyyy');
 
     this.update = function() {
