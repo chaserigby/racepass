@@ -3,7 +3,10 @@ angular.module('main').controller(
       this.raceInfo = [];
 
       this.populateRaceInfo = function() {
-        $http.get(window.apiurl + 'race?limit=10&token=' localStorage.token)
-            .then(function(result) { this.raceInfo = result.data; });
+        var self = this;
+        $http.get(window.apiurl + 'race?limit=10&token=' + localStorage.token)
+            .then(function(result) { self.raceInfo = result.data; });
       }.bind(this);
+
+      this.populateRaceInfo();
     });
