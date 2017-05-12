@@ -12,8 +12,8 @@ angular.module('main').controller('ListController', function($timeout, $filter,
              'limit=' + (this.limit + 1) + '&token=' + localStorage.token)
         .then(function(result) {
           var data = result.data;
-          this.hasNextPage = data.length > this.limit;
-          self.raceInfo = result.data.slice(0, this.limit);
+          self.hasNextPage = data.length > self.limit;
+          self.raceInfo = result.data.slice(0, self.limit);
         });
   }.bind(this);
 
