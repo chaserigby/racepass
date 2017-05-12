@@ -9,7 +9,7 @@ angular.module('main').controller('ListController', function($timeout, $filter,
     var self = this;
     $http
         .get(window.apiurl + 'race?offset=' + this.offset +
-             'limit=' + (this.limit + 1) + '&token=' + localStorage.token)
+             '&limit=' + (this.limit + 1) + '&token=' + localStorage.token)
         .then(function(result) {
           var data = result.data;
           self.hasNextPage = data.length > self.limit;
