@@ -25,7 +25,14 @@ body {
 	/* below are fields for the fixed footer */
 	position: relative;
 	min-height: 100%;
-	padding-bottom: 220px;
+	/* space for the footer */
+	padding-bottom: 320px;
+}
+@media screen and (max-width: 750px) {
+	body {
+		/* padding needs to be bigger since the footer is taller on small devices */
+		padding-bottom: 420px;
+	}
 }
 a, a:hover, a:visited {
 	color: #F7F7F7;
