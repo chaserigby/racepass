@@ -10,7 +10,10 @@
     </tr>
     <tr ng-repeat="race in list.raceInfo">
       <td>{{main.formatRaceDistance(race.distance)}}</td>
-      <td>{{race.name}}</td>
+      <td>
+        <a ng-if="race.website" href="{{race.website}}" target="_blank">{{race.name}}</a>
+        <span ng-if="!race.website">{{race.name}}</span>
+      </td>
       <td>{{race.datetime | date:'MM/dd/yyyy' }}</td>
       <td>{{race.location.city}}, {{race.location.state}}</td>
       <td ng-click="main.race_register(race)">
