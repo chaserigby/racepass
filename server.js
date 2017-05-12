@@ -127,6 +127,12 @@ expressa.addListener('post', -10, function(req, collection, doc) {
         return expressa.db.race_signup.find({ 'meta.owner' : req.user._id, 'status' : { '$in': ['pending', 'registered'] } })
           .then(function(race_signups) {
             var race_ids = race_signups.map(function(signup) { return signup.race_id; });
+            if (race_ids.length >= 5) {
+              return {
+                code: '400',
+                message: 'Each runner can only have 5 races in their queue at a time.',
+              }
+            }
             if (race_ids.indexOf(doc.race_id) != -1) {
               return {
                 code: '400',
