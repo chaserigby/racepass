@@ -21,7 +21,7 @@
       </td>
     </tr>
   </table>
-  <div id="list-nav-message">{{this.getNavMessage()}}</div>
+  <div id="list-nav-message">{{list.getNavMessage()}}</div>
   <div id="list-nav-buttons">
     <button id="list-previous-page" ng-disabled="list.offset == 0" ng-click="list.getPreviousPage()">Previous</button>
     <button id="list-next-page" ng-disabled="!list.hasNextPage" ng-click="list.getNextPage()">Next</button>
