@@ -3,9 +3,9 @@
   <table class="race-table">
     <tr>
       <th>Distance</th>
-      <th>Race</th>
+      <th>Race<input ng-model="list.nameFilter" ng-change="list.updateQuery()" /></th>
       <th>Date</th>
-      <th>Location</th>
+      <th>Location<input ng-model="list.locationFilter" ng-change="list.updateQuery()" /></th>
       <th>Actions</th>
     </tr>
     <tr ng-repeat="race in list.raceInfo">
