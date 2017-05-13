@@ -43,6 +43,7 @@ angular.module('main').controller(
         } else {
           this.query = {};
         }
+        this.offset = 0;
         this.resultSize = 'many';
         this.populateRaceInfo();
       }.bind(this);

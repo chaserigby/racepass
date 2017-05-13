@@ -62,7 +62,7 @@
 }
 
 #list-nav-buttons button:disabled {
-	background-color: #808080;
+	background: #808080;
 }
 
 /** Styles for registration */
