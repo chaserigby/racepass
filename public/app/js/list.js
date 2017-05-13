@@ -38,8 +38,10 @@ angular.module('main').controller(
               createStringContainsQuery('location.state', this.locationFilter);
           subQueries.push({$or : [ cityQuery, stateQuery ]});
         }
-        if (subQueries.length < 0) {
+        if (subQueries.length > 0) {
           this.query = {$and : subQueries};
+        } else {
+          this.query = {};
         }
         this.resultSize = 'many';
         this.populateRaceInfo();
