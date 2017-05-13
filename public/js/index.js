@@ -1,4 +1,4 @@
-var race_logos = ['107th Thanksgiving Day Race logo.jpg','Across the bay 10k logo.jpg','AJC Peachtree Road Race Logo.jpg','Army Ten Miler Logo.jpg','Bank of America Shamrock Shuffle.jpeg','Blue Cross Blue Shield Broad Street Run 10 Miler.jpg','Bolder Boulder Logo.jpg','Cherry Blossom run Logo.jpg','Cooper River Bridge Run Logo.jpg','Country Music Marathon and Half Marathon Nashville logo.jpg','Crescent City Classic 10k.jpg','Gate River Run logo.jpg','Great aloha run logo.jpg','Honolulu Marathon.jpg','Hot Cholocate 15k_5k Logo.jpg','Lilac Bloomsday Run Logo.jpg','NYC Half Marathon logo.jpg','Ohio State Four Miler logo.jpg','Oneamerica 500 Festival Mini-marathon.jpg','Pat\'s Run logo .jpg','Pittsburgh_Marathon logo.jpg','Rock N Roll Series generic logo.jpg','San Francisco Marathon logo.jpg','Statesman Capitol 10k logo.jpg','SurfCity marathon logo.jpg','the-color-run-logo.jpg','Ukrop Monument Ave 10K logo.jpg','Zappos.com Bay to Breakers Logo.jpg'];
+var race_logos = [];
 
 $(function() {
     var panel = document.getElementById('race-logos');

@@ -101,7 +101,7 @@
         <div ng-if="search.panel == 'details'" id="race-details">
           <div ng-if="search.full_mode" ng-click="search.panel = (search.full_mode ? 'results' : '');" class="close">X</div>
           <h3 style="font-size: 20px;">{{search.selected.name}}</h3>
-          <img ng-if="search.selected_image" class="image" ng-src="{{search.selected_image}}" />
+          <!--<img ng-if="search.selected_image" class="image" ng-src="{{search.selected_image}}" />-->
           <dl ng-repeat="(label, value) in search.selected_details"">
             <dt>{{label}}</dt>
             <dd>{{value}}</dd>
