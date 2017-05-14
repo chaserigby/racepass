@@ -1,5 +1,10 @@
 <section id="race-listings" class="container">
   <h3>Upcoming Races</h3>
+  <div id="list-nav-buttons">
+    <button id="list-previous-page" ng-disabled="list.offset == 0" ng-click="list.getPreviousPage()">Previous</button>
+    <span id="list-nav-message">{{list.navMessage}}</span>
+    <button id="list-next-page" ng-disabled="!list.hasNextPage" ng-click="list.getNextPage()">Next</button>
+  </div>
   <table class="race-table">
     <tr>
       <th>Distance</th>
@@ -21,9 +26,4 @@
       </td>
     </tr>
   </table>
-  <div id="list-nav-message">{{list.navMessage}}</div>
-  <div id="list-nav-buttons">
-    <button id="list-previous-page" ng-disabled="list.offset == 0" ng-click="list.getPreviousPage()">Previous</button>
-    <button id="list-next-page" ng-disabled="!list.hasNextPage" ng-click="list.getNextPage()">Next</button>
-  </div>
 </section>
