@@ -23,7 +23,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/search.css" />
   </head>
   <body id="home" ng-init="full_mode = false;" ng-app="landing" ng-controller="LandingController as landing">
-    <div id="promo"><a id="freeTrial" ng-click="landing.buy('freeTrial')">Get up and running by trying Racepass for FREE</a></div>
+    <div id="promo"><a id="freeTrial" ng-click="landing.buy('freeTrial')">Try Racepass free</a></div>
     <!--#include virtual="/includes/login_modal.html" -->
     <!--#include virtual="/includes/anon_header.html" -->
     <div id="banner1">
@@ -94,7 +94,7 @@
             <div class="pass-title">Contender</div>
             <div class="pass-body">
               <div class="pass-top">
-                <div class="pass-count">3 Races</div>
+                <div class="pass-count">Covers registration for <em>three</em> Races</div>
                 <br>
                 <div class="distances">26.2 • 13.1<br>
                   10k • 5k • Fun Runs
@@ -110,7 +110,7 @@
             <div class="pass-title">Athlete</div>
             <div class="pass-body">
               <div class="pass-top">
-                <div class="pass-count">5 Races</div>
+                <div class="pass-count">Covers registration for <em>five</em> Races</div>
                 <br>
                 <div class="distances">26.2 • 13.1<br>
                   10k • 5k • Fun Runs
@@ -121,20 +121,23 @@
             <a id="buy2" ng-click="landing.buy('5races')" class="pass-buy"><button>Buy Athlete</button></a>
           </div>
         </div>
-        <div class="pass-container">
-          <div class="pass pass-side">
-            <div class="pass-title">Pro</div>
-            <div class="pass-body">
-              <div class="pass-top">
-                <div class="pass-count">Unlimited Races</div>
-                <br>
-                <div class="distances">26.2 • 13.1<br>
-                  10k • 5k • Fun Runs
+        <div class="pass-bordered">
+          <em style="font-size: 18px;">SOLD OUT</em>
+          <div class="pass-container">
+            <div class="pass pass-side">
+              <div class="pass-title">Pro</div>
+              <div class="pass-body">
+                <div class="pass-top">
+                  <div class="pass-count">Covers registration for <em>unlimited</em> Races</div>
+                  <br>
+                  <div class="distances">26.2 • 13.1<br>
+                    10k • 5k • Fun Runs
+                  </div>
                 </div>
+                <div class="pass-price-row"><span class="pass-price">${{landing.passPrices['unlimited']}}</span>/yr</div>
               </div>
-              <div class="pass-price-row"><span class="pass-price">${{landing.passPrices['unlimited']}}</span>/yr</div>
+              <a id="buy3" class="pass-buy"><button>Sold out</button></a>
             </div>
-            <a id="buy3" ng-click="landing.buy('unlimited')" class="pass-buy"><button>Buy Pro</button></a>
           </div>
         </div>
       </div>
