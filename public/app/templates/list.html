@@ -8,9 +8,9 @@
   <table class="race-table">
     <tr>
       <th>Distance</th>
-      <th>Race<input type="text" ng-model="list.nameFilter" ng-change="list.updateQuery()" /></th>
+      <th>Race<input type="text" class="list-search-filter" ng-model="list.nameFilter" ng-change="list.updateQuery()" /></th>
       <th>Date</th>
-      <th>Location<input type="text" ng-model="list.locationFilter" ng-change="list.updateQuery()" /></th>
+      <th>Location<input type="text" class="list-search-filter" ng-model="list.locationFilter" ng-change="list.updateQuery()" /></th>
       <th>Actions</th>
     </tr>
     <tr ng-repeat="race in list.raceInfo">
