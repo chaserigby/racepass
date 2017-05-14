@@ -10,7 +10,8 @@ angular.module('main').controller(
       this.limit = 10;
 
       this.hasNextPage = true;
-      this.resultSize = 'many';
+      this.resultSize = null;
+      this.navMessage = '';
 
       this.populateRaceInfo = function() {
         var self = this;
@@ -22,6 +23,7 @@ angular.module('main').controller(
               var data = result.data;
               self.hasNextPage = data.length > self.limit;
               self.raceInfo = result.data.slice(0, self.limit);
+              self.updateNavMessage();
             });
       }.bind(this);
 
@@ -44,7 +46,7 @@ angular.module('main').controller(
           this.query = {};
         }
         this.offset = 0;
-        this.resultSize = 'many';
+        this.resultSize = null;
         this.populateRaceInfo();
       }.bind(this);
 
@@ -55,12 +57,13 @@ angular.module('main').controller(
         return query;
       }
 
-      this.getNavMessage = function() {
+      this.updateNavMessage = function() {
         if (!this.hasNextPage) {
           this.resultSize = this.offset + this.raceInfo.length;
         }
-        return 'Showing ' + (this.offset + 1) + ' through ' +
-               (this.offset + this.limit) + ' of ' + this.resultSize;
+        this.navMessage = 'Showing ' + (this.offset + 1) + ' through ' +
+               (this.hasNextPage ? this.offset + this.limit : this.resultSize) +
+               ' of ' + (this.resultSize || 'many');
       }.bind(this);
 
       this.getPreviousPage = function() {
