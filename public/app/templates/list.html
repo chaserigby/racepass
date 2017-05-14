@@ -2,8 +2,8 @@
   <h3>Upcoming Races</h3>
   <div id="list-nav-buttons">
     <button id="list-previous-page" ng-disabled="list.offset == 0" ng-click="list.getPreviousPage()">Previous</button>
-    <span id="list-nav-message">{{list.navMessage}}</span>
     <button id="list-next-page" ng-disabled="!list.hasNextPage" ng-click="list.getNextPage()">Next</button>
+    <span id="list-nav-message">{{list.navMessage}}</span>
   </div>
   <table class="race-table">
     <tr>
