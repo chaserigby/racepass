@@ -413,6 +413,7 @@
 }
 .pass-container {
 	padding: 10px;
+	margin-top: 5px;
 }
 .pass {
 	/*margin: 30px 10px 0px 10px;*/
@@ -422,6 +423,9 @@
 	border-radius: 4px;
 	display: inline-block;
 	width: 100%;
+}
+:not(.pass-bordered) > .pass-container {
+	margin-top: 40px;
 }
 .pass-bordered {
 	border: 2px solid #0DFFAE;
@@ -439,7 +443,8 @@
 	margin: 47px auto 29px auto;
 }
 .pass-count {
-	font-size: 24px;
+	font-size: 18px;
+	padding: 0px 15px;
 }
 .pass p {
 	margin: 0px 0px 15px 0px;
