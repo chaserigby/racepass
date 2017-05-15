@@ -78,7 +78,8 @@ angular.module('main')
       'Free Trial': 'freeTrial',
       'Contender': '3races',
       'Athlete': '5races',
-      'Pro': 'unlimited'
+// Pro pass currently shouldn't show up in the dropdown
+//      'Pro': 'unlimited'
     }
     this.passType = localStorage.buyType || '3races';
     this.passName = passNames[this.passType];
