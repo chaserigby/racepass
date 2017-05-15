@@ -81,6 +81,10 @@ angular.module('main')
 // Pro pass currently shouldn't show up in the dropdown
 //      'Pro': 'unlimited'
     }
+    if (localStorage.buyType == 'unlimited') {
+      // If the person clicked "pro" previously, change the selection to the 5 races plan.
+      localStorage.buyType = '5races';
+    }
     this.passType = localStorage.buyType || '3races';
     this.passName = passNames[this.passType];
     this.email = window.localStorage.email || '';
