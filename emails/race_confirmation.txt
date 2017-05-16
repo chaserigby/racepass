@@ -1,9 +1,8 @@
-Registration confirmed {{data.name}}
+Registration requested {{data.name}}
 
 Distance: {{data.distance}}
 Date: {{data.date}}
-Race starting time: {{data.start_time}}
 
-Keep an eye out for race day prep emails from the team at {{data.name}}, including directions, parking instructions & any other details.
+Keep an eye out for your race registration confirmation and other race day prep information from the team at {{data.name}}.
 
-See you on race day
+Good luck on race day!
