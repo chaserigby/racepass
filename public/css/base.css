@@ -405,6 +405,17 @@ footer .disclaimer {
 footer a {
 	padding: 10px;
 }
+#footer-bottom .disclaimer a {
+  padding: 0;
+  font-size: inherit;
+}
+#video-attribution {
+  display: none;
+}
+/* Attribution should only be visible on the home page. */
+#home #video-attribution {
+  display: block;
+}
 
 
 /* LOGIN */
