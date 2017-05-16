@@ -118,7 +118,7 @@ function combinedSearch(queryText, callback) {
   });
 
   var query = {'$and': [
-    {'status': {'$ne': 'hidden'}}
+    {'status': 'visible'}
   ]}
   queryText.split(' ').forEach(function(word) {
     query['$and'].push({"name":{"$regex": word, "$options":"i"}})

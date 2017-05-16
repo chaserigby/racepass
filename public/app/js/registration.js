@@ -17,7 +17,7 @@ app.controller('RegistrationController', function($location, $http, $scope, $tim
       console.log(response);
       self.data = response.data;
       if (self.data.date_of_birth) {
-        self.data.date_of_birth = new Date(self.data.date_of_birth);
+        self.data.date_of_birth = $filter('date')(self.data.date_of_birth, 'MM/dd/yyyy');
       }
     });
   this.next = function() {

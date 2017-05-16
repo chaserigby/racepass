@@ -95,6 +95,9 @@
         'onemilefun': 1.6,
       }
       function processDistance(dist) {
+        if (!dist) {
+          return undefined;
+        }
         dist = dist.toLowerCase().replace(/ /g,'');
         if (distanceMap[dist]) {
           return distanceMap[dist];
@@ -115,7 +118,7 @@
         console.log(apiurl);
         gapi.client.sheets.spreadsheets.values.get({
           spreadsheetId: '1CuSgAraivaOtGqtP99pq_m_-AVKDpLx2F8Rtqm_CIPc',
-          range: 'Data!A2:S',
+          range: 'Data!A2:T',
         }).then(function(response) {
           var range = response.result;
           if (range.values.length > 0) {

@@ -27,11 +27,13 @@ function populateUserFromFacebook(doc) {
             numbers: true
         });
         doc.facebook_id = res.id;
-        var loc_parts = res.location.name.split(',');
-        doc.address = {}
-        doc.address.city = loc_parts[0];
-        if (loc_parts.length >= 2) {
-          doc.address.state = loc_parts[1];
+        if (res.location && res.location.name) {
+          var loc_parts = res.location.name.split(',');
+          doc.address = {}
+          doc.address.city = loc_parts[0];
+          if (loc_parts.length >= 2) {
+            doc.address.state = loc_parts[1];
+          }
         }
         doc.date_of_birth = new Date(res.birthday).toISOString();
         delete doc.fbAccessToken;
@@ -300,7 +302,7 @@ app.get('/nearby_races', function(req, res, next) {
     }
     var query = "SELECT * FROM race "
     + " WHERE data->>'datetime' >= $4"
-    + " AND data->>'status' != 'hidden'"
+    + " AND data->>'status' = 'visible'"
      + " ORDER BY "
      + "abs($1::numeric - (data->'location'->'coordinates'->>'lat')::numeric)"
      + " + abs($2::numeric - (data->'location'->'coordinates'->>'lng')::numeric) ASC LIMIT $3;"
