@@ -30,12 +30,12 @@ function initAutocomplete(lat, lng) {
 
     controller.query['status'] = 'visible';
     controller.query["location.coordinates.lat"] = {
-      "$gt": b.f.f,
-      "$lt": b.f.b,
+      "$gt": Math.min(b.f.f, b.f.b),
+      "$lt": Math.max(b.f.f, b.f.b),
     };
     controller.query["location.coordinates.lng"] = {
-      "$gt": b.b.b,
-      "$lt": b.b.f,
+      "$gt": Math.min(b.b.b, b.b.f),
+      "$lt": Math.max(b.b.b, b.b.f),
     };
     var r = new Request(window.apiurl + 'race?limit=100000&query='+JSON.stringify(controller.query));
     fetch(r).then(function(response) {
