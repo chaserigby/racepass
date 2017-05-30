@@ -29,7 +29,8 @@
           "pending",
           "registered",
           "request_cancel",
-          "canceled"
+          "canceled",
+          "completed"
         ]
       },
       "distance": {

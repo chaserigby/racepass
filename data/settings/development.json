@@ -1,0 +1,15 @@
+{
+  "_id": "production",
+  "postgresql_uri": "postgres://postgres:wkDPvFPkFtlJY55n@localhost/racepass",
+  "mongodb_uri": "",
+  "jwt_secret": "123123",
+  "enforce_permissions": true,
+  "installed": true,
+  "logging_level": "info",
+  "meta": {
+    "created": "2016-12-14T08:09:55.586Z",
+    "updated": "2017-04-10T07:17:22.628Z"
+  },
+  "google_oauth_id": "23281825114-ge841i3kr8se961aa6fvbb40r12fketl.apps.googleusercontent.com",
+  "google_oauth_secret": "iTTgFRey-45W3bLIXMecLKeu"
+}

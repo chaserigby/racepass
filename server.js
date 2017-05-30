@@ -238,7 +238,7 @@ expressa.addListener('changed', -10, function(req, collection, doc) {
 
 expressa.addListener('get', -5, function(req, collection, data) {
   if (collection == 'users') {
-    return expressa.db.race_signup.find({ 'meta.owner' : data._id, 'status' : { '$in': ['pending', 'registered'] } })
+    return expressa.db.race_signup.find({ 'meta.owner' : data._id, 'status' : { '$in': ['pending', 'registered', 'completed'] } })
       .then(function(race_signups) {
         data.race_signup_ids = {};
         var signup_ids = race_signups.forEach(function(signup) {
