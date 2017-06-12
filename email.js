@@ -83,7 +83,7 @@ exports.sendRaceConfirmation = function(user, race) {
   if (race.datetime.indexOf('T') != -1) {
     data['start_time'] = moment(race.datetime).format('h:mm a');
   }
-  send('race_confirmation', user.email, 'Registration Confirmed for '+ race.name, { 'data': data});
+  send('race_confirmation', user.email, 'Registration requested for ' + race.name, { 'data': data});
 }
 
 exports.sendRaceCancellation = function(user, race) {
@@ -96,5 +96,5 @@ exports.sendRaceCancellation = function(user, race) {
   if (race.datetime.indexOf('T') != -1) {
     data['start_time'] = moment(race.datetime).format('h:mm a');
   }
-  send('race_cancellation', user.email, 'Cancellation Confirmed for '+ race.name, { 'data': data});
+  send('race_cancellation', user.email, 'Cancellation Confirmed for ' + race.name, { 'data': data});
 }
