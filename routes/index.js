@@ -111,6 +111,7 @@ module.exports = function(expressa) {
             expressa.db.user_payments.create(data);
           }, function(err) {
             console.error('invalid user when registering.')
+            console.error(err);
             expressa.db.user_payments.create(data);
           })
 

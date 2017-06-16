@@ -42,6 +42,13 @@
           "unlimited"
         ]
       },
+      "favorites": {
+        "items": {
+          "type": "string"
+        },
+        "uniqueItems": true,
+        "type": "array"
+      },
       "transaction_id": {
         "type": "string"
       },

@@ -29,6 +29,10 @@
     "race: view": true,
     "race: edit": true,
     "race: delete": true,
+    "race2: create": true,
+    "race2: view": true,
+    "race2: edit": true,
+    "race2: delete": true,
     "leads: create": true,
     "leads: view": true,
     "leads: edit": true,
@@ -67,6 +71,6 @@
   },
   "meta": {
     "created": "2016-12-14T08:09:54.875Z",
-    "updated": "2017-04-04T07:43:29.460Z"
+    "updated": "2017-06-16T08:37:35.681Z"
   }
 }

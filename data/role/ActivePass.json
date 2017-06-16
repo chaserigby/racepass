@@ -59,11 +59,19 @@
     "race_signup: edit": false,
     "race_signup: edit own": true,
     "race_signup: view": false,
-    "race_signup: view own": true
+    "race_signup: view own": true,
+    "log: create": false,
+    "log: delete": false,
+    "log: edit": false,
+    "log: view": false,
+    "race2: create": false,
+    "race2: delete": false,
+    "race2: edit": false,
+    "race2: view": false
   },
   "meta": {
     "created": "2017-03-08T06:20:23.125Z",
-    "updated": "2017-04-04T07:43:29.467Z",
+    "updated": "2017-06-16T08:37:35.687Z",
     "owner": "a52ee085-ff47-4ee2-bac2-a8a319f674ed"
   }
 }
