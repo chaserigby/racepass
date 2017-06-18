@@ -98,7 +98,7 @@ expressa.addListener('post', -10, function(req, collection, doc) {
       '5races': 5,
       'unlimited': 200,
     }
-    return expressa.db.race.get(doc.race_id)
+    return expressa.db.race2.get(doc.race_id)
       .then(function(race) {
 
         var cutoff = new Date().toISOString();
@@ -170,6 +170,7 @@ expressa.addListener('put', -10, function(req, collection, doc) {
     var key = 'AIzaSyDOZ8hCqFBA-vK2S5rt2eOJm_6FS36N2fE';
     var loc = doc.address.line1 + ',' + doc.address.city + ',' + doc.address.state + ',' + doc.address.zip;
     delete doc.race_signup_ids;
+    delete doc.race_signups;
     delete doc.race_listings;
     return new Promise(function(resolve, reject) {
       request('https://maps.googleapis.com/maps/api/geocode/json?address='+loc+'&key='+key, function(err, response, body) {
@@ -219,7 +220,7 @@ expressa.addListener('changed', -10, function(req, collection, doc) {
   if (collection == 'race_signup') {
     expressa.db.users.get(doc.meta.owner)
       .then(function(user) {
-        expressa.db.race.get(doc.race_id)
+        expressa.db.race2.get(doc.race_id)
           .then(function(race) {
             if (doc.status == 'pending') {
               console.log('emailing ' + user);
@@ -240,13 +241,14 @@ expressa.addListener('get', -5, function(req, collection, data) {
   if (collection == 'users') {
     return expressa.db.race_signup.find({ 'meta.owner' : data._id, 'status' : { '$in': ['pending', 'registered', 'completed'] } })
       .then(function(race_signups) {
+        data.race_signups= race_signups;
         data.race_signup_ids = {};
         var signup_ids = race_signups.forEach(function(signup) {
           data.race_signup_ids[signup.race_id] = signup._id;
         });
         var race_ids = race_signups.map(function(signup) { return signup.race_id; });
         if (race_signups.length) {
-          return expressa.db.race.find({ '_id' : { '$in' : race_ids } })
+          return expressa.db.race2.find({ '_id' : { '$in' : race_ids } })
             .then(function(races) {
               data.race_listings = races;
             }, function(err) {
@@ -261,7 +263,7 @@ expressa.addListener('get', -5, function(req, collection, data) {
   }
   if (collection == 'race_signup') {
     var userPromise = expressa.db.users.get(data.meta.owner)
-    var racePromise = expressa.db.race.get(data.race_id)
+    var racePromise = expressa.db.race2.get(data.race_id)
     return Promise.all([userPromise, racePromise])
       .then(function(results) {
         data.user = results[0];
@@ -300,7 +302,7 @@ app.get('/nearby_races', function(req, res, next) {
     if (err) {
       return reject(err, 500);
     }
-    var query = "SELECT * FROM race "
+    var query = "SELECT * FROM race2 "
     + " WHERE data->>'datetime' >= $4"
     + " AND data->>'status' = 'visible'"
      + " ORDER BY "
