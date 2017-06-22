@@ -51,7 +51,73 @@ expressa.addMetaData = function(data, req, res) {
   }
 }
 
+function preprocessRace(race) {
+  var stateMapping = {
+    'AL': 'Alabama',
+    'AK': 'Alaska',
+    'AZ': 'Arizona',
+    'AR': 'Arkansas',
+    'CA': 'California',
+    'CO': 'Colorado',
+    'CT': 'Connecticut',
+    'DE': 'Delaware',
+    'FL': 'Florida',
+    'GA': 'Georgia',
+    'HI': 'Hawaii',
+    'ID': 'Idaho',
+    'IL': 'Illinois',
+    'IN': 'Indiana',
+    'IA': 'Iowa',
+    'KS': 'Kansas',
+    'KY': 'Kentucky',
+    'LA': 'Louisiana',
+    'ME': 'Maine',
+    'MD': 'Maryland',
+    'MA': 'Massachusetts',
+    'MI': 'Michigan',
+    'MN': 'Minnesota',
+    'MS': 'Mississippi',
+    'MO': 'Missouri',
+    'MT': 'Montana',
+    'NE': 'Nebraska',
+    'NV': 'Nevada',
+    'NH': 'New Hampshire',
+    'NJ': 'New Jersey',
+    'NM': 'New Mexico',
+    'NY': 'New York',
+    'NC': 'North Carolina',
+    'ND': 'North Dakota',
+    'OH': 'Ohio',
+    'OK': 'Oklahoma',
+    'OR': 'Oregon',
+    'PA': 'Pennsylvania',
+    'RI': 'Rhode Island',
+    'SC': 'South Carolina',
+    'SD': 'South Dakota',
+    'TN': 'Tennessee',
+    'TX': 'Texas',
+    'UT': 'Utah',
+    'VT': 'Vermont',
+    'VA': 'Virginia',
+    'WA': 'Washington',
+    'WV': 'West Virginia',
+    'WI': 'Wisconsin',
+    'WY': 'Wyoming'
+  }
+  race.terms = race.name + ' ' + race.location.city + ' ' + race.location.state;
+  if (stateMapping[race.location.state]) {
+    race.terms += ' ' + stateMapping[race.location.state]
+  }
+  race.courses.forEach(function(course) {
+    race.terms += ' ' + course.distance
+  })
+  return race
+}
+
 expressa.addListener('post', -10, function(req, collection, doc) {
+  if (collection == 'race2') {
+    preprocessRace(doc)
+  }
   if (collection == 'promo_code') {
     doc.name = doc.name.toUpperCase()
   } 
@@ -163,10 +229,13 @@ expressa.addListener('post', -10, function(req, collection, doc) {
 })
 
 expressa.addListener('put', -10, function(req, collection, doc) {
+  if (collection == 'race2') {
+    preprocessRace(doc)
+  }
   if (collection == 'promo_code') {
     doc.name = doc.name.toUpperCase()
   } 
-  if (collection == 'users' && doc.address && doc.address.city) {
+  if (collection == 'users' && doc.location && doc.location.city) {
     var key = 'AIzaSyDOZ8hCqFBA-vK2S5rt2eOJm_6FS36N2fE';
     var loc = doc.address.line1 + ',' + doc.address.city + ',' + doc.address.state + ',' + doc.address.zip;
     delete doc.race_signup_ids;

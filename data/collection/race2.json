@@ -74,6 +74,9 @@
       },
       "prominance": {
         "type": "number"
+      },
+      "terms": {
+        "type": "string"
       }
     }
   },
