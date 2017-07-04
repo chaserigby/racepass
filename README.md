@@ -10,7 +10,7 @@ The Racepass backend is written using [expressa](https://github.com/thomas4019/e
     2. cd racepass
     3. npm install
     4. Modify postgresql_uri in data/settings/development.json to match chose username/password.
-        * postgres://<username>:<password>@localhost/racepass
+        * postgres://username:password@localhost/racepass
         * Be careful to not submit this change.
 * Run Server
     1. node --use-strict server.js
