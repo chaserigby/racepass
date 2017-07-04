@@ -75,6 +75,9 @@
       "prominance": {
         "type": "number"
       },
+      "slug": {
+        "type": "string"
+      },
       "terms": {
         "type": "string"
       }
