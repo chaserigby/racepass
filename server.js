@@ -162,6 +162,7 @@ expressa.addListener('post', -10, function(req, collection, doc) {
       'freeTrial': 0,
       '3races': 3,
       '5races': 5,
+      '12races': 12,
       'unlimited': 200,
     }
     return expressa.db.race2.get(doc.race_id)

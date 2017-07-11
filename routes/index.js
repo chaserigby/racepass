@@ -62,6 +62,7 @@ module.exports = function(expressa) {
       'freeTrial': 0,
       '3races': 195,
       '5races': 295,
+      '12races': 695,
       'unlimited': 695,
     }
 
@@ -69,6 +70,7 @@ module.exports = function(expressa) {
       'freeTrial': 0,
       '3races': 3,
       '5races': 5,
+      '12races': 12,
       'unlimited': 200,
     }
 
