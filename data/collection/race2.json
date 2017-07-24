@@ -41,6 +41,112 @@
             },
             "distance_km": {
               "type": "number"
+            },
+            "about": {
+              "type": "string"
+            },
+            "awards": {
+              "type": "string"
+            },
+            "bibs": {
+              "type": "string"
+            },
+            "transit": {
+              "type": "string"
+            },
+            "scoring": {
+              "type": "string"
+            },
+            "average_finish_time": {
+              "type": "string"
+            },
+            "participants": {
+              "type": "number"
+            },
+            "course_time_limit": {
+              "type": "string"
+            },
+            "divisions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "waves": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "amenities": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "records": {
+              "type": "object",
+              "properties": {
+                "male": {
+                  "type": "string"
+                },
+                "female": {
+                  "type": "string"
+                }
+              }
+            },
+            "expo": {
+              "type": "object",
+              "properties": {
+                "lat": {
+                  "type": "number"
+                },
+                "lng": {
+                  "type": "number"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "location": {
+                  "type": "string"
+                },
+                "admission": {
+                  "type": "string"
+                }
+              }
+            },
+            "map": {
+              "type": "object",
+              "properties": {
+                "elevation": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "start_coordinate": {
+                  "type": "object",
+                  "properties": {
+                    "lat": {
+                      "type": "number"
+                    },
+                    "lng": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "end_coordinate": {
+                  "type": "object",
+                  "properties": {
+                    "lat": {
+                      "type": "number"
+                    },
+                    "lng": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
             }
           }
         }
