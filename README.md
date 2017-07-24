@@ -1,36 +1,21 @@
+## Introduction
+The Racepass backend is written using [expressa](https://github.com/thomas4019/expressa) which provides automatic REST endpoints based on [json schema](http://json-schema.org/) collections in data/collection, a database abstraction layer, and listeners. Most business logic is implemented in listeners in server.js.
+
 ## Setting up a local development environment
-1. clone the repository
-2. npm install
-3. node --use-strict server.js
-4. Install postgres
-5. Create database racepass (use the same password as production or step 6)
-6. change postgresql_uri in data/settings/production.json to match password chosen in step 5 if different.
+* Postgres
+    1. Install postgres - [windows](https://www.postgresql.org/download/windows/)
+    2. Use any username/password, create a database named "racepass".
+* Setup Server
+    1. git clone git@github.com:thomas4019/racepass.git
+    2. cd racepass
+    3. npm install
+    4. Modify postgresql_uri in data/settings/development.json to match chose username/password.
+        * postgres://username:password@localhost/racepass
+        * Be careful to not submit this change.
+* Run Server
+    1. node --use-strict server.js
+    2. Look for the message "Racepass server listening on port 3000!" within around 10 seconds. The server won't respond to requests until you see this. 
+    3. If you see "failed to initialize race2 using postgres", then either the username/password/database info is incorrect or Postgres is not running.
 
-## Setting up web server
-1. clone racepass-html
-2. Install nginx
-3. Use something like tho following config except change the root to match where you cloned the html repo.
-4. Edit the last 2 lines in js/base.js so that apiurl is set to the server you want it to use.
-
-```
-server {
-        listen 0.0.0.0:80 default_server;
-
-        rewrite ^(/includes.*)?$ $1 last;
-        rewrite ^(/.*)\.html(\?.*)?$ $1$2 permanent;
-
-        root '/mnt/c/Users/thoma/Google Drive/Projects/Racepass/html';
-        index index.html;
-
-        server_name localhost local.racepass.com;
-
-        location / {
-                ssi on;
-                try_files $uri $uri.html $uri/index.html =404;
-        }
-}
-```
-
-Files shared between landing page and app/
- * CSS: base.css, payment.css
- * JS: base.js, login.js, map.js, mapstyle.js
+## Crawlers
+In the crawlers folder there are a bunch of [Scrapy](https://scrapy.org/) crawlers of varying quality.

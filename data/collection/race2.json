@@ -187,6 +187,20 @@
       "terms": {
         "type": "string"
       }
+    },
+    "listing": {
+      "columns": [
+        "_id",
+        "name",
+        "status",
+        "datetime",
+        "location",
+        "website"
+      ],
+      "search_columns": [
+        "id",
+        "name"
+      ]
     }
   },
   "storage": "postgres",
