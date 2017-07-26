@@ -222,8 +222,9 @@
         "website"
       ],
       "search_columns": [
-        "id",
-        "name"
+        "_id",
+        "name",
+        "website"
       ]
     }
   },
