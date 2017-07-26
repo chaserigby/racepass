@@ -214,6 +214,7 @@ function preprocessRace(race) {
   // remove slashes, remove non-alphanumeric characters, remove double whitespace characters.
   slug = slug.replace('/', ' ').replace(/[\W_]+/g, ' ').replace(/\s\s+/g, ' ');
   race.slug = removeDiacritics(slug).toLowerCase();
+  race.slug = race.slug.replace(' ', '-');
   return race
 }
 
