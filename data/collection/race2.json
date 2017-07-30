@@ -69,13 +69,26 @@
             "divisions": {
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "object",
+                "properties": {
+                  "min": {
+                    "type": "number"
+                  },
+                  "max": {
+                    "type": "number"
+                  }
+                }
               }
             },
             "waves": {
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "object",
+                "properties": {
+                  "start": {
+                    "type": "string"
+                  }
+                }
               }
             },
             "amenities": {
@@ -118,45 +131,42 @@
             "map": {
               "type": "object",
               "properties": {
-                 "stations": {
+                "stations": {
                   "type": "array",
                   "items": {
-                    "type": "string"
-                  }
-                },
-                "elevation": {
-                  "type": "array",
-                  "items": {
-                    "type": "number"
-                  }
-                },
-                "start_coordinate": {
-                  "type": "object",
-                  "properties": {
-                    "location": {
-                      "type": "string"
-                    },
-                    "lat": {
-                      "type": "number"
-                    },
-                    "lng": {
-                      "type": "number"
+                    "type": "object",
+                    "properties": {
+                      "lat": {
+                        "type": "number"
+                      },
+                      "lng": {
+                        "type": "number"
+                      }
                     }
                   }
                 },
-                "end_coordinate": {
-                  "type": "object",
-                  "properties": {
-                    "location": {
-                      "type": "string"
-                    },
-                    "lat": {
-                      "type": "number"
-                    },
-                    "lng": {
-                      "type": "number"
+                "route": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "lat": {
+                        "type": "number"
+                      },
+                      "lng": {
+                        "type": "number"
+                      },
+                      "elevation": {
+                        "type": "number"
+                      }
                     }
                   }
+                },
+                "start_location": {
+                  "type": "string"
+                },
+                "end_location": {
+                  "type": "string"
                 }
               }
             }
