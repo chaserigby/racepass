@@ -66,6 +66,9 @@
             "course_time_limit": {
               "type": "string"
             },
+            "cost": {
+              "type": "number"
+            },
             "divisions": {
               "type": "array",
               "items": {
