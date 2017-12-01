@@ -18,7 +18,7 @@ loadEmail('race_cancellation');
 function send(templateName, dest, subject, data) {
   var server  = emailjs.server.connect({
      user:    "apikey", 
-     password:"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", 
+     password:"<PUT ACTUAL SENDGRID KEY HERE>", 
      host:    "smtp.sendgrid.net", 
      ssl:     true
   });
